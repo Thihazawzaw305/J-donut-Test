@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:j_donuts_app/core/errors/result.dart';
+import 'package:j_donuts_app/features/auth/domain/entities/auth_flow.dart';
+import 'package:j_donuts_app/features/auth/domain/entities/phone_number.dart';
+import 'package:j_donuts_app/features/auth/domain/failures/auth_failure.dart';
+import 'package:j_donuts_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:j_donuts_app/core/router/app_routes.dart';
 import 'package:j_donuts_app/core/widgets/primary_button.dart';
 import 'package:j_donuts_app/features/auth/data/repositories/fake_auth_repository.dart';
@@ -135,4 +139,41 @@ void main() {
 
     expect(find.text(validNumber), findsOneWidget);
   });
+
+  testWidgets('a stale failure toast is gone after a later successful submit', (
+    tester,
+  ) async {
+    await pumpJDonutsApp(
+      tester,
+      location: AppRoutes.registerPhone,
+      overrides: [
+        authRepositoryProvider.overrideWithValue(_FailThenSucceedRepository()),
+      ],
+    );
+    await typeNumber(tester, validNumber);
+    await tester.tap(find.byType(PrimaryButton));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(find.byType(SnackBar), findsOneWidget);
+
+    await tester.tap(find.byType(PrimaryButton));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    await tester.pump(const Duration(milliseconds: 500));
+
+    expect(find.text('Verify your number'), findsOneWidget);
+    expect(find.byType(SnackBar), findsNothing);
+  });
+}
+
+class _FailThenSucceedRepository implements AuthRepository {
+  var _calls = 0;
+
+  @override
+  Future<Result<void, AuthFailure>> requestOtp(
+    PhoneNumber phone, {
+    required AuthFlow flow,
+  }) async => _calls++ == 0
+      ? const Err(AuthFailure.alreadyRegistered)
+      : const Ok(null);
 }

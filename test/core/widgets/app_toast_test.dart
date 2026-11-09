@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:j_donuts_app/core/constants/app_motion.dart';
 import 'package:j_donuts_app/core/widgets/app_toast.dart';
 
 import '../../helpers/pump_app.dart';
@@ -50,5 +51,25 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Something went wrong'), findsOneWidget);
+  });
+
+  testWidgets('a toast with an action auto-dismisses', (tester) async {
+    await showToast(tester, actionLabel: 'Retry');
+    expect(find.text('Something went wrong'), findsOneWidget);
+
+    await tester.pump(AppMotion.toastDisplay + const Duration(seconds: 1));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Something went wrong'), findsNothing);
+  });
+
+  testWidgets('hide removes the visible toast', (tester) async {
+    await showToast(tester);
+    final context = tester.element(find.text('trigger'));
+
+    AppToast.hide(context);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Something went wrong'), findsNothing);
   });
 }

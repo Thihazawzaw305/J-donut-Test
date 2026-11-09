@@ -91,6 +91,7 @@ class _PhonePageState extends ConsumerState<PhonePage> {
   void _onStatus(PhoneSubmitStatus status) {
     switch (status) {
       case PhoneSubmitSuccess():
+        AppToast.hide(context);
         context.push(widget.flow.otpRoute);
       case PhoneSubmitFailure(:final failure):
         _showAuthFailure(failure);

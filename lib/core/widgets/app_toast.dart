@@ -9,6 +9,9 @@ enum AppToastType { info, error }
 
 /// Short floating message; replaces any toast already on screen.
 abstract final class AppToast {
+  static void hide(BuildContext context) =>
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
   static void show(
     BuildContext context, {
     required String message,
@@ -24,9 +27,13 @@ abstract final class AppToast {
       ..showSnackBar(
         SnackBar(
           duration: AppMotion.toastDisplay,
+          persist: false,
           content: _ToastContent(message: message, type: type),
           action: action,
         ),
+        snackBarAnimationStyle: MediaQuery.disableAnimationsOf(context)
+            ? AnimationStyle.noAnimation
+            : null,
       );
   }
 }
