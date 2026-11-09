@@ -33,12 +33,12 @@ void main() {
     expect(find.text('+95'), findsOneWidget);
   });
 
-  testWidgets('keeps only digits, spaces and dashes', (tester) async {
+  testWidgets('keeps only digits, spaces, dashes, and plus', (tester) async {
     await pumpField(tester);
 
-    await tester.enterText(find.byType(TextField), 'a9-25 4x');
+    await tester.enterText(find.byType(TextField), 'a9-25+4x');
 
-    expect(controller.text, '9-25 4');
+    expect(controller.text, '9-25+4');
   });
 
   testWidgets('loses focus when the user taps outside', (tester) async {

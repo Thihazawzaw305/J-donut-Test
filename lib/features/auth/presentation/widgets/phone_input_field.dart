@@ -18,7 +18,7 @@ class PhoneInputField extends StatelessWidget {
   });
 
   static const _maxInputLength = 15;
-  static final _allowedCharacters = RegExp(r'[0-9 \-]');
+  static final _allowedCharacters = RegExp(r'[0-9 +\-]');
 
   final TextEditingController controller;
   final FocusNode focusNode;

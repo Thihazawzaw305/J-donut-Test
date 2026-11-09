@@ -6,8 +6,17 @@ final _separators = RegExp(r'[\s-]');
 final _nationalNumberPattern = RegExp(r'^9\d{7,9}$');
 const _trunkPrefix = '0';
 
+String _digitsOnly(String raw) {
+  var digits = raw.replaceAll(_separators, '');
+  if (digits.startsWith('+')) {
+    digits = digits.substring(1);
+    if (digits.startsWith('95')) digits = digits.substring(2);
+  }
+  return digits;
+}
+
 Result<PhoneNumber, PhoneValidationFailure> validatePhone(String raw) {
-  final digits = raw.replaceAll(_separators, '');
+  final digits = _digitsOnly(raw);
   if (digits.isEmpty) return const Err(PhoneValidationFailure.empty);
 
   final national = digits.startsWith(_trunkPrefix)

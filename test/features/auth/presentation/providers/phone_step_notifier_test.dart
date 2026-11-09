@@ -83,6 +83,16 @@ void main() {
     );
   });
 
+  test('input change is ignored while submitting', () async {
+    notifier().onInputChanged(validInput);
+    final pending = notifier().submit();
+    notifier().onInputChanged('09123456789');
+
+    expect(state().input, validInput);
+    repository.complete(const Ok(null));
+    await pending;
+  });
+
   test('a second submit while submitting sends no extra request', () async {
     notifier().onInputChanged(validInput);
     final first = notifier().submit();

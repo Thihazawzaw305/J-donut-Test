@@ -28,6 +28,10 @@ void main() {
       expect(e164Of('09-254 135 592'), '+959254135592');
     });
 
+    test('strips a leading +95 country code', () {
+      expect(e164Of('+959254135592'), '+959254135592');
+    });
+
     test('strips only one leading zero', () {
       expect(failureOf('009254135592'), PhoneValidationFailure.invalidFormat);
     });

@@ -19,6 +19,7 @@ class PhoneStepNotifier extends Notifier<PhoneStepState> {
   }
 
   void onInputChanged(String input) {
+    if (state.isSubmitting) return;
     ref.read(authDraftProvider.notifier).updatePhoneInput(input);
     state = state.copyWith(
       input: input,
