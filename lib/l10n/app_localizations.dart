@@ -249,6 +249,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Loading'**
   String get loading;
+
+  /// No description provided for @otpSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ve sent 6 digit OTP to {e164}'**
+  String otpSentTo(String e164);
+
+  /// No description provided for @otpResendPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Didn\'t receive the code?'**
+  String get otpResendPrompt;
+
+  /// No description provided for @otpResendIn.
+  ///
+  /// In en, this message translates to:
+  /// **'resend in {mm} : {ss} min'**
+  String otpResendIn(String mm, String ss);
+
+  /// No description provided for @otpErrorWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'That code is incorrect.'**
+  String get otpErrorWrong;
+
+  /// No description provided for @otpErrorLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many tries. Resend a new code.'**
+  String get otpErrorLocked;
+
+  /// No description provided for @otpErrorIncomplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter all 6 digits.'**
+  String get otpErrorIncomplete;
+
+  /// No description provided for @otpErrorNonDigit.
+  ///
+  /// In en, this message translates to:
+  /// **'Use numbers only.'**
+  String get otpErrorNonDigit;
+
+  /// No description provided for @firstNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'First name'**
+  String get firstNameHint;
+
+  /// No description provided for @lastNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Last name (optional)'**
+  String get lastNameHint;
+
+  /// No description provided for @nameTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s your name?'**
+  String get nameTitle;
+
+  /// No description provided for @firstNameErrorEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your first name.'**
+  String get firstNameErrorEmpty;
+
+  /// No description provided for @firstNameErrorTooLong.
+  ///
+  /// In en, this message translates to:
+  /// **'First name must be 50 characters or fewer.'**
+  String get firstNameErrorTooLong;
+
+  /// No description provided for @firstNameErrorContainsDigit.
+  ///
+  /// In en, this message translates to:
+  /// **'Names can\'t include numbers.'**
+  String get firstNameErrorContainsDigit;
+
+  /// No description provided for @firstNameErrorInvalidCharacters.
+  ///
+  /// In en, this message translates to:
+  /// **'Use letters and spaces only.'**
+  String get firstNameErrorInvalidCharacters;
+
+  /// No description provided for @lastNameErrorTooLong.
+  ///
+  /// In en, this message translates to:
+  /// **'Last name must be 50 characters or fewer.'**
+  String get lastNameErrorTooLong;
+
+  /// No description provided for @lastNameErrorContainsDigit.
+  ///
+  /// In en, this message translates to:
+  /// **'Names can\'t include numbers.'**
+  String get lastNameErrorContainsDigit;
+
+  /// No description provided for @lastNameErrorInvalidCharacters.
+  ///
+  /// In en, this message translates to:
+  /// **'Use letters and spaces only.'**
+  String get lastNameErrorInvalidCharacters;
+
+  /// No description provided for @dobTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s your date of birth?'**
+  String get dobTitle;
+
+  /// No description provided for @dayHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get dayHint;
+
+  /// No description provided for @monthHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get monthHint;
+
+  /// No description provided for @yearHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get yearHint;
+
+  /// No description provided for @selectBirthday.
+  ///
+  /// In en, this message translates to:
+  /// **'Select birthday'**
+  String get selectBirthday;
+
+  /// No description provided for @select.
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get select;
+
+  /// No description provided for @creating.
+  ///
+  /// In en, this message translates to:
+  /// **'Creating'**
+  String get creating;
+
+  /// No description provided for @dobErrorIncomplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your full date of birth.'**
+  String get dobErrorIncomplete;
+
+  /// No description provided for @dobErrorInvalidDate.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s not a valid date.'**
+  String get dobErrorInvalidDate;
+
+  /// No description provided for @dobErrorInFuture.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth date can\'t be in the future.'**
+  String get dobErrorInFuture;
+
+  /// No description provided for @dobErrorTooYoung.
+  ///
+  /// In en, this message translates to:
+  /// **'You must be at least 13 years old.'**
+  String get dobErrorTooYoung;
+
+  /// No description provided for @welcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get welcomeTitle;
+
+  /// No description provided for @homeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get homeTitle;
 }
 
 class _AppLocalizationsDelegate

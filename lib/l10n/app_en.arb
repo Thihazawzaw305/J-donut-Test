@@ -31,5 +31,46 @@
   "authErrorOtpLocked": "Too many attempts. Request a new code.",
   "registerAction": "Register",
   "verifyNumberTitle": "Verify your number",
-  "loading": "Loading"
+  "loading": "Loading",
+  "otpSentTo": "We've sent 6 digit OTP to {e164}",
+  "@otpSentTo": {
+    "placeholders": {
+      "e164": {"type": "String"}
+    }
+  },
+  "otpResendPrompt": "Didn't receive the code?",
+  "otpResendIn": "resend in {mm} : {ss} min",
+  "@otpResendIn": {
+    "placeholders": {
+      "mm": {"type": "String"},
+      "ss": {"type": "String"}
+    }
+  },
+  "otpErrorWrong": "That code is incorrect.",
+  "otpErrorLocked": "Too many tries. Resend a new code.",
+  "otpErrorIncomplete": "Enter all 6 digits.",
+  "otpErrorNonDigit": "Use numbers only.",
+  "firstNameHint": "First name",
+  "lastNameHint": "Last name (optional)",
+  "nameTitle": "What's your name?",
+  "firstNameErrorEmpty": "Please enter your first name.",
+  "firstNameErrorTooLong": "First name must be 50 characters or fewer.",
+  "firstNameErrorContainsDigit": "Names can't include numbers.",
+  "firstNameErrorInvalidCharacters": "Use letters and spaces only.",
+  "lastNameErrorTooLong": "Last name must be 50 characters or fewer.",
+  "lastNameErrorContainsDigit": "Names can't include numbers.",
+  "lastNameErrorInvalidCharacters": "Use letters and spaces only.",
+  "dobTitle": "What's your date of birth?",
+  "dayHint": "Day",
+  "monthHint": "Month",
+  "yearHint": "Year",
+  "selectBirthday": "Select birthday",
+  "select": "Select",
+  "creating": "Creating",
+  "dobErrorIncomplete": "Enter your full date of birth.",
+  "dobErrorInvalidDate": "That's not a valid date.",
+  "dobErrorInFuture": "Birth date can't be in the future.",
+  "dobErrorTooYoung": "You must be at least 13 years old.",
+  "welcomeTitle": "Welcome",
+  "homeTitle": "Home"
 }

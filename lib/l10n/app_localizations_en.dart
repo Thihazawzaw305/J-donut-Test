@@ -90,4 +90,100 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loading => 'Loading';
+
+  @override
+  String otpSentTo(String e164) {
+    return 'We\'ve sent 6 digit OTP to $e164';
+  }
+
+  @override
+  String get otpResendPrompt => 'Didn\'t receive the code?';
+
+  @override
+  String otpResendIn(String mm, String ss) {
+    return 'resend in $mm : $ss min';
+  }
+
+  @override
+  String get otpErrorWrong => 'That code is incorrect.';
+
+  @override
+  String get otpErrorLocked => 'Too many tries. Resend a new code.';
+
+  @override
+  String get otpErrorIncomplete => 'Enter all 6 digits.';
+
+  @override
+  String get otpErrorNonDigit => 'Use numbers only.';
+
+  @override
+  String get firstNameHint => 'First name';
+
+  @override
+  String get lastNameHint => 'Last name (optional)';
+
+  @override
+  String get nameTitle => 'What\'s your name?';
+
+  @override
+  String get firstNameErrorEmpty => 'Please enter your first name.';
+
+  @override
+  String get firstNameErrorTooLong =>
+      'First name must be 50 characters or fewer.';
+
+  @override
+  String get firstNameErrorContainsDigit => 'Names can\'t include numbers.';
+
+  @override
+  String get firstNameErrorInvalidCharacters => 'Use letters and spaces only.';
+
+  @override
+  String get lastNameErrorTooLong =>
+      'Last name must be 50 characters or fewer.';
+
+  @override
+  String get lastNameErrorContainsDigit => 'Names can\'t include numbers.';
+
+  @override
+  String get lastNameErrorInvalidCharacters => 'Use letters and spaces only.';
+
+  @override
+  String get dobTitle => 'What\'s your date of birth?';
+
+  @override
+  String get dayHint => 'Day';
+
+  @override
+  String get monthHint => 'Month';
+
+  @override
+  String get yearHint => 'Year';
+
+  @override
+  String get selectBirthday => 'Select birthday';
+
+  @override
+  String get select => 'Select';
+
+  @override
+  String get creating => 'Creating';
+
+  @override
+  String get dobErrorIncomplete => 'Enter your full date of birth.';
+
+  @override
+  String get dobErrorInvalidDate => 'That\'s not a valid date.';
+
+  @override
+  String get dobErrorInFuture => 'Birth date can\'t be in the future.';
+
+  @override
+  String get dobErrorTooYoung => 'You must be at least 13 years old.';
+
+  @override
+  String get welcomeTitle => 'Welcome';
+
+  @override
+  String get homeTitle => 'Home';
 }

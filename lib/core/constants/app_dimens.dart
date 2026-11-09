@@ -15,6 +15,9 @@ abstract final class AppDimens {
   static const backButtonRadius = 10.0;
   static const progressRingSize = 40.0;
   static const progressRingStroke = 9.0;
+  static const otpBoxSize = 48.0;
+  static const otpBoxGap = 8.0;
+  static const otpBoxRadius = 10.0;
   static const socialButtonSize = 48.0;
   static const socialButtonElevation = 4.0;
   static const toastRadius = 16.0;
