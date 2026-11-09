@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/auth/domain/entities/auth_flow.dart';
 import '../../features/auth/presentation/pages/onboarding_page.dart';
+import '../../features/auth/presentation/pages/otp_page.dart';
 import '../../features/auth/presentation/pages/phone_page.dart';
 import '../l10n/l10n_extension.dart';
 import '../widgets/placeholder_page.dart';
@@ -24,12 +25,28 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.loginPhone,
         builder: (_, _) => const PhonePage(flow: AuthFlow.login),
       ),
-      for (final path in [AppRoutes.registerOtp, AppRoutes.loginOtp])
-        GoRoute(
-          path: path,
-          builder: (context, _) =>
-              PlaceholderPage(title: context.l10n.verifyNumberTitle),
-        ),
+      GoRoute(
+        path: AppRoutes.registerOtp,
+        builder: (_, _) => const OtpPage(flow: AuthFlow.register),
+      ),
+      GoRoute(
+        path: AppRoutes.loginOtp,
+        builder: (_, _) => const OtpPage(flow: AuthFlow.login),
+      ),
+      GoRoute(
+        path: AppRoutes.registerName,
+        builder: (context, _) =>
+            PlaceholderPage(title: context.l10n.nameTitle),
+      ),
+      GoRoute(
+        path: AppRoutes.welcome,
+        builder: (context, _) =>
+            PlaceholderPage(title: context.l10n.welcomeTitle),
+      ),
+      GoRoute(
+        path: AppRoutes.home,
+        builder: (context, _) => PlaceholderPage(title: context.l10n.homeTitle),
+      ),
     ],
   );
   ref.onDispose(router.dispose);

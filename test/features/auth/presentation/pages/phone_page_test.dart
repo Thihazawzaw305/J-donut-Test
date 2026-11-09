@@ -102,7 +102,7 @@ void main() {
     expect(repository.requestCount, 1);
 
     repository.complete(const Ok(null));
-    await tester.pumpAndSettle();
+    await tester.pump();
     expect(find.text('Verify your number'), findsOneWidget);
   });
 

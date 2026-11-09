@@ -15,7 +15,7 @@ class AuthStepScaffold extends StatelessWidget {
     super.key,
     required this.title,
     required this.body,
-    required this.action,
+    this.action,
     required this.onBack,
     this.currentStep,
   });
@@ -24,7 +24,7 @@ class AuthStepScaffold extends StatelessWidget {
 
   final String title;
   final Widget body;
-  final Widget action;
+  final Widget? action;
   final VoidCallback onBack;
 
   /// Registration step (1-based); null hides the progress ring.
@@ -104,8 +104,10 @@ class AuthStepScaffold extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const SizedBox(height: AppDimens.spaceLg),
-        action,
-        const SizedBox(height: AppDimens.spaceLg),
+        if (action != null) ...[
+          action!,
+          const SizedBox(height: AppDimens.spaceLg),
+        ],
         LegalFooter(
           onTermsTap: () => _showComingSoon(context),
           onPrivacyTap: () => _showComingSoon(context),

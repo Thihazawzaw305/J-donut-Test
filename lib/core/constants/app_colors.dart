@@ -6,6 +6,7 @@ abstract final class AppColors {
   static const primaryDisabled = Color(0x8032C4E9);
   static const onPrimary = Color(0xFFFFFFFF);
   static const accent = Color(0xFFF2559A);
+  static const otpCursor = accent;
   static const ringProgress = Color(0xFFFF4C9E);
   static const ringTrack = Color(0xFF61D3F8);
   static const backgroundTop = Color(0xFFFFD6E6);

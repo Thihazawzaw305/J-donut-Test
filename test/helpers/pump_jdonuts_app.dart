@@ -12,6 +12,7 @@ Future<void> pumpJDonutsApp(
   String? location,
   Size viewport = const Size(800, 600),
   double textScale = 1.0,
+  bool settle = true,
 }) async {
   tester.view.physicalSize = viewport;
   tester.view.devicePixelRatio = 1.0;
@@ -32,5 +33,9 @@ Future<void> pumpJDonutsApp(
     );
     container.read(appRouterProvider).go(location);
   }
-  await tester.pumpAndSettle();
+  if (settle) {
+    await tester.pumpAndSettle();
+  } else {
+    await tester.pump();
+  }
 }

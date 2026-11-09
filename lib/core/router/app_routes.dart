@@ -4,4 +4,7 @@ abstract final class AppRoutes {
   static const loginPhone = '/login/phone';
   static const registerOtp = '/register/otp';
   static const loginOtp = '/login/otp';
+  static const registerName = '/register/name';
+  static const welcome = '/welcome';
+  static const home = '/home';
 }
