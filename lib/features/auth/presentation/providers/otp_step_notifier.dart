@@ -30,7 +30,7 @@ class OtpStepNotifier extends Notifier<OtpStepState> {
   }
 
   void onChanged(String raw) {
-    if (state.isSubmitting) return;
+    if (state.isSubmitting || state.locked) return;
     final digits = _sanitize(raw);
     ref.read(authDraftProvider.notifier).updateOtpInput(digits);
     state = state.copyWith(
@@ -90,17 +90,19 @@ class OtpStepNotifier extends Notifier<OtpStepState> {
   }
 
   void _applyFailure(AuthFailure error) {
-    final locked = error == AuthFailure.otpLocked;
-    final showInline =
+    final isOtpError =
         error == AuthFailure.wrongOtp || error == AuthFailure.otpLocked;
+    if (!isOtpError) {
+      state = state.copyWith(status: OtpSubmitFailure(error));
+      return;
+    }
     ref.read(authDraftProvider.notifier).updateOtpInput('');
     state = state.copyWith(
       digits: '',
-      locked: locked || state.locked,
+      locked: error == AuthFailure.otpLocked || state.locked,
       status: OtpSubmitFailure(error),
       shakeEpoch: state.shakeEpoch + 1,
-      inlineMessage: showInline ? error : null,
-      clearInlineMessage: !showInline,
+      inlineMessage: error,
     );
   }
 

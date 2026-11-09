@@ -92,6 +92,20 @@ void main() {
     await notifier().submit();
 
     expect(repository.verifyCount, 3);
+    expect(state().digits, isEmpty);
+  });
+
+  test('does not shake or clear digits on notRegistered', () async {
+    await _enterAndComplete(
+      notifier,
+      repository,
+      const Err(AuthFailure.notRegistered),
+    );
+
+    expect(state().digits, '111111');
+    expect(state().shakeEpoch, 0);
+    expect(state().inlineMessage, isNull);
+    expect(state().status, isA<OtpSubmitFailure>());
   });
 
   test('tick to zero then resend unlocks', () async {
