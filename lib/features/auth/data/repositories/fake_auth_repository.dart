@@ -47,6 +47,9 @@ class FakeAuthRepository implements AuthRepository {
     if (flow == AuthFlow.login && !isRegistered) {
       return const Err(AuthFailure.notRegistered);
     }
+    if ((_otpAttempts[phone.e164] ?? 0) >= OtpPolicy.maxAttempts) {
+      return const Err(AuthFailure.otpLocked);
+    }
     if (code.digits == OtpPolicy.correctCode) {
       return const Ok(null);
     }

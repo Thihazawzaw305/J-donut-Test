@@ -72,6 +72,29 @@ void main() {
       );
     });
 
+    test('rejects the correct code while locked until resend', () async {
+      final repo = build();
+      const wrong = OtpCode('000000');
+      const correct = OtpCode(OtpPolicy.correctCode);
+
+      for (var i = 0; i < OtpPolicy.maxAttempts; i++) {
+        await repo.verifyOtp(unknown, wrong, flow: AuthFlow.register);
+      }
+
+      expect(
+        (await repo.verifyOtp(unknown, correct, flow: AuthFlow.register))
+            .errorOrNull,
+        AuthFailure.otpLocked,
+      );
+
+      await repo.resendOtp(unknown);
+
+      expect(
+        (await repo.verifyOtp(unknown, correct, flow: AuthFlow.register)).isOk,
+        isTrue,
+      );
+    });
+
     test('resend resets attempts so verification can continue', () async {
       final repo = build();
       const wrong = OtpCode('000000');
