@@ -16,6 +16,7 @@ import '../../../../helpers/pump_jdonuts_app.dart';
 
 void main() {
   const validNumber = '09254135592';
+  const displayedNumber = '9254135592';
   const invalidMessage =
       'Enter a valid Myanmar mobile number, like 09 123 456 789.';
 
@@ -125,7 +126,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(StepProgressRing), findsOneWidget);
-    expect(find.text(validNumber), findsOneWidget);
+    expect(find.text(displayedNumber), findsOneWidget);
   });
 
   testWidgets('progress ring shows on registration and not on login', (
@@ -149,7 +150,7 @@ void main() {
     await tester.tap(find.text("LET'S GET STARTED"));
     await tester.pumpAndSettle();
 
-    expect(find.text(validNumber), findsOneWidget);
+    expect(find.text(displayedNumber), findsOneWidget);
   });
 
   testWidgets('a stale failure toast is gone after a later successful submit', (

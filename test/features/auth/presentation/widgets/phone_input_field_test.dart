@@ -41,6 +41,14 @@ void main() {
     expect(controller.text, '9-25+4');
   });
 
+  testWidgets('removes a leading zero from what is shown', (tester) async {
+    await pumpField(tester);
+
+    await tester.enterText(find.byType(TextField), '09254135592');
+
+    expect(controller.text, '9254135592');
+  });
+
   testWidgets('loses focus when the user taps outside', (tester) async {
     await pumpField(tester);
     await tester.tap(find.byType(TextField));

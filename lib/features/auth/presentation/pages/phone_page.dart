@@ -6,6 +6,7 @@ import '../../../../core/l10n/l10n_extension.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/widgets/primary_button.dart';
 import '../../domain/entities/auth_flow.dart';
+import '../../domain/validators/phone_input_normalizer.dart';
 import '../providers/phone_step_notifier.dart';
 import '../providers/phone_step_state.dart';
 import '../widgets/auth_step_scaffold.dart';
@@ -34,7 +35,9 @@ class _PhonePageState extends ConsumerState<PhonePage> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: ref.read(_provider).input);
+    _controller = TextEditingController(
+      text: normalizePhoneInputForDisplay(ref.read(_provider).input),
+    );
     _focusNode.addListener(_onFocusChanged);
   }
 
