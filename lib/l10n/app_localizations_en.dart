@@ -117,10 +117,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpErrorNonDigit => 'Use numbers only.';
 
   @override
-  String get firstNameHint => 'First name';
+  String get firstNameHint => 'First Name';
 
   @override
-  String get lastNameHint => 'Last name (optional)';
+  String get lastNameHint => 'Last Name';
 
   @override
   String get nameTitle => 'What\'s your name?';

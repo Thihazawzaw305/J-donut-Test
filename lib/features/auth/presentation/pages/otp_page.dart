@@ -46,26 +46,23 @@ class _OtpPageState extends ConsumerState<OtpPage> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(
-      _provider.select((s) => s.status),
-      (_, status) => OtpStepFeedback(
-        flow: widget.flow,
-      ).onSubmitStatus(context, status),
-    );
+    ref.listen(_provider.select((s) => s.status), (_, status) {
+      if (status is OtpSubmitSuccess) _ticker?.cancel();
+      OtpStepFeedback(flow: widget.flow).onSubmitStatus(context, status);
+    });
     final state = ref.watch(_provider);
     final e164 =
-        validatePhone(ref.watch(authDraftProvider).phoneInput).valueOrNull?.e164 ??
+        validatePhone(
+          ref.watch(authDraftProvider).phoneInput,
+        ).valueOrNull?.e164 ??
         '';
     return AuthStepScaffold(
       title: context.l10n.verifyNumberTitle,
+      subtitle: context.l10n.otpSentTo(e164),
       currentStep: widget.flow == AuthFlow.register ? 2 : null,
       onBack: () =>
           context.canPop() ? context.pop() : context.go(widget.flow.phoneRoute),
-      body: OtpStepBody(
-        e164: e164,
-        state: state,
-        notifier: ref.read(_provider.notifier),
-      ),
+      body: OtpStepBody(state: state, notifier: ref.read(_provider.notifier)),
     );
   }
 }

@@ -121,24 +121,28 @@ class _DobReadOnlyField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(minHeight: AppDimens.inputHeight),
-      padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceLg),
-      alignment: Alignment.centerLeft,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppDimens.inputRadius),
-      ),
-      child: TextFormField(
-        key: ValueKey('$hint-${value ?? ''}'),
-        initialValue: value ?? '',
-        readOnly: true,
-        enabled: enabled,
-        onTap: enabled ? onTap : null,
-        style: AppTextStyles.input,
-        decoration: InputDecoration.collapsed(
-          hintText: hint,
-          hintStyle: AppTextStyles.inputHint,
+    return GestureDetector(
+      onTap: enabled ? onTap : null,
+      child: Container(
+        height: AppDimens.inputHeight,
+        padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceLg),
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(AppDimens.inputRadius),
+        ),
+        child: IgnorePointer(
+          child: TextFormField(
+            key: ValueKey('$hint-${value ?? ''}'),
+            initialValue: value ?? '',
+            readOnly: true,
+            enabled: enabled,
+            style: AppTextStyles.input,
+            decoration: InputDecoration.collapsed(
+              hintText: hint,
+              hintStyle: AppTextStyles.inputHint,
+            ),
+          ),
         ),
       ),
     );

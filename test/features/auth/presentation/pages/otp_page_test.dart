@@ -18,7 +18,6 @@ const _phoneInput = '09254135592';
 const _e164 = '+959254135592';
 
 void main() {
-
   Future<void> pumpOtp(
     WidgetTester tester, {
     required String location,
@@ -35,19 +34,23 @@ void main() {
     );
   }
 
-  testWidgets('register OTP matches layout: six boxes, E.164, resend, legal, ring, no Continue', (
-    tester,
-  ) async {
-    await pumpOtp(tester, location: AppRoutes.registerOtp);
+  testWidgets(
+    'register OTP matches layout: six boxes, E.164, resend, legal, ring, no Continue',
+    (tester) async {
+      await pumpOtp(tester, location: AppRoutes.registerOtp);
 
-    expect(find.byType(OtpDigitBox), findsNWidgets(6));
-    expect(find.text("We've sent 6 digit OTP to $_e164"), findsOneWidget);
-    expect(find.text("Didn't receive the code?"), findsOneWidget);
-    expect(find.text('resend in 5 : 00 min'), findsOneWidget);
-    expect(find.textContaining('Terms of Use'), findsOneWidget);
-    expect(find.byType(StepProgressRing), findsOneWidget);
-    expect(find.byType(PrimaryButton), findsNothing);
-  });
+      expect(find.byType(OtpDigitBox), findsNWidgets(6));
+      expect(find.text("We've sent 6 digit OTP to $_e164"), findsOneWidget);
+      expect(find.text("Didn't receive the code?"), findsOneWidget);
+      expect(
+        find.text('resend in 5 : 00 min', findRichText: true),
+        findsOneWidget,
+      );
+      expect(find.textContaining('Terms of Use'), findsOneWidget);
+      expect(find.byType(StepProgressRing), findsOneWidget);
+      expect(find.byType(PrimaryButton), findsNothing);
+    },
+  );
 
   testWidgets('login OTP hides the progress ring', (tester) async {
     await pumpOtp(tester, location: AppRoutes.loginOtp);
@@ -133,14 +136,14 @@ void main() {
     expect(find.text("This number isn't registered yet."), findsOneWidget);
   });
 
-  testWidgets('already-registered verify failure shows a toast', (tester) async {
+  testWidgets('already-registered verify failure shows a toast', (
+    tester,
+  ) async {
     final repository = ControllableAuthRepository();
     await pumpOtp(
       tester,
       location: AppRoutes.registerOtp,
-      extraOverrides: [
-        authRepositoryProvider.overrideWithValue(repository),
-      ],
+      extraOverrides: [authRepositoryProvider.overrideWithValue(repository)],
     );
 
     await tester.enterText(find.byType(TextField), '123456');
@@ -161,9 +164,7 @@ void main() {
     await pumpOtp(
       tester,
       location: AppRoutes.registerOtp,
-      extraOverrides: [
-        authRepositoryProvider.overrideWithValue(repository),
-      ],
+      extraOverrides: [authRepositoryProvider.overrideWithValue(repository)],
     );
 
     await tester.enterText(find.byType(TextField), '123456');

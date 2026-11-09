@@ -96,7 +96,7 @@ class NameTextField extends StatelessWidget {
 
   Widget _field() {
     return Container(
-      constraints: const BoxConstraints(minHeight: AppDimens.inputHeight),
+      height: AppDimens.inputHeight,
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceLg),
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
@@ -106,6 +106,7 @@ class NameTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         readOnly: readOnly,
+        cursorColor: AppColors.otpCursor,
         textCapitalization: TextCapitalization.words,
         textInputAction: textInputAction,
         autofillHints: autofillHints,

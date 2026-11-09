@@ -32,8 +32,9 @@ class DobPage extends ConsumerWidget {
           body: const DobFields(),
           action: PrimaryButton(
             label: context.l10n.continueLabel,
-            isLoading: state.isSubmitting,
-            onPressed: state.canSubmit ? notifier.submit : null,
+            onPressed: state.validation.isOk
+                ? (state.isSubmitting ? () {} : notifier.submit)
+                : null,
           ),
         ),
         if (state.isSubmitting) const CreatingOverlay(),

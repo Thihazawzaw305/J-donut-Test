@@ -15,14 +15,8 @@ import '../providers/otp_step_state.dart';
 import 'otp_resend_row.dart';
 
 class OtpStepBody extends StatelessWidget {
-  const OtpStepBody({
-    super.key,
-    required this.e164,
-    required this.state,
-    required this.notifier,
-  });
+  const OtpStepBody({super.key, required this.state, required this.notifier});
 
-  final String e164;
   final OtpStepState state;
   final OtpStepNotifier notifier;
 
@@ -30,8 +24,6 @@ class OtpStepBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(context.l10n.otpSentTo(e164), style: AppTextStyles.body),
-        const SizedBox(height: AppDimens.spaceXl),
         OtpBoxes(
           digits: state.digits,
           onChanged: notifier.onChanged,
@@ -197,11 +189,7 @@ class _OtpBoxesState extends State<OtpBoxes>
 }
 
 class OtpDigitBox extends StatelessWidget {
-  const OtpDigitBox({
-    super.key,
-    required this.digit,
-    required this.showCursor,
-  });
+  const OtpDigitBox({super.key, required this.digit, required this.showCursor});
 
   final String digit;
   final bool showCursor;

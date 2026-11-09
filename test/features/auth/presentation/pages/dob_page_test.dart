@@ -39,7 +39,12 @@ void main() {
   );
 
   Future<void> selectBirthday(WidgetTester tester, DateTime date) async {
-    await tester.tap(find.byType(TextFormField).first);
+    final chrome = tester.getRect(
+      find
+          .ancestor(of: find.text('Day'), matching: find.byType(Container))
+          .first,
+    );
+    await tester.tapAt(chrome.topLeft + const Offset(8, 8));
     await tester.pumpAndSettle();
     tester
         .widget<CupertinoDatePicker>(find.byType(CupertinoDatePicker))
@@ -78,6 +83,22 @@ void main() {
     expect(continueButton(tester).onPressed, isNull);
   });
 
+  testWidgets('tapping the Day field chrome opens the birthday sheet', (
+    tester,
+  ) async {
+    await pumpDob(tester);
+
+    final chrome = tester.getRect(
+      find
+          .ancestor(of: find.text('Day'), matching: find.byType(Container))
+          .first,
+    );
+    await tester.tapAt(chrome.topLeft + const Offset(8, 8));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Select your Birthday'), findsOneWidget);
+  });
+
   testWidgets('selecting 30 May 2000 enables Continue', (tester) async {
     await pumpDob(tester);
 
@@ -100,7 +121,8 @@ void main() {
     await tester.pump();
 
     expect(find.text('Creating...'), findsOneWidget);
-    expect(find.byType(CircularProgressIndicator), findsWidgets);
+    expect(find.widgetWithText(PrimaryButton, 'CONTINUE'), findsOneWidget);
+    expect(continueButton(tester).isLoading, isFalse);
     expect(repository.completeRegistrationCount, 1);
 
     repository.finishCompleteRegistration(const Ok(null));

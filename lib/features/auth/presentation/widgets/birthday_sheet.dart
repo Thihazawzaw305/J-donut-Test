@@ -103,7 +103,7 @@ class _Header extends StatelessWidget {
         Expanded(
           child: Text(
             title,
-            style: AppTextStyles.headline.copyWith(color: AppColors.accent),
+            style: AppTextStyles.input.copyWith(color: AppColors.accent),
           ),
         ),
         IconButton(

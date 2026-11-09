@@ -11,31 +11,41 @@ class CreatingOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final label = context.l10n.creating;
-    return AbsorbPointer(
-      child: Center(
-        child: Semantics(
-          liveRegion: true,
-          label: label,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(AppDimens.buttonHeight / 2),
-              boxShadow: const [
-                BoxShadow(
-                  color: AppColors.shadow,
-                  blurRadius: AppDimens.shadowBlur,
+    return Positioned.fill(
+      child: Stack(
+        children: [
+          ModalBarrier(
+            dismissible: false,
+            color: AppColors.surface.withValues(alpha: 0),
+          ),
+          Center(
+            child: Semantics(
+              liveRegion: true,
+              label: label,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: BorderRadius.circular(
+                    AppDimens.buttonHeight / 2,
+                  ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: AppColors.shadow,
+                      blurRadius: AppDimens.shadowBlur,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppDimens.spaceLg,
-                vertical: AppDimens.spaceMd,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimens.spaceLg,
+                    vertical: AppDimens.spaceMd,
+                  ),
+                  child: Text(label, style: AppTextStyles.body),
+                ),
               ),
-              child: Text(label, style: AppTextStyles.body),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

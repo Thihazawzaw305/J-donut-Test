@@ -14,6 +14,7 @@ class AuthStepScaffold extends StatelessWidget {
   const AuthStepScaffold({
     super.key,
     required this.title,
+    this.subtitle,
     required this.body,
     this.action,
     required this.onBack,
@@ -24,6 +25,7 @@ class AuthStepScaffold extends StatelessWidget {
   static const registrationStepCount = 4;
 
   final String title;
+  final String? subtitle;
   final Widget body;
   final Widget? action;
   final VoidCallback onBack;
@@ -97,6 +99,10 @@ class AuthStepScaffold extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(title, style: AppTextStyles.headline),
+        if (subtitle != null) ...[
+          const SizedBox(height: AppDimens.spaceMd),
+          Text(subtitle!, style: AppTextStyles.body),
+        ],
         const SizedBox(height: AppDimens.spaceXl),
       ],
     );

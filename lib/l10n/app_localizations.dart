@@ -295,13 +295,13 @@ abstract class AppLocalizations {
   /// No description provided for @firstNameHint.
   ///
   /// In en, this message translates to:
-  /// **'First name'**
+  /// **'First Name'**
   String get firstNameHint;
 
   /// No description provided for @lastNameHint.
   ///
   /// In en, this message translates to:
-  /// **'Last name (optional)'**
+  /// **'Last Name'**
   String get lastNameHint;
 
   /// No description provided for @nameTitle.

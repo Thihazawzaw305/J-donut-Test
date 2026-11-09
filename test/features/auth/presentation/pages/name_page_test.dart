@@ -34,8 +34,8 @@ void main() {
     await pumpName(tester);
 
     expect(find.text("What's your name?"), findsOneWidget);
-    expect(find.text('First name'), findsOneWidget);
-    expect(find.text('Last name (optional)'), findsOneWidget);
+    expect(find.text('First Name'), findsOneWidget);
+    expect(find.text('Last Name'), findsOneWidget);
     expect(find.byType(TextField), findsNWidgets(2));
     expect(find.byType(PrimaryButton), findsOneWidget);
     expect(find.textContaining('Terms of Use'), findsOneWidget);
