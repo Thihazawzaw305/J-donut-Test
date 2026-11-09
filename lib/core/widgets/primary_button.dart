@@ -74,32 +74,64 @@ class _ButtonBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) => Center(
-        child: AnimatedContainer(
+    // No LayoutBuilder: the button must support intrinsic-height layout
+    // (AuthStepScaffold wraps its content in IntrinsicHeight).
+    return Center(
+      child: AnimatedSize(
+        duration: duration,
+        curve: AppMotion.standardCurve,
+        child: _AnimatedPill(
+          width: isLoading ? AppDimens.buttonHeight : double.infinity,
           duration: duration,
-          curve: AppMotion.standardCurve,
-          height: AppDimens.buttonHeight,
-          width: isLoading ? AppDimens.buttonHeight : constraints.maxWidth,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: isDisabled ? AppColors.primaryDisabled : AppColors.primary,
-            borderRadius: BorderRadius.circular(AppDimens.buttonHeight / 2),
-          ),
-          child: AnimatedSwitcher(
-            duration: duration,
-            child: isLoading
-                ? const _Spinner()
-                : Text(
-                    label.toUpperCase(),
-                    key: ValueKey(label),
-                    maxLines: 1,
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
-                    style: AppTextStyles.button,
-                  ),
-          ),
+          isDisabled: isDisabled,
+          child: _content(),
         ),
+      ),
+    );
+  }
+
+  Widget _content() => AnimatedSwitcher(
+    duration: duration,
+    child: isLoading
+        ? const _Spinner()
+        : Text(
+            label.toUpperCase(),
+            key: ValueKey(label),
+            maxLines: 1,
+            overflow: TextOverflow.fade,
+            softWrap: false,
+            style: AppTextStyles.button,
+          ),
+  );
+}
+
+class _AnimatedPill extends StatelessWidget {
+  const _AnimatedPill({
+    required this.width,
+    required this.duration,
+    required this.isDisabled,
+    required this.child,
+  });
+
+  final double width;
+  final Duration duration;
+  final bool isDisabled;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width,
+      height: AppDimens.buttonHeight,
+      child: AnimatedContainer(
+        duration: duration,
+        curve: AppMotion.standardCurve,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: isDisabled ? AppColors.primaryDisabled : AppColors.primary,
+          borderRadius: BorderRadius.circular(AppDimens.buttonHeight / 2),
+        ),
+        child: child,
       ),
     );
   }
