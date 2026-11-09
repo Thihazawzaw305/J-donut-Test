@@ -12,9 +12,14 @@ import 'package:j_donuts_app/features/auth/domain/repositories/auth_repository.d
 class ControllableAuthRepository implements AuthRepository {
   final _completer = Completer<Result<void, AuthFailure>>();
   final _verifyCompleters = <Completer<Result<void, AuthFailure>>>[];
+  final _saveNameCompleter = Completer<Result<void, AuthFailure>>();
+  final _completeRegistrationCompleter =
+      Completer<Result<void, AuthFailure>>();
   int requestCount = 0;
   int verifyCount = 0;
   int resendCount = 0;
+  int saveProfileNameCount = 0;
+  int completeRegistrationCount = 0;
   AuthFlow? lastFlow;
   AuthFlow? lastVerifyFlow;
   OtpCode? lastCode;
@@ -60,8 +65,13 @@ class ControllableAuthRepository implements AuthRepository {
     PhoneNumber phone, {
     required String firstName,
     String? lastName,
-  }) async =>
-      const Ok(null);
+  }) {
+    saveProfileNameCount++;
+    return _saveNameCompleter.future;
+  }
+
+  void completeSaveProfileName(Result<void, AuthFailure> result) =>
+      _saveNameCompleter.complete(result);
 
   @override
   Future<Result<void, AuthFailure>> completeRegistration(
@@ -69,6 +79,11 @@ class ControllableAuthRepository implements AuthRepository {
     required String firstName,
     String? lastName,
     required DateOfBirth dateOfBirth,
-  }) async =>
-      const Ok(null);
+  }) {
+    completeRegistrationCount++;
+    return _completeRegistrationCompleter.future;
+  }
+
+  void finishCompleteRegistration(Result<void, AuthFailure> result) =>
+      _completeRegistrationCompleter.complete(result);
 }
