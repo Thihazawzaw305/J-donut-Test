@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:j_donuts_app/core/errors/result.dart';
 import 'package:j_donuts_app/features/auth/domain/entities/auth_flow.dart';
+import 'package:j_donuts_app/features/auth/domain/entities/date_of_birth.dart';
+import 'package:j_donuts_app/features/auth/domain/entities/otp_code.dart';
 import 'package:j_donuts_app/features/auth/domain/entities/phone_number.dart';
 import 'package:j_donuts_app/features/auth/domain/failures/auth_failure.dart';
 import 'package:j_donuts_app/features/auth/domain/repositories/auth_repository.dart';
@@ -201,4 +203,33 @@ class _FailThenSucceedRepository implements AuthRepository {
     required AuthFlow flow,
   }) async =>
       _calls++ == 0 ? const Err(AuthFailure.alreadyRegistered) : const Ok(null);
+
+  @override
+  Future<Result<void, AuthFailure>> verifyOtp(
+    PhoneNumber phone,
+    OtpCode code, {
+    required AuthFlow flow,
+  }) async =>
+      const Ok(null);
+
+  @override
+  Future<Result<void, AuthFailure>> resendOtp(PhoneNumber phone) async =>
+      const Ok(null);
+
+  @override
+  Future<Result<void, AuthFailure>> saveProfileName(
+    PhoneNumber phone, {
+    required String firstName,
+    String? lastName,
+  }) async =>
+      const Ok(null);
+
+  @override
+  Future<Result<void, AuthFailure>> completeRegistration(
+    PhoneNumber phone, {
+    required String firstName,
+    String? lastName,
+    required DateOfBirth dateOfBirth,
+  }) async =>
+      const Ok(null);
 }

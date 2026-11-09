@@ -13,5 +13,7 @@ extension AuthFailureMessage on AuthFailure {
   String message(AppLocalizations l10n) => switch (this) {
     AuthFailure.notRegistered => l10n.authErrorNotRegistered,
     AuthFailure.alreadyRegistered => l10n.authErrorAlreadyRegistered,
+    AuthFailure.wrongOtp => l10n.authErrorWrongOtp,
+    AuthFailure.otpLocked => l10n.authErrorOtpLocked,
   };
 }

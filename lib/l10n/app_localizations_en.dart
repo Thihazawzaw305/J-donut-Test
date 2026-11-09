@@ -77,6 +77,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'This number is already registered. Please log in.';
 
   @override
+  String get authErrorWrongOtp => 'That code doesn\'t match. Try again.';
+
+  @override
+  String get authErrorOtpLocked => 'Too many attempts. Request a new code.';
+
+  @override
   String get registerAction => 'Register';
 
   @override

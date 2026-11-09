@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:j_donuts_app/core/errors/result.dart';
 import 'package:j_donuts_app/features/auth/domain/entities/auth_flow.dart';
+import 'package:j_donuts_app/features/auth/domain/entities/date_of_birth.dart';
+import 'package:j_donuts_app/features/auth/domain/entities/otp_code.dart';
 import 'package:j_donuts_app/features/auth/domain/entities/phone_number.dart';
 import 'package:j_donuts_app/features/auth/domain/failures/auth_failure.dart';
 import 'package:j_donuts_app/features/auth/domain/repositories/auth_repository.dart';
@@ -9,8 +11,12 @@ import 'package:j_donuts_app/features/auth/domain/repositories/auth_repository.d
 /// Holds every request open until [complete] is called.
 class ControllableAuthRepository implements AuthRepository {
   final _completer = Completer<Result<void, AuthFailure>>();
+  final _verifyCompleter = Completer<Result<void, AuthFailure>>();
   int requestCount = 0;
+  int verifyCount = 0;
   AuthFlow? lastFlow;
+  AuthFlow? lastVerifyFlow;
+  OtpCode? lastCode;
 
   @override
   Future<Result<void, AuthFailure>> requestOtp(
@@ -24,4 +30,40 @@ class ControllableAuthRepository implements AuthRepository {
 
   void complete(Result<void, AuthFailure> result) =>
       _completer.complete(result);
+
+  @override
+  Future<Result<void, AuthFailure>> verifyOtp(
+    PhoneNumber phone,
+    OtpCode code, {
+    required AuthFlow flow,
+  }) {
+    verifyCount++;
+    lastCode = code;
+    lastVerifyFlow = flow;
+    return _verifyCompleter.future;
+  }
+
+  void completeVerify(Result<void, AuthFailure> result) =>
+      _verifyCompleter.complete(result);
+
+  @override
+  Future<Result<void, AuthFailure>> resendOtp(PhoneNumber phone) async =>
+      const Ok(null);
+
+  @override
+  Future<Result<void, AuthFailure>> saveProfileName(
+    PhoneNumber phone, {
+    required String firstName,
+    String? lastName,
+  }) async =>
+      const Ok(null);
+
+  @override
+  Future<Result<void, AuthFailure>> completeRegistration(
+    PhoneNumber phone, {
+    required String firstName,
+    String? lastName,
+    required DateOfBirth dateOfBirth,
+  }) async =>
+      const Ok(null);
 }

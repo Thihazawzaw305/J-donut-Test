@@ -220,6 +220,18 @@ abstract class AppLocalizations {
   /// **'This number is already registered. Please log in.'**
   String get authErrorAlreadyRegistered;
 
+  /// No description provided for @authErrorWrongOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'That code doesn\'t match. Try again.'**
+  String get authErrorWrongOtp;
+
+  /// No description provided for @authErrorOtpLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many attempts. Request a new code.'**
+  String get authErrorOtpLocked;
+
   /// No description provided for @registerAction.
   ///
   /// In en, this message translates to:

@@ -1,3 +1,8 @@
 import '../../../../core/errors/failure.dart';
 
-enum AuthFailure implements Failure { notRegistered, alreadyRegistered }
+enum AuthFailure implements Failure {
+  notRegistered,
+  alreadyRegistered,
+  wrongOtp,
+  otpLocked,
+}
