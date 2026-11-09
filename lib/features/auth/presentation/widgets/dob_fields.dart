@@ -28,22 +28,19 @@ class DobFields extends ConsumerWidget {
         _DobReadOnlyField(
           hint: l10n.dayHint,
           value: state.day?.toString(),
-          enabled: !state.isSubmitting,
-          onTap: open,
+          onTap: state.isSubmitting ? null : open,
         ),
         const SizedBox(height: AppDimens.spaceMd),
         _DobReadOnlyField(
           hint: l10n.monthHint,
           value: _monthLabel(context, state.month),
-          enabled: !state.isSubmitting,
-          onTap: open,
+          onTap: state.isSubmitting ? null : open,
         ),
         const SizedBox(height: AppDimens.spaceMd),
         _DobReadOnlyField(
           hint: l10n.yearHint,
           value: state.year?.toString(),
-          enabled: !state.isSubmitting,
-          onTap: open,
+          onTap: state.isSubmitting ? null : open,
         ),
         if (error != null) ...[
           const SizedBox(height: AppDimens.spaceXs),
@@ -110,19 +107,17 @@ class _DobReadOnlyField extends StatelessWidget {
   const _DobReadOnlyField({
     required this.hint,
     required this.value,
-    required this.enabled,
     required this.onTap,
   });
 
   final String hint;
   final String? value;
-  final bool enabled;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: enabled ? onTap : null,
+      onTap: onTap,
       child: Container(
         height: AppDimens.inputHeight,
         padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceLg),
@@ -136,7 +131,6 @@ class _DobReadOnlyField extends StatelessWidget {
             key: ValueKey('$hint-${value ?? ''}'),
             initialValue: value ?? '',
             readOnly: true,
-            enabled: enabled,
             style: AppTextStyles.input,
             decoration: InputDecoration.collapsed(
               hintText: hint,

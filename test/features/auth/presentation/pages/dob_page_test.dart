@@ -121,6 +121,13 @@ void main() {
     await tester.pump();
 
     expect(find.text('Creating...'), findsOneWidget);
+    expect(find.text('30'), findsOneWidget);
+    expect(find.text('May'), findsOneWidget);
+    expect(find.text('2000'), findsOneWidget);
+    expect(
+      tester.widgetList<TextField>(find.byType(TextField)),
+      everyElement(predicate<TextField>((field) => field.enabled ?? true)),
+    );
     expect(find.widgetWithText(PrimaryButton, 'CONTINUE'), findsOneWidget);
     expect(continueButton(tester).isLoading, isFalse);
     expect(repository.completeRegistrationCount, 1);
