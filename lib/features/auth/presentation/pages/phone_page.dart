@@ -4,16 +4,13 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/l10n/l10n_extension.dart';
 import '../../../../core/router/app_routes.dart';
-import '../../../../core/widgets/app_toast.dart';
 import '../../../../core/widgets/primary_button.dart';
 import '../../domain/entities/auth_flow.dart';
-import '../../domain/failures/auth_failure.dart';
-import '../auth_routes.dart';
-import '../mappers/failure_messages.dart';
 import '../providers/phone_step_notifier.dart';
 import '../providers/phone_step_state.dart';
 import '../widgets/auth_step_scaffold.dart';
 import '../widgets/phone_input_field.dart';
+import '../widgets/phone_step_feedback.dart';
 
 class PhonePage extends ConsumerStatefulWidget {
   const PhonePage({super.key, required this.flow});
@@ -31,6 +28,9 @@ class _PhonePageState extends ConsumerState<PhonePage> {
   NotifierProvider<PhoneStepNotifier, PhoneStepState> get _provider =>
       phoneStepProvider(widget.flow);
 
+  PhoneStepFeedback get _feedback =>
+      PhoneStepFeedback(ref: ref, flow: widget.flow);
+
   @override
   void initState() {
     super.initState();
@@ -40,6 +40,7 @@ class _PhonePageState extends ConsumerState<PhonePage> {
 
   @override
   void dispose() {
+    _focusNode.removeListener(_onFocusChanged);
     _focusNode.dispose();
     _controller.dispose();
     super.dispose();
@@ -47,7 +48,10 @@ class _PhonePageState extends ConsumerState<PhonePage> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(_provider.select((s) => s.status), (_, s) => _onStatus(s));
+    ref.listen(
+      _provider.select((s) => s.status),
+      (_, status) => _feedback.onSubmitStatus(context, status),
+    );
     final state = ref.watch(_provider);
     final notifier = ref.read(_provider.notifier);
     return AuthStepScaffold(
@@ -70,53 +74,16 @@ class _PhonePageState extends ConsumerState<PhonePage> {
   }
 
   void _onFocusChanged() {
+    if (!mounted) return;
     final isCurrentRoute = ModalRoute.of(context)?.isCurrent ?? false;
-    if (!_focusNode.hasFocus && isCurrentRoute) _warnIfInvalid();
+    if (!_focusNode.hasFocus && isCurrentRoute) {
+      _feedback.warnIfInvalid(context);
+    }
   }
 
   void _onKeyboardDone(PhoneStepState state) => state.canSubmit
       ? ref.read(_provider.notifier).submit()
-      : _warnIfInvalid();
-
-  void _warnIfInvalid() {
-    final error = ref.read(_provider).visibleError;
-    if (error == null) return;
-    AppToast.show(
-      context,
-      message: error.message(context.l10n),
-      type: AppToastType.error,
-    );
-  }
-
-  void _onStatus(PhoneSubmitStatus status) {
-    switch (status) {
-      case PhoneSubmitSuccess():
-        AppToast.hide(context);
-        context.push(widget.flow.otpRoute);
-      case PhoneSubmitFailure(:final failure):
-        _showAuthFailure(failure);
-      case PhoneSubmitIdle() || PhoneSubmitting():
-        break;
-    }
-  }
-
-  void _showAuthFailure(AuthFailure failure) {
-    final router = GoRouter.of(context);
-    final (actionLabel, target) = switch (failure) {
-      AuthFailure.notRegistered => (
-        context.l10n.registerAction,
-        AuthFlow.register,
-      ),
-      AuthFailure.alreadyRegistered => (context.l10n.logIn, AuthFlow.login),
-    };
-    AppToast.show(
-      context,
-      message: failure.message(context.l10n),
-      type: AppToastType.error,
-      actionLabel: actionLabel,
-      onAction: () => router.pushReplacement(target.phoneRoute),
-    );
-  }
+      : _feedback.warnIfInvalid(context);
 
   void _goBack() =>
       context.canPop() ? context.pop() : context.go(AppRoutes.onboarding);

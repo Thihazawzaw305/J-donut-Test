@@ -45,6 +45,18 @@ void main() {
     expect(continueButton(tester).onPressed, isNotNull);
   });
 
+  testWidgets('done on the keyboard shows one validation toast', (
+    tester,
+  ) async {
+    await pumpJDonutsApp(tester, location: AppRoutes.registerPhone);
+    await tester.tap(find.byType(TextField));
+    await typeNumber(tester, '0912');
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+
+    expect(find.text(invalidMessage), findsOneWidget);
+  });
+
   testWidgets('shows a toast when an invalid number loses focus', (
     tester,
   ) async {
@@ -164,6 +176,19 @@ void main() {
     expect(find.text('Verify your number'), findsOneWidget);
     expect(find.byType(SnackBar), findsNothing);
   });
+
+  testWidgets('fits a narrow screen with large text', (tester) async {
+    const viewport = Size(320, 568);
+    await pumpJDonutsApp(
+      tester,
+      location: AppRoutes.registerPhone,
+      viewport: viewport,
+      textScale: 1.3,
+    );
+
+    expect(find.text('Enter your phone number'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }
 
 class _FailThenSucceedRepository implements AuthRepository {
@@ -173,7 +198,6 @@ class _FailThenSucceedRepository implements AuthRepository {
   Future<Result<void, AuthFailure>> requestOtp(
     PhoneNumber phone, {
     required AuthFlow flow,
-  }) async => _calls++ == 0
-      ? const Err(AuthFailure.alreadyRegistered)
-      : const Ok(null);
+  }) async =>
+      _calls++ == 0 ? const Err(AuthFailure.alreadyRegistered) : const Ok(null);
 }
