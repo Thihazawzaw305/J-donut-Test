@@ -25,6 +25,13 @@ void main() {
       );
     });
 
+    test('rejects punctuation as invalidCharacters', () {
+      expect(
+        validateFirstName('John@').errorOrNull,
+        NameValidationFailure.invalidCharacters,
+      );
+    });
+
     test('accepts Myanmar letters', () {
       expect(validateFirstName('သီဟ').valueOrNull, 'သီဟ');
     });
@@ -59,6 +66,17 @@ void main() {
 
     test('accepts valid last name when provided', () {
       expect(validateLastName('Smith').valueOrNull, 'Smith');
+    });
+
+    test('accepts Myanmar letters', () {
+      expect(validateLastName('သီဟ').valueOrNull, 'သီဟ');
+    });
+
+    test('rejects punctuation as invalidCharacters', () {
+      expect(
+        validateLastName('Smith-').errorOrNull,
+        NameValidationFailure.invalidCharacters,
+      );
     });
   });
 }
