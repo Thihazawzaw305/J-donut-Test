@@ -11,9 +11,10 @@ import 'package:j_donuts_app/features/auth/domain/repositories/auth_repository.d
 /// Holds every request open until [complete] is called.
 class ControllableAuthRepository implements AuthRepository {
   final _completer = Completer<Result<void, AuthFailure>>();
-  final _verifyCompleter = Completer<Result<void, AuthFailure>>();
+  final _verifyCompleters = <Completer<Result<void, AuthFailure>>>[];
   int requestCount = 0;
   int verifyCount = 0;
+  int resendCount = 0;
   AuthFlow? lastFlow;
   AuthFlow? lastVerifyFlow;
   OtpCode? lastCode;
@@ -40,15 +41,19 @@ class ControllableAuthRepository implements AuthRepository {
     verifyCount++;
     lastCode = code;
     lastVerifyFlow = flow;
-    return _verifyCompleter.future;
+    final completer = Completer<Result<void, AuthFailure>>();
+    _verifyCompleters.add(completer);
+    return completer.future;
   }
 
   void completeVerify(Result<void, AuthFailure> result) =>
-      _verifyCompleter.complete(result);
+      _verifyCompleters.firstWhere((c) => !c.isCompleted).complete(result);
 
   @override
-  Future<Result<void, AuthFailure>> resendOtp(PhoneNumber phone) async =>
-      const Ok(null);
+  Future<Result<void, AuthFailure>> resendOtp(PhoneNumber phone) async {
+    resendCount++;
+    return const Ok(null);
+  }
 
   @override
   Future<Result<void, AuthFailure>> saveProfileName(
