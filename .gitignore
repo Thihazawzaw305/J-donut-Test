@@ -47,3 +47,7 @@ app.*.map.json
 # Client design material (must not be committed)
 Madivizion_Flutter_Code_Test.pdf
 
+
+# Subagent-driven-development scratch
+.superpowers/
+
