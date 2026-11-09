@@ -44,9 +44,11 @@ void main() {
   testWidgets('loses focus when the user taps outside', (tester) async {
     await pumpField(tester);
     await tester.tap(find.byType(TextField));
+    await tester.pump();
     expect(focusNode.hasFocus, isTrue);
 
     await tester.tapAt(const Offset(5, 500));
+    await tester.pump();
 
     expect(focusNode.hasFocus, isFalse);
   });

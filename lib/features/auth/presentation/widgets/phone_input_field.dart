@@ -28,7 +28,7 @@ class PhoneInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final field = Container(
+    return Container(
       constraints: const BoxConstraints(minHeight: AppDimens.inputHeight),
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceLg),
       decoration: BoxDecoration(
@@ -41,15 +41,6 @@ class PhoneInputField extends StatelessWidget {
           const SizedBox(width: AppDimens.spaceLg),
           Expanded(child: _buildTextField(context)),
         ],
-      ),
-    );
-    return SizedBox(
-      width: double.infinity,
-      height: MediaQuery.sizeOf(context).height,
-      child: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: focusNode.unfocus,
-        child: Align(alignment: Alignment.topCenter, child: field),
       ),
     );
   }
