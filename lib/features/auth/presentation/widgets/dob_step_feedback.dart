@@ -15,7 +15,9 @@ final class DobStepFeedback {
     switch (status) {
       case DobSubmitSuccess():
         AppToast.hide(context);
-        context.push(AppRoutes.welcome);
+        // Terminal Welcome: `go` drops Phone→OTP→Name→DOB so Back cannot
+        // resubmit DOB. Until Welcome, register still uses `push`.
+        context.go(AppRoutes.welcome);
       case DobSubmitFailure(:final failure):
         AppToast.show(
           context,

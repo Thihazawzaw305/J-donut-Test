@@ -20,7 +20,7 @@ final class OtpStepFeedback {
     switch (status) {
       case OtpSubmitSuccess():
         AppToast.hide(context);
-        context.push(_successRoute);
+        _goToSuccess(context);
       case OtpSubmitFailure(:final failure):
         _onFailure(context, failure);
       case OtpSubmitIdle() || OtpSubmitting():
@@ -28,10 +28,15 @@ final class OtpStepFeedback {
     }
   }
 
-  String get _successRoute => switch (flow) {
-    AuthFlow.register => AppRoutes.registerName,
-    AuthFlow.login => AppRoutes.home,
-  };
+  void _goToSuccess(BuildContext context) {
+    switch (flow) {
+      case AuthFlow.register:
+        context.push(flow.nameRoute);
+      case AuthFlow.login:
+        // Terminal: replace the stack so system back cannot return to OTP.
+        context.go(AppRoutes.home);
+    }
+  }
 
   void _onFailure(BuildContext context, AuthFailure failure) {
     if (failure == AuthFailure.wrongOtp || failure == AuthFailure.otpLocked) {
