@@ -84,7 +84,7 @@ lib/
 `AuthRepository`
 - `Future<Result<void, AuthFailure>> requestOtp(PhoneNumber phone, {required AuthFlow flow})`
 - `AuthFlow { register, login }`
-- `AuthFailure` sealed: `notRegistered`, `alreadyRegistered`, `unknown`.
+- `AuthFailure` enum: `notRegistered`, `alreadyRegistered`.
 
 `RequestOtp` use case: delegates to repository.
 
