@@ -43,6 +43,23 @@ void main() {
     expect(repository.completeRegistrationCount, 0);
   });
 
+  test('invalid date does not clear a previously saved draft date', () {
+    notifier().onDateChanged(year: 2000, month: 5, day: 15);
+    expect(
+      container.read(authDraftProvider).dateOfBirth,
+      const DateOfBirth(year: 2000, month: 5, day: 15),
+    );
+
+    notifier().onDateChanged(year: 2000, month: 4, day: 31);
+
+    expect(
+      container.read(authDraftProvider).dateOfBirth,
+      const DateOfBirth(year: 2000, month: 5, day: 15),
+    );
+    expect(state().day, 31);
+    expect(state().month, 4);
+  });
+
   test('valid date of birth submits successfully', () async {
     notifier().onDateChanged(year: 2000, month: 5, day: 15);
 

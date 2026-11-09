@@ -40,7 +40,9 @@ class DobStepNotifier extends Notifier<DobStepState> {
       now: now,
     );
     final dob = validation.valueOrNull;
-    ref.read(authDraftProvider.notifier).updateDateOfBirth(dob);
+    if (dob != null) {
+      ref.read(authDraftProvider.notifier).updateDateOfBirth(dob);
+    }
     state = state.copyWith(
       year: nextYear,
       month: nextMonth,
