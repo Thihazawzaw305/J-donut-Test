@@ -161,13 +161,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yearHint => 'Year';
 
   @override
-  String get selectBirthday => 'Select birthday';
+  String get selectBirthday => 'Select your Birthday';
 
   @override
   String get select => 'Select';
 
   @override
-  String get creating => 'Creating';
+  String get close => 'Close';
+
+  @override
+  String get creating => 'Creating...';
 
   @override
   String get dobErrorIncomplete => 'Enter your full date of birth.';

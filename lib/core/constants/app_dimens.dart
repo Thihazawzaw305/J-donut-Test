@@ -24,6 +24,7 @@ abstract final class AppDimens {
   static const toastElevation = 6.0;
   static const spinnerSize = 22.0;
   static const spinnerStroke = 2.5;
+  static const datePickerHeight = 216.0;
   static const iconMd = 24.0;
   static const iconLg = 32.0;
   static const shadowBlur = 12.0;

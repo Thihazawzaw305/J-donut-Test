@@ -18,6 +18,7 @@ class AuthStepScaffold extends StatelessWidget {
     this.action,
     required this.onBack,
     this.currentStep,
+    this.showCheck = false,
   });
 
   static const registrationStepCount = 4;
@@ -29,6 +30,7 @@ class AuthStepScaffold extends StatelessWidget {
 
   /// Registration step (1-based); null hides the progress ring.
   final int? currentStep;
+  final bool showCheck;
 
   void _showComingSoon(BuildContext context) =>
       AppToast.show(context, message: context.l10n.comingSoon);
@@ -81,6 +83,7 @@ class AuthStepScaffold extends StatelessWidget {
               StepProgressRing(
                 currentStep: step,
                 totalSteps: registrationStepCount,
+                showCheck: showCheck,
               ),
           ],
         ),

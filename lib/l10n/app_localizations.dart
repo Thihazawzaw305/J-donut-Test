@@ -379,7 +379,7 @@ abstract class AppLocalizations {
   /// No description provided for @selectBirthday.
   ///
   /// In en, this message translates to:
-  /// **'Select birthday'**
+  /// **'Select your Birthday'**
   String get selectBirthday;
 
   /// No description provided for @select.
@@ -388,10 +388,16 @@ abstract class AppLocalizations {
   /// **'Select'**
   String get select;
 
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
   /// No description provided for @creating.
   ///
   /// In en, this message translates to:
-  /// **'Creating'**
+  /// **'Creating...'**
   String get creating;
 
   /// No description provided for @dobErrorIncomplete.

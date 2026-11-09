@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/domain/entities/auth_flow.dart';
+import '../../features/auth/presentation/pages/dob_page.dart';
 import '../../features/auth/presentation/pages/name_page.dart';
 import '../../features/auth/presentation/pages/onboarding_page.dart';
 import '../../features/auth/presentation/pages/otp_page.dart';
@@ -38,11 +39,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.registerName,
         builder: (_, _) => const NamePage(),
       ),
-      GoRoute(
-        path: AppRoutes.registerDob,
-        builder: (context, _) =>
-            PlaceholderPage(title: context.l10n.dobTitle),
-      ),
+      GoRoute(path: AppRoutes.registerDob, builder: (_, _) => const DobPage()),
       GoRoute(
         path: AppRoutes.welcome,
         builder: (context, _) =>
