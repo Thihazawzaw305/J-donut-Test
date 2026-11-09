@@ -5,6 +5,7 @@ abstract final class AppRoutes {
   static const registerOtp = '/register/otp';
   static const loginOtp = '/login/otp';
   static const registerName = '/register/name';
+  static const registerDob = '/register/dob';
   static const welcome = '/welcome';
   static const home = '/home';
 }
