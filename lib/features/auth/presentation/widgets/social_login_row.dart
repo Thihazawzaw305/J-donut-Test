@@ -59,7 +59,7 @@ class _SocialButton extends StatelessWidget {
       child: Material(
         color: AppColors.surface,
         shape: const CircleBorder(),
-        elevation: AppDimens.spaceXs,
+        elevation: AppDimens.socialButtonElevation,
         shadowColor: AppColors.shadow,
         child: InkWell(
           customBorder: const CircleBorder(),

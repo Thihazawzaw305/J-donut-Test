@@ -55,6 +55,19 @@ class AuthStepScaffold extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _buildHeader(context),
+        _buildTitle(context),
+        body,
+        const Spacer(),
+        _buildFooter(context),
+      ],
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
     final step = currentStep;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -72,10 +85,24 @@ class AuthStepScaffold extends StatelessWidget {
           ],
         ),
         const SizedBox(height: AppDimens.spaceXl),
+      ],
+    );
+  }
+
+  Widget _buildTitle(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
         Text(title, style: AppTextStyles.headline),
         const SizedBox(height: AppDimens.spaceXl),
-        body,
-        const Spacer(),
+      ],
+    );
+  }
+
+  Widget _buildFooter(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
         const SizedBox(height: AppDimens.spaceLg),
         action,
         const SizedBox(height: AppDimens.spaceLg),

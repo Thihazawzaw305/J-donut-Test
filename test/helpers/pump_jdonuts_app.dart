@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
@@ -9,9 +10,21 @@ Future<void> pumpJDonutsApp(
   WidgetTester tester, {
   List<Override> overrides = const [],
   String? location,
+  Size viewport = const Size(800, 600),
+  double textScale = 1.0,
 }) async {
+  tester.view.physicalSize = viewport;
+  tester.view.devicePixelRatio = 1.0;
+  addTearDown(tester.view.resetPhysicalSize);
+
   await tester.pumpWidget(
-    ProviderScope(overrides: overrides, child: const JDonutsApp()),
+    MediaQuery(
+      data: MediaQueryData(
+        size: viewport,
+        textScaler: TextScaler.linear(textScale),
+      ),
+      child: ProviderScope(overrides: overrides, child: const JDonutsApp()),
+    ),
   );
   if (location != null) {
     final container = ProviderScope.containerOf(

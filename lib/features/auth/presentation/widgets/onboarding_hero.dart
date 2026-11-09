@@ -1,3 +1,5 @@
+import 'dart:math' show min;
+
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
@@ -45,7 +47,7 @@ class OnboardingHero extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final width = constraints.maxWidth;
+        final extent = min(constraints.maxWidth, constraints.maxHeight);
         return ClipRect(
           child: Stack(
             children: [
@@ -53,14 +55,14 @@ class OnboardingHero extends StatelessWidget {
                 Align(
                   alignment: circle.alignment,
                   child: _Circle(
-                    diameter: width * circle.widthFactor,
+                    diameter: extent * circle.widthFactor,
                     color: circle.color,
                   ),
                 ),
               Align(
                 alignment: _logoAlignment,
                 child: _Circle(
-                  diameter: width * _logoWidthFactor,
+                  diameter: extent * _logoWidthFactor,
                   color: AppColors.heroPink,
                   child: Text(context.l10n.appName, style: AppTextStyles.brand),
                 ),

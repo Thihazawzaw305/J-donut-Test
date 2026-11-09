@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:j_donuts_app/features/auth/presentation/widgets/step_progress_ring.dart';
 
@@ -57,5 +58,22 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Coming soon'), findsOneWidget);
+  });
+
+  testWidgets('Privacy Policy shows a coming soon toast', (tester) async {
+    await pumpJDonutsApp(tester);
+
+    await tester.tapOnText(find.textRange.ofSubstring('Privacy Policy'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Coming soon'), findsOneWidget);
+  });
+
+  testWidgets('fits a narrow screen with large text', (tester) async {
+    const viewport = Size(320, 568);
+    await pumpJDonutsApp(tester, viewport: viewport, textScale: 1.3);
+
+    expect(find.text("LET'S GET STARTED"), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 }

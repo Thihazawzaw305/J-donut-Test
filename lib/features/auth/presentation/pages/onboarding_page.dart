@@ -18,48 +18,52 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void comingSoon() =>
-        AppToast.show(context, message: context.l10n.comingSoon);
-
     return Scaffold(
       body: GradientBackground(
         colors: AppColors.onboardingGradient,
-        child: SafeArea(
-          child: Column(
-            children: [
-              const Expanded(child: OnboardingHero()),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimens.onboardingPadding,
-                ),
-                child: Column(
-                  children: [
-                    PrimaryButton(
-                      label: context.l10n.getStarted,
-                      onPressed: () => context.push(AppRoutes.registerPhone),
-                    ),
-                    const SizedBox(height: AppDimens.spaceMd),
-                    LoginPrompt(
-                      onLogIn: () => context.push(AppRoutes.loginPhone),
-                    ),
-                    const SizedBox(height: AppDimens.spaceMd),
-                    SocialLoginRow(
-                      onGoogle: comingSoon,
-                      onFacebook: comingSoon,
-                    ),
-                    const SizedBox(height: AppDimens.spaceLg),
-                    LegalFooter(
-                      onTermsTap: comingSoon,
-                      onPrivacyTap: comingSoon,
-                    ),
-                    const SizedBox(height: AppDimens.spaceMd),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+        child: SafeArea(child: _buildBody(context)),
       ),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return Column(
+      children: [
+        const Expanded(child: OnboardingHero()),
+        _buildBottomSection(context),
+      ],
+    );
+  }
+
+  Widget _buildBottomSection(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimens.onboardingPadding,
+        ),
+        child: _buildActions(context),
+      ),
+    );
+  }
+
+  Widget _buildActions(BuildContext context) {
+    void comingSoon() =>
+        AppToast.show(context, message: context.l10n.comingSoon);
+
+    return Column(
+      children: [
+        PrimaryButton(
+          label: context.l10n.getStarted,
+          onPressed: () => context.push(AppRoutes.registerPhone),
+        ),
+        const SizedBox(height: AppDimens.spaceMd),
+        LoginPrompt(onLogIn: () => context.push(AppRoutes.loginPhone)),
+        const SizedBox(height: AppDimens.spaceMd),
+        SocialLoginRow(onGoogle: comingSoon, onFacebook: comingSoon),
+        const SizedBox(height: AppDimens.spaceLg),
+        LegalFooter(onTermsTap: comingSoon, onPrivacyTap: comingSoon),
+        const SizedBox(height: AppDimens.spaceMd),
+      ],
     );
   }
 }

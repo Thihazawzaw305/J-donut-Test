@@ -16,6 +16,7 @@ abstract final class AppDimens {
   static const progressRingSize = 40.0;
   static const progressRingStroke = 9.0;
   static const socialButtonSize = 48.0;
+  static const socialButtonElevation = 4.0;
   static const toastRadius = 16.0;
   static const toastElevation = 6.0;
   static const spinnerSize = 22.0;
