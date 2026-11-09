@@ -77,7 +77,10 @@ void main() {
 
     final status = state().status;
     expect(status, isA<PhoneSubmitSuccess>());
-    expect((status as PhoneSubmitSuccess).phone, const PhoneNumber('9254135592'));
+    expect(
+      (status as PhoneSubmitSuccess).phone,
+      const PhoneNumber('9254135592'),
+    );
   });
 
   test('a second submit while submitting sends no extra request', () async {
@@ -98,6 +101,9 @@ void main() {
 
     final status = state().status;
     expect(status, isA<PhoneSubmitFailure>());
-    expect((status as PhoneSubmitFailure).failure, AuthFailure.alreadyRegistered);
+    expect(
+      (status as PhoneSubmitFailure).failure,
+      AuthFailure.alreadyRegistered,
+    );
   });
 }

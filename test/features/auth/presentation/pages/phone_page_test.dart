@@ -28,8 +28,9 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('Continue stays disabled until the number is valid',
-      (tester) async {
+  testWidgets('Continue stays disabled until the number is valid', (
+    tester,
+  ) async {
     await pumpJDonutsApp(tester, location: AppRoutes.registerPhone);
     expect(continueButton(tester).onPressed, isNull);
 
@@ -40,8 +41,9 @@ void main() {
     expect(continueButton(tester).onPressed, isNotNull);
   });
 
-  testWidgets('shows a toast when an invalid number loses focus',
-      (tester) async {
+  testWidgets('shows a toast when an invalid number loses focus', (
+    tester,
+  ) async {
     await pumpJDonutsApp(tester, location: AppRoutes.registerPhone);
     await tester.tap(find.byType(TextField));
     await typeNumber(tester, '0912');
@@ -61,8 +63,9 @@ void main() {
     expect(find.byType(SnackBar), findsNothing);
   });
 
-  testWidgets('double tap sends one request, shows spinner, then opens OTP',
-      (tester) async {
+  testWidgets('double tap sends one request, shows spinner, then opens OTP', (
+    tester,
+  ) async {
     final repository = ControllableAuthRepository();
     await pumpJDonutsApp(
       tester,
@@ -84,8 +87,9 @@ void main() {
     expect(find.text('Verify your number'), findsOneWidget);
   });
 
-  testWidgets('login with an unregistered number offers to register',
-      (tester) async {
+  testWidgets('login with an unregistered number offers to register', (
+    tester,
+  ) async {
     await pumpJDonutsApp(
       tester,
       location: AppRoutes.loginPhone,
@@ -108,8 +112,9 @@ void main() {
     expect(find.text(validNumber), findsOneWidget);
   });
 
-  testWidgets('progress ring shows on registration and not on login',
-      (tester) async {
+  testWidgets('progress ring shows on registration and not on login', (
+    tester,
+  ) async {
     await pumpJDonutsApp(tester, location: AppRoutes.registerPhone);
     expect(find.byType(StepProgressRing), findsOneWidget);
 
@@ -117,8 +122,9 @@ void main() {
     expect(find.byType(StepProgressRing), findsNothing);
   });
 
-  testWidgets('back returns to onboarding and keeps the typed number',
-      (tester) async {
+  testWidgets('back returns to onboarding and keeps the typed number', (
+    tester,
+  ) async {
     await pumpJDonutsApp(tester, location: AppRoutes.registerPhone);
     await typeNumber(tester, validNumber);
 

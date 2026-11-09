@@ -12,6 +12,5 @@ class RequestOtp {
   Future<Result<void, AuthFailure>> call(
     PhoneNumber phone, {
     required AuthFlow flow,
-  }) =>
-      _repository.requestOtp(phone, flow: flow);
+  }) => _repository.requestOtp(phone, flow: flow);
 }

@@ -102,7 +102,10 @@ class _PhonePageState extends ConsumerState<PhonePage> {
   void _showAuthFailure(AuthFailure failure) {
     final router = GoRouter.of(context);
     final (actionLabel, target) = switch (failure) {
-      AuthFailure.notRegistered => (context.l10n.registerAction, AuthFlow.register),
+      AuthFailure.notRegistered => (
+        context.l10n.registerAction,
+        AuthFlow.register,
+      ),
       AuthFailure.alreadyRegistered => (context.l10n.logIn, AuthFlow.login),
     };
     AppToast.show(

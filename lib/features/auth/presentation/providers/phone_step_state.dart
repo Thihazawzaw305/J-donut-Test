@@ -50,10 +50,9 @@ class PhoneStepState {
     String? input,
     Result<PhoneNumber, PhoneValidationFailure>? validation,
     PhoneSubmitStatus? status,
-  }) =>
-      PhoneStepState(
-        input: input ?? this.input,
-        validation: validation ?? this.validation,
-        status: status ?? this.status,
-      );
+  }) => PhoneStepState(
+    input: input ?? this.input,
+    validation: validation ?? this.validation,
+    status: status ?? this.status,
+  );
 }

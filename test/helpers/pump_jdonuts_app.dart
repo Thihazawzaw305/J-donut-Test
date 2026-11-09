@@ -14,8 +14,9 @@ Future<void> pumpJDonutsApp(
     ProviderScope(overrides: overrides, child: const JDonutsApp()),
   );
   if (location != null) {
-    final container =
-        ProviderScope.containerOf(tester.element(find.byType(JDonutsApp)));
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(JDonutsApp)),
+    );
     container.read(appRouterProvider).go(location);
   }
   await tester.pumpAndSettle();

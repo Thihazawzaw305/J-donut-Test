@@ -23,6 +23,10 @@ abstract final class AppColors {
   static const heroLavender = Color(0xFFDCD6FF);
   static const heroPeach = Color(0xFFFCE3D6);
 
-  static const authGradient = [backgroundTop, backgroundMiddle, backgroundBottom];
+  static const authGradient = [
+    backgroundTop,
+    backgroundMiddle,
+    backgroundBottom,
+  ];
   static const onboardingGradient = [surface, backgroundBottom];
 }

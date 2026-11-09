@@ -9,9 +9,9 @@ void main() {
   const unknown = PhoneNumber('912345678');
 
   FakeAuthRepository build() => FakeAuthRepository(
-        latency: Duration.zero,
-        registeredNumbers: {known.e164},
-      );
+    latency: Duration.zero,
+    registeredNumbers: {known.e164},
+  );
 
   test('registering a new number succeeds', () async {
     final result = await build().requestOtp(unknown, flow: AuthFlow.register);

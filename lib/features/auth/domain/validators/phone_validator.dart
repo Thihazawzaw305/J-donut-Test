@@ -10,8 +10,9 @@ Result<PhoneNumber, PhoneValidationFailure> validatePhone(String raw) {
   final digits = raw.replaceAll(_separators, '');
   if (digits.isEmpty) return const Err(PhoneValidationFailure.empty);
 
-  final national =
-      digits.startsWith(_trunkPrefix) ? digits.substring(1) : digits;
+  final national = digits.startsWith(_trunkPrefix)
+      ? digits.substring(1)
+      : digits;
   if (!_nationalNumberPattern.hasMatch(national)) {
     return const Err(PhoneValidationFailure.invalidFormat);
   }

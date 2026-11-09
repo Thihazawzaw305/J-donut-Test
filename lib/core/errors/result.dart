@@ -6,14 +6,14 @@ sealed class Result<T, E extends Failure> {
   bool get isOk => this is Ok<T, E>;
 
   T? get valueOrNull => switch (this) {
-        Ok<T, E>(:final value) => value,
-        Err<T, E>() => null,
-      };
+    Ok<T, E>(:final value) => value,
+    Err<T, E>() => null,
+  };
 
   E? get errorOrNull => switch (this) {
-        Ok<T, E>() => null,
-        Err<T, E>(:final error) => error,
-      };
+    Ok<T, E>() => null,
+    Err<T, E>(:final error) => error,
+  };
 }
 
 final class Ok<T, E extends Failure> extends Result<T, E> {

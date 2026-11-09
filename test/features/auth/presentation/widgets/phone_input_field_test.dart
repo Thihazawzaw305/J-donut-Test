@@ -19,13 +19,13 @@ void main() {
   });
 
   Future<void> pumpField(WidgetTester tester) => tester.pumpApp(
-        PhoneInputField(
-          controller: controller,
-          focusNode: focusNode,
-          onChanged: (_) {},
-          onSubmitted: (_) {},
-        ),
-      );
+    PhoneInputField(
+      controller: controller,
+      focusNode: focusNode,
+      onChanged: (_) {},
+      onSubmitted: (_) {},
+    ),
+  );
 
   testWidgets('shows the +95 country code prefix', (tester) async {
     await pumpField(tester);

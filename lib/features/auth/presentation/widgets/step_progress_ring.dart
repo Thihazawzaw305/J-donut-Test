@@ -55,7 +55,13 @@ class StepProgressPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke;
 
-    canvas.drawArc(rect, 0, _fullTurn, false, paint..color = AppColors.ringTrack);
+    canvas.drawArc(
+      rect,
+      0,
+      _fullTurn,
+      false,
+      paint..color = AppColors.ringTrack,
+    );
     canvas.drawArc(
       rect,
       _startAngle,

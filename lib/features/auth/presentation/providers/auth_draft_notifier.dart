@@ -18,5 +18,6 @@ class AuthDraftNotifier extends Notifier<AuthDraft> {
       state = state.copyWith(phoneInput: value);
 }
 
-final authDraftProvider =
-    NotifierProvider<AuthDraftNotifier, AuthDraft>(AuthDraftNotifier.new);
+final authDraftProvider = NotifierProvider<AuthDraftNotifier, AuthDraft>(
+  AuthDraftNotifier.new,
+);

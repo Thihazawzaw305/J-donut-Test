@@ -17,7 +17,10 @@ void main() {
   });
 
   test('maps auth failures to localized text', () {
-    expect(AuthFailure.notRegistered.message(l10n), l10n.authErrorNotRegistered);
+    expect(
+      AuthFailure.notRegistered.message(l10n),
+      l10n.authErrorNotRegistered,
+    );
     expect(
       AuthFailure.alreadyRegistered.message(l10n),
       l10n.authErrorAlreadyRegistered,

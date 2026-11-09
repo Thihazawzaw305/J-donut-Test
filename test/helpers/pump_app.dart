@@ -6,11 +6,11 @@ import 'package:j_donuts_app/l10n/app_localizations.dart';
 extension PumpApp on WidgetTester {
   /// Pumps [child] inside a themed, localized app with a Scaffold.
   Future<void> pumpApp(Widget child) => pumpWidget(
-        MaterialApp(
-          theme: AppTheme.light,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: Scaffold(body: child),
-        ),
-      );
+    MaterialApp(
+      theme: AppTheme.light,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Scaffold(body: child),
+    ),
+  );
 }

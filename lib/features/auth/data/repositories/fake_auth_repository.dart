@@ -25,8 +25,9 @@ class FakeAuthRepository implements AuthRepository {
     final isRegistered = _registeredNumbers.contains(phone.e164);
     return switch (flow) {
       AuthFlow.login when !isRegistered => const Err(AuthFailure.notRegistered),
-      AuthFlow.register when isRegistered =>
-        const Err(AuthFailure.alreadyRegistered),
+      AuthFlow.register when isRegistered => const Err(
+        AuthFailure.alreadyRegistered,
+      ),
       _ => const Ok(null),
     };
   }
