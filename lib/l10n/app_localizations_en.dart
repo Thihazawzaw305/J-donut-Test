@@ -81,4 +81,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get verifyNumberTitle => 'Verify your number';
+
+  @override
+  String get loading => 'Loading';
 }

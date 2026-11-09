@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/l10n_extension.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_dimens.dart';
 import '../constants/app_motion.dart';
@@ -38,6 +39,8 @@ class _PrimaryButtonState extends State<PrimaryButton> {
       button: true,
       enabled: _enabled,
       label: widget.label,
+      value: widget.isLoading ? context.l10n.loading : null,
+      onTap: _enabled ? widget.onPressed : null,
       excludeSemantics: true,
       child: GestureDetector(
         onTapDown: _enabled ? (_) => _setPressed(true) : null,

@@ -231,6 +231,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Verify your number'**
   String get verifyNumberTitle;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get loading;
 }
 
 class _AppLocalizationsDelegate

@@ -28,5 +28,6 @@
   "authErrorNotRegistered": "This number isn't registered yet.",
   "authErrorAlreadyRegistered": "This number is already registered. Please log in.",
   "registerAction": "Register",
-  "verifyNumberTitle": "Verify your number"
+  "verifyNumberTitle": "Verify your number",
+  "loading": "Loading"
 }
