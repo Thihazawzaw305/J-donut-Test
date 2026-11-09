@@ -1,0 +1,117 @@
+---
+description: Clean Architecture, Riverpod, Drift, gen-l10n, layers, tests, and design tokens for j_donuts_app
+alwaysApply: true
+---
+
+# j_donuts_app — Clean Architecture
+
+Flutter app structured by **Clean Architecture**, feature-first. Dependencies point **inward**: outer layers depend on inner abstractions, never the reverse.
+
+## Tech stack (fixed)
+
+| Area | Choice |
+|------|--------|
+| State management + DI | **Riverpod** (providers are the composition root; no services created in widgets) |
+| Local database | **Drift** (SQLite), versioned migrations, seeded from bundled JSON |
+| Session | `flutter_secure_storage` |
+| Navigation | `go_router` (auth redirect guard, `/product/:id`) |
+| Models | Immutable: `freezed` + `json_serializable` (or Dart 3 sealed classes/records) |
+| Errors | Typed failures via a `Result` type; never swallow exceptions |
+| Images | `cached_network_image` + bundled seed assets |
+| Connectivity | `connectivity_plus` + real reachability check |
+| Strings | `gen-l10n` (ARB files in `lib/l10n/`) |
+| Network (only if server added) | Dio with timeout, retry, logging interceptors |
+
+## Layer map
+
+| Layer | Folder (per feature) | Responsibility |
+|-------|----------------------|----------------|
+| **View (presentation)** | `presentation/` | Pages, widgets, Riverpod notifiers orchestrating UI |
+| **Domain** | `domain/` | Entities, repository **interfaces**, use cases, pure validators — no Flutter, no HTTP, no DB |
+| **Network** | `data/datasources/remote/` | API clients, DTOs, mappers to entities |
+| **Persistence** | `data/datasources/local/` | Drift tables/DAOs, secure storage; mappers to entities |
+| **Data glue** | `data/repositories/` | Implements domain repositories; local DB is the **single source of truth** |
+
+```
+lib/
+  core/
+    theme/              # design tokens: colors, typography, spacing
+    constants/          # app_colors.dart, app_motion.dart (durations/curves), dimens
+    errors/             # Failure, Result
+    network/
+    di/                 # shared providers (db, connectivity, router)
+  l10n/                 # app_en.arb, (app_my.arb bonus)
+  features/             # auth, home, product, rewards
+    <feature>/
+      domain/
+      data/
+      presentation/
+        pages/          # thin screens
+        widgets/        # small, composable pieces
+        providers/      # Riverpod notifiers + immutable state
+test/                   # mirrors lib/
+```
+
+- Shared UI goes in `core/widgets/` only when used by **2+** features.
+- Files ~300 lines max, functions ~20 lines max; named constants, no magic numbers.
+
+## State management (Riverpod)
+
+- Business rules live in **use cases**/domain, not in widgets or notifiers.
+- Notifiers (`AsyncNotifier`/`Notifier`) in `presentation/providers/` call use cases through provider-injected interfaces.
+- Expose `AsyncValue` or sealed state: loading / data / error / empty must all be handled on every screen and section.
+- Domain exposes repository interfaces; `core/di` or feature providers bind implementations. Tests override providers with fakes.
+- Drift watch queries → `Stream` → `StreamProvider`/`AsyncNotifier` so UI updates from DB.
+
+## Screens and widgets
+
+- **Pages** are thin (~< 80 lines): layout + wiring only.
+- Break screens into **small single-purpose widgets** in `presentation/widgets/`; combine in the page.
+- Pass data/callbacks via constructors so widgets mount in isolation.
+- Prefer `StatelessWidget`/`ConsumerWidget`; local `StatefulWidget` only for ephemeral UI (animation, focus).
+- Respect Reduce Motion (`MediaQuery.disableAnimations`); animation durations/curves come from the motion constants file.
+
+## Testability (required)
+
+- Every use case, validator, repository impl, mapper, and non-trivial widget has a test mirroring `lib/` under `test/`.
+- Validators are **pure functions in domain**, one unit test per rule.
+- Depend on abstractions (`abstract class XRepository`); inject fakes via provider overrides.
+- Drift tests use in-memory databases; widget tests use no live network or disk.
+- Test names describe behaviour. Add one integration test: Register → Home → Product detail.
+
+## Strings and colors
+
+- **No hardcoded** user-visible strings or colors in widgets or logic.
+- Strings: ARB files via `gen-l10n`; widgets use `context.l10n.<key>` / `AppLocalizations`.
+- Colors/type/spacing: theme tokens in `core/theme` and `core/constants/app_colors.dart`; widgets use `Theme`/`AppColors` only.
+- Domain/data have no `BuildContext`: they return typed failures/codes; **presentation maps them to localized text**.
+
+## Dependency rules
+
+```dart
+// ✅ GOOD — widget reads a provider; provider uses a use case interface
+class HomePage extends ConsumerWidget {
+  const HomePage({super.key});
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final home = ref.watch(homeProvider);
+    return home.when(data: HomeContent.new, loading: HomeSkeleton.new, error: HomeError.new);
+  }
+}
+
+// ❌ BAD — widget touches API/DB directly or hardcodes copy/colors
+Text('Welcome', style: TextStyle(color: Color(0xFFE91E63)));
+```
+
+- **Do**: map DTO/DB row → entity in data before domain sees it.
+- **Don’t**: import `presentation/` from `domain/` or `data/`; import Flutter in `domain/`.
+- **Don’t**: hardcode data in widgets (automatic fail); commit secrets or client design images.
+
+## New feature checklist
+
+1. `domain/`: entities, repository interface, use cases, validators.
+2. `data/`: Drift DAO/remote source, mappers, repository impl.
+3. Providers for DI wiring.
+4. `presentation/`: notifier + state, page, small widgets; strings in ARB, colors from theme.
+5. Tests: unit (domain/data) + widget (presentation).
+6. `flutter analyze` clean.
