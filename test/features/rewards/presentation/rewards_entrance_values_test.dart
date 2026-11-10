@@ -34,6 +34,14 @@ void main() {
     expect(values.tierFades[1], greaterThan(values.tierFades[2]));
   });
 
+  test('each element starts and finishes at its own interval boundary', () {
+    expect(RewardsEntranceValues.at(0.35, reduceMotion: false).tierFades[0], 1);
+    expect(RewardsEntranceValues.at(0.12, reduceMotion: false).tierFades[1], 0);
+    expect(RewardsEntranceValues.at(0.65, reduceMotion: false).tierFades[2], 1);
+    expect(RewardsEntranceValues.at(0.15, reduceMotion: false).sideFade, 0);
+    expect(RewardsEntranceValues.at(0.4, reduceMotion: false).titleFade, 1);
+  });
+
   test('reduce motion returns the settled state at any time', () {
     final values = RewardsEntranceValues.at(0, reduceMotion: true);
 

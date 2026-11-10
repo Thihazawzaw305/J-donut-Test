@@ -93,7 +93,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get verifyNumberTitle => 'သင့်နံပါတ်ကို အတည်ပြုပါ';
 
   @override
-  String get loading => 'ဖွင့်နေသည်';
+  String get loading => 'ခေတ္တစောင့်ပါ';
 
   @override
   String otpSentTo(String e164) {
@@ -115,7 +115,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get otpErrorLocked => 'ကြိုးစားမှု များလွန်းသည်။ ကုဒ်အသစ် ပြန်ပို့ပါ။';
 
   @override
-  String get otpErrorIncomplete => 'ဂဏန်း ၆ လုံးလုံး ထည့်ပါ။';
+  String get otpErrorIncomplete => 'ဂဏန်း ၆ လုံးစလုံး ထည့်ပါ။';
 
   @override
   String get otpErrorNonDigit => 'ဂဏန်းများသာ သုံးပါ။';
@@ -124,7 +124,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get firstNameHint => 'အမည်';
 
   @override
-  String get lastNameHint => 'မျိုးနွယ်အမည် (မထည့်လည်းရ)';
+  String get lastNameHint => 'မျိုးရိုးအမည် (မထည့်လည်းရ)';
 
   @override
   String get nameTitle => 'သင့်အမည် ဘယ်လိုခေါ်ပါသလဲ။';
@@ -143,7 +143,7 @@ class AppLocalizationsMy extends AppLocalizations {
       'စာလုံးနှင့် နေရာလွတ်များသာ သုံးပါ။';
 
   @override
-  String get lastNameErrorTooLong => 'မျိုးနွယ်အမည်သည် စာလုံး ၅၀ ထက် မပိုရပါ။';
+  String get lastNameErrorTooLong => 'မျိုးရိုးအမည်သည် စာလုံး ၅၀ ထက် မပိုရပါ။';
 
   @override
   String get lastNameErrorContainsDigit => 'အမည်တွင် ဂဏန်း မပါရပါ။';
@@ -192,7 +192,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get welcomeTitle => 'ကြိုဆိုပါသည်';
 
   @override
-  String get welcomeHeadline => 'J\'donuts ကမ္ဘာမှ\nကြိုဆိုပါသည်';
+  String get welcomeHeadline => 'J\'donuts ကမ္ဘာသို့\nကြိုဆိုပါသည်';
 
   @override
   String get letsExplore => 'စူးစမ်းကြရအောင်';

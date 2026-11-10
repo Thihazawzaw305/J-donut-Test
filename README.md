@@ -2,12 +2,16 @@
 
 Madivizion Flutter code test — J'Donuts customer app slice (Tasks 1–3).
 
+Repo: https://github.com/Thihazawzaw305/J-donut-Test
+
 ## Versions
 
 | Tool | Version |
 |------|---------|
 | Flutter | 3.44.8 (stable) |
 | Dart | 3.12.2 |
+
+CI pins the same Flutter version in `.github/workflows/ci.yml`.
 
 ## Run
 
@@ -19,6 +23,15 @@ flutter test
 flutter test integration_test/register_to_product_test.dart   # device/emulator; allow USB install
 ```
 
+### Release APK
+
+```bash
+flutter build apk --release
+# output: build/app/outputs/flutter-apk/app-release.apk
+```
+
+Release builds need `INTERNET` in the main `AndroidManifest` for connectivity reachability and remote images.
+
 ## State management
 
 **Riverpod 3** — providers are the composition root (`core/di`, feature `presentation/providers`). No services constructed inside widgets. `AsyncValue` / sealed notifier states drive loading and error UI.
@@ -28,11 +41,11 @@ flutter test integration_test/register_to_product_test.dart   # device/emulator;
 ```
 lib/
   core/          theme tokens, motion, router, connectivity, errors, shared widgets
-  l10n/          gen-l10n ARB strings
+  l10n/          gen-l10n ARB strings (en + my)
   features/
     auth/        domain validators + AuthRepository; fake impl + secure session/registered phones
     catalog/     Drift DB, seed JSON, repository
-    home/        Home shell, sections, offline banner
+    home/        Home shell, sections, offline banner, pull-to-refresh
     product/     Product detail, quantity, MMK formatting
     rewards/     Tier ladder, points ring, challenges, tab motion (Task 3)
 ```
@@ -48,6 +61,7 @@ Dependencies point inward: presentation → domain ← data.
 - **Source of truth:** Drift (SQLite) seeded from `assets/seed/catalog_v1.json` on first open; idempotent re-sync on pull-to-refresh.
 - **Images:** Bundled `assets/images/seed/*` plus optional `imageUrl` via `cached_network_image`.
 - **Connectivity:** `connectivity_plus` plus HTTP reachability; offline banner on Home while offline.
+- **Offline banner:** Fixed above the scroll view (not a sliver) so overscroll still arms pull-to-refresh.
 - **Auth (fake):** Registered phone numbers persisted in secure storage; session phone in `flutter_secure_storage`.
 
 ## Animations (Madivizion §6)
@@ -72,14 +86,14 @@ Use **`123456`** on the verify-number step. Three wrong attempts lock until Rese
 ## Tests
 
 - Unit: domain validators, auth repository, catalog seed, MMK formatter, rewards progress helpers
-- Widget: auth steps, home sections, product detail, rewards motion widgets
+- Widget: auth steps, home sections (incl. section error panel + offline pull-refresh), product detail, rewards motion widgets
 - Integration: register → welcome → home → coconut product (`integration_test/register_to_product_test.dart`)
 
 ## Known gaps
 
 - **Delivery artifacts** — APK / iOS simulator `.app` and screen recording not included in repo (build locally).
-- **Burmese locale** — `lib/l10n/app_my.arb` covers UI copy; product names, product descriptions and shop addresses fall back to English.
-- Sections load from one Drift stream; if it fails, Home still renders header, banners and shops, and each section shows its own retry panel (no per-section streams).
+- **Burmese locale** — `lib/l10n/app_my.arb` covers UI copy; product names and descriptions, shop names and addresses, and tier titles fall back to English.
+- Product sections load from one Drift stream; if it fails, Home still renders header, banners and shops, with one `HomeSectionStatePanel` retry in place of the product sections (no per-section streams, no hardcoded fallback catalog).
 - Integration tests find widgets by English text, so run them on a device set to English.
 
 CI (`.github/workflows/ci.yml`) runs `flutter analyze` and `flutter test`.

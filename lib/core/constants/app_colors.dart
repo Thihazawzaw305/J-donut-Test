@@ -48,6 +48,18 @@ abstract final class AppColors {
     surface,
   ];
 
+  /// One evenly spaced stop per [welcomeScrimColors] entry.
+  static const welcomeScrimStops = [
+    0.0,
+    1 / 7,
+    2 / 7,
+    3 / 7,
+    4 / 7,
+    5 / 7,
+    6 / 7,
+    1.0,
+  ];
+
   static const homeHeader = heroPeach;
   static const homeScreenBackground = Color(0xFFEBEDF0);
   static const notificationOrange = Color(0xFFF5A623);

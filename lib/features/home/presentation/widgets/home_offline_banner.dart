@@ -12,15 +12,19 @@ class HomeOfflineBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: AppColors.textPrimary,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.spaceMd,
-          vertical: AppDimens.spaceSm,
-        ),
-        child: Text(
-          context.l10n.homeOfflineBanner,
-          style: AppTextStyles.body.copyWith(color: AppColors.onPrimary),
-          textAlign: TextAlign.center,
+      child: SafeArea(
+        bottom: false,
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimens.spaceMd,
+            vertical: AppDimens.spaceSm,
+          ),
+          child: Text(
+            context.l10n.homeOfflineBanner,
+            style: AppTextStyles.body.copyWith(color: AppColors.onPrimary),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );

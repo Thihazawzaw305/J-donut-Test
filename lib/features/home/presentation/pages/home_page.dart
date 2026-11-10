@@ -9,7 +9,6 @@ import '../../../../core/di/catalog_providers.dart';
 import '../../../../core/l10n/l10n_extension.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../catalog/domain/entities/catalog_section.dart';
-import '../home_fallback_sections.dart';
 import '../providers/home_catalog_refresh_provider.dart';
 import '../widgets/home_collapsing_header.dart';
 import '../widgets/home_donut_refresh_control.dart';
@@ -19,6 +18,7 @@ import '../widgets/home_pinned_notification.dart';
 import '../widgets/home_product_section.dart';
 import '../widgets/home_product_section_skeleton.dart';
 import '../widgets/home_section_entrance.dart';
+import '../widgets/home_section_state_panel.dart';
 import '../widgets/home_shops_section.dart';
 import '../widgets/home_shops_section_skeleton.dart';
 
@@ -60,7 +60,11 @@ class _HomeCatalogBody extends ConsumerWidget {
     final loading =
         (memberAsync.isLoading && !memberAsync.hasValue) ||
         (bannersAsync.isLoading && !bannersAsync.hasValue) ||
-        (sectionsAsync.isLoading && !sectionsAsync.hasValue) ||
+        // A failed sections stream must not hide the rest of Home while
+        // Riverpod retries it in the background.
+        (sectionsAsync.isLoading &&
+            !sectionsAsync.hasValue &&
+            !sectionsAsync.hasError) ||
         (shopsAsync.isLoading && !shopsAsync.hasValue);
 
     if (loading) {
@@ -69,8 +73,8 @@ class _HomeCatalogBody extends ConsumerWidget {
 
     final member = memberAsync.value;
     final sectionsLoadFailed = sectionsAsync.hasError;
-    final sections =
-        sectionsAsync.value ?? (sectionsLoadFailed ? homeFallbackSections : []);
+    final sections = sectionsAsync.value ?? [];
+    final sectionsUnavailable = sectionsLoadFailed && sections.isEmpty;
     final shops = shopsAsync.value ?? [];
     final sectionErrorMessage = sectionsLoadFailed
         ? context.l10n.homeSectionError
@@ -86,14 +90,12 @@ class _HomeCatalogBody extends ConsumerWidget {
       );
     }
 
-    return Stack(
+    final catalog = Stack(
       clipBehavior: Clip.none,
       children: [
         CustomScrollView(
           physics: AppMotion.homeScrollPhysics(context),
           slivers: [
-            if (showOffline)
-              const SliverToBoxAdapter(child: HomeOfflineBanner()),
             HomeCollapsingHeader(
               member: member,
               banners: bannersAsync.value ?? [],
@@ -103,6 +105,17 @@ class _HomeCatalogBody extends ConsumerWidget {
             ),
             if (refreshing)
               ..._sectionSkeletonSlivers(sections)
+            else if (sectionsUnavailable)
+              SliverPadding(
+                padding: const EdgeInsets.all(AppDimens.spaceMd),
+                sliver: SliverToBoxAdapter(
+                  child: HomeSectionStatePanel(
+                    message: context.l10n.homeSectionError,
+                    actionLabel: context.l10n.homeRetry,
+                    onAction: retrySections,
+                  ),
+                ),
+              )
             else
               for (var i = 0; i < sections.length; i++)
                 SliverToBoxAdapter(
@@ -129,6 +142,23 @@ class _HomeCatalogBody extends ConsumerWidget {
           ],
         ),
         HomePinnedNotification(count: member.notificationCount),
+      ],
+    );
+
+    if (!showOffline) return catalog;
+
+    // The banner sits outside the scroll view: a sliver above the header
+    // would absorb the overscroll that arms pull-to-refresh.
+    return Column(
+      children: [
+        const HomeOfflineBanner(),
+        Expanded(
+          child: MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            child: catalog,
+          ),
+        ),
       ],
     );
   }

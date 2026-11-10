@@ -10,6 +10,7 @@ import '../../../catalog/domain/entities/product_card_style.dart';
 import '../../../catalog/presentation/catalog_strings.dart';
 import '../home_product_card_layout.dart';
 import 'home_product_tile.dart';
+import 'home_section_state_panel.dart';
 
 class HomeProductSection extends StatelessWidget {
   const HomeProductSection({
@@ -31,7 +32,7 @@ class HomeProductSection extends StatelessWidget {
       return _sectionShell(
         context,
         title: title,
-        child: _SectionStatePanel(
+        child: HomeSectionStatePanel(
           message: errorMessage!,
           actionLabel: context.l10n.homeRetry,
           onAction: onRetry,
@@ -43,7 +44,7 @@ class HomeProductSection extends StatelessWidget {
       return _sectionShell(
         context,
         title: title,
-        child: _SectionStatePanel(message: context.l10n.homeSectionEmpty),
+        child: HomeSectionStatePanel(message: context.l10n.homeSectionEmpty),
       );
     }
 
@@ -148,42 +149,6 @@ class HomeProductSection extends StatelessWidget {
       'seasonal' => '$base 💕',
       _ => base,
     };
-  }
-}
-
-class _SectionStatePanel extends StatelessWidget {
-  const _SectionStatePanel({
-    required this.message,
-    this.actionLabel,
-    this.onAction,
-  });
-
-  final String message;
-  final String? actionLabel;
-  final VoidCallback? onAction;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppDimens.spaceLg),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppDimens.spaceMd),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(message, style: AppTextStyles.body, textAlign: TextAlign.center),
-          if (actionLabel != null && onAction != null) ...[
-            const SizedBox(height: AppDimens.spaceSm),
-            Align(
-              child: TextButton(onPressed: onAction, child: Text(actionLabel!)),
-            ),
-          ],
-        ],
-      ),
-    );
   }
 }
 

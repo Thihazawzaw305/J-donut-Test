@@ -15,10 +15,10 @@ class RewardsLowerSection extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<RewardsLowerSection> createState() =>
-      RewardsLowerSectionState();
+      _RewardsLowerSectionState();
 }
 
-class RewardsLowerSectionState extends ConsumerState<RewardsLowerSection> {
+class _RewardsLowerSectionState extends ConsumerState<RewardsLowerSection> {
   var _giftSelected = false;
 
   @override

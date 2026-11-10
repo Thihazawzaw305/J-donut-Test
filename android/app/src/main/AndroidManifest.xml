@@ -1,4 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Release builds need this for the reachability check and remote images;
+         the debug and profile manifests only cover those build types. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="j_donuts_app"
         android:name="${applicationName}"
