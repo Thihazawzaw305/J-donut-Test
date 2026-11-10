@@ -11,8 +11,8 @@ class RewardsCoffeeArcPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final stroke = AppDimens.rewardsCoffeeArcStroke;
-    final inset = stroke / 2;
+    const stroke = AppDimens.rewardsCoffeeArcStroke;
+    const inset = stroke / 2;
     final rect = Rect.fromLTWH(
       inset,
       inset,

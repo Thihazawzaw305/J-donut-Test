@@ -10,6 +10,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/primary_button.dart';
 import '../widgets/welcome_donut_tiles.dart';
 import '../widgets/welcome_hero_gradient_overlay.dart';
+
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
 

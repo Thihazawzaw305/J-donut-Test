@@ -78,9 +78,11 @@ Use **`123456`** on the verify-number step. Three wrong attempts lock until Rese
 ## Known gaps
 
 - **Delivery artifacts** — APK / iOS simulator `.app` and screen recording not included in repo (build locally).
-- **Burmese locale** — English ARB only (bonus locale not done).
-- Per-section **independent** error streams not implemented; one sections provider failure marks all sections with retry.
-- **`flutter analyze`** — may report `prefer_const_*` info lints in tests/rewards; no errors.
+- **Burmese locale** — `lib/l10n/app_my.arb` covers UI copy; product names, product descriptions and shop addresses fall back to English.
+- Sections load from one Drift stream; if it fails, Home still renders header, banners and shops, and each section shows its own retry panel (no per-section streams).
+- Integration tests find widgets by English text, so run them on a device set to English.
+
+CI (`.github/workflows/ci.yml`) runs `flutter analyze` and `flutter test`.
 
 ## Madivizion Task 1 notes
 

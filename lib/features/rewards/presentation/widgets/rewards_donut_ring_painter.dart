@@ -32,7 +32,7 @@ class RewardsDonutRingPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
-    final stroke = AppDimens.rewardsDonutStroke;
+    const stroke = AppDimens.rewardsDonutStroke;
     final radius = (size.shortestSide - stroke) / 2;
     final arcRect = Rect.fromCircle(center: center, radius: radius);
 
@@ -135,10 +135,10 @@ class RewardsDonutRingPainter extends CustomPainter {
     required double sweep,
   }) {
     final paint = Paint()..color = AppColors.rewardsDonutSprinkle;
-    final baseLength = AppDimens.rewardsDonutSprinkleLength;
-    final thickness = AppDimens.rewardsDonutSprinkleThickness;
+    const baseLength = AppDimens.rewardsDonutSprinkleLength;
+    const thickness = AppDimens.rewardsDonutSprinkleThickness;
     final bandHalf = stroke / 2 - AppDimens.rewardsDonutSprinkleEdgeInset;
-    final arcSpan = AppDimens.rewardsDonutDisplaySweep;
+    const arcSpan = AppDimens.rewardsDonutDisplaySweep;
     final fillAlongArc = (progress.clamp(0, arcSpan) / arcSpan).clamp(0.0, 1.0);
 
     for (final sprinkle in _sprinkles) {
@@ -150,7 +150,7 @@ class RewardsDonutRingPainter extends CustomPainter {
       final length = baseLength * sprinkle.scale;
       final capsule = RRect.fromRectAndRadius(
         Rect.fromCenter(center: Offset.zero, width: length, height: thickness),
-        Radius.circular(thickness / 2),
+        const Radius.circular(thickness / 2),
       );
 
       canvas.save();

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'auth_draft_notifier.dart';
 import 'session_providers.dart';
 
 class SessionNotifier extends AsyncNotifier<String?> {
@@ -16,6 +17,8 @@ class SessionNotifier extends AsyncNotifier<String?> {
 
   Future<void> logout() async {
     await ref.read(sessionRepositoryProvider).clear();
+    // The draft outlives the auth pages, so the next sign-in must start blank.
+    ref.invalidate(authDraftProvider);
     state = const AsyncData(null);
     ref.read(sessionRefreshProvider).bump();
   }

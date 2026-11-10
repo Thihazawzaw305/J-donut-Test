@@ -1,5 +1,3 @@
-import 'dart:ui' show Size;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -28,10 +26,10 @@ void main() {
         ),
         child: ProviderScope(
           overrides: [catalogDatabaseOverride()],
-          child: MaterialApp(
+          child: const MaterialApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            home: const Scaffold(body: HomePage()),
+            home: Scaffold(body: HomePage()),
           ),
         ),
       ),

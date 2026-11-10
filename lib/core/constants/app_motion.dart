@@ -19,6 +19,16 @@ abstract final class AppMotion {
   static const rewardsEntranceOffset = 24.0;
   static const rewardsTitleInterval = Interval(0, 0.4, curve: standardCurve);
   static const rewardsSideInterval = Interval(0.15, 0.55, curve: standardCurve);
+
+  /// Silver, Gold, Platinum ladder steps, staggered in that order.
+  static const rewardsTierIntervals = [
+    Interval(0, 0.35, curve: standardCurve),
+    Interval(0.12, 0.5, curve: standardCurve),
+    Interval(0.24, 0.65, curve: standardCurve),
+  ];
+
+  /// Rewards badge scale before its pop-in completes.
+  static const rewardsBadgeRestScale = 0.85;
   static const rewardsRingSweep = Duration(milliseconds: 1400);
   static const rewardsPillPop = Duration(milliseconds: 320);
   static const rewardsTabThumb = Duration(milliseconds: 280);
@@ -32,6 +42,7 @@ abstract final class AppMotion {
 
   static const welcomeDonutStagger = Duration(milliseconds: 70);
   static const welcomeDonutEntrance = Duration(milliseconds: 450);
+
   /// Starts after the last of 4 tiles settles: stagger * 3 + entrance.
   static const welcomeTitleDelay = Duration(milliseconds: 660);
   static const welcomeTileSlide = 48.0;

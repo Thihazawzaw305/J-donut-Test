@@ -9,6 +9,7 @@ import '../../../../core/di/catalog_providers.dart';
 import '../../../../core/l10n/l10n_extension.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../catalog/domain/entities/catalog_section.dart';
+import '../home_fallback_sections.dart';
 import '../providers/home_catalog_refresh_provider.dart';
 import '../widgets/home_collapsing_header.dart';
 import '../widgets/home_donut_refresh_control.dart';
@@ -67,9 +68,10 @@ class _HomeCatalogBody extends ConsumerWidget {
     }
 
     final member = memberAsync.value;
-    final sections = sectionsAsync.value ?? [];
-    final shops = shopsAsync.value ?? [];
     final sectionsLoadFailed = sectionsAsync.hasError;
+    final sections =
+        sectionsAsync.value ?? (sectionsLoadFailed ? homeFallbackSections : []);
+    final shops = shopsAsync.value ?? [];
     final sectionErrorMessage = sectionsLoadFailed
         ? context.l10n.homeSectionError
         : null;

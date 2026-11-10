@@ -4,8 +4,8 @@ import 'package:j_donuts_app/features/rewards/presentation/widgets/rewards_donut
 
 void main() {
   test('clipper repaints when progress changes', () {
-    final a = RewardsDonutQuarterClipper(progress: 0.25);
-    final b = RewardsDonutQuarterClipper(progress: 0.5);
+    const a = RewardsDonutQuarterClipper(progress: 0.25);
+    const b = RewardsDonutQuarterClipper(progress: 0.5);
     expect(a.shouldReclip(b), isTrue);
   });
 

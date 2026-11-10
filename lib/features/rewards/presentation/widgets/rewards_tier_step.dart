@@ -87,7 +87,7 @@ class RewardsTierStep extends StatelessWidget {
       width: AppDimens.rewardsTierBadgeSize,
       height: AppDimens.rewardsTierBadgeSize,
       fit: BoxFit.contain,
-      errorBuilder: (_, _, _) => SizedBox.square(
+      errorBuilder: (_, _, _) => const SizedBox.square(
         dimension: AppDimens.rewardsTierBadgeSize,
         child: ColoredBox(color: AppColors.tierCapsuleBorder),
       ),

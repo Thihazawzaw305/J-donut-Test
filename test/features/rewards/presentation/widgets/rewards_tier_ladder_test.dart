@@ -24,12 +24,12 @@ void main() {
 
   testWidgets('gold step shows 500 points remaining', (tester) async {
     await tester.pumpApp(
-      MediaQuery(
-        data: const MediaQueryData(disableAnimations: true),
+      const MediaQuery(
+        data: MediaQueryData(disableAnimations: true),
         child: RewardsTierLadder(
           member: _member,
-          tierOpacities: const [1, 1, 1],
-          tierSlides: const [0, 0, 0],
+          tierOpacities: [1, 1, 1],
+          tierSlides: [0, 0, 0],
           connectorFill: 0.58,
         ),
       ),

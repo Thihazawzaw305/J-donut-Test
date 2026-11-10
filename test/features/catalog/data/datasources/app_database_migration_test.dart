@@ -22,8 +22,8 @@ void main() {
             tierCode: 'silver',
             pointsBalance: 680000,
             pointsToNextTier: 500,
-            rewardsPillCount: Value(3),
-            tierLadderFillBp: Value(3500),
+            rewardsPillCount: const Value(3),
+            tierLadderFillBp: const Value(3500),
           ),
         );
 

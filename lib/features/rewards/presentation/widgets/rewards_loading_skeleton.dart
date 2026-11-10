@@ -8,8 +8,8 @@ class RewardsLoadingSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RewardsScreenBackground(
-      child: const Center(
+    return const RewardsScreenBackground(
+      child: Center(
         child: SizedBox(
           width: 200,
           height: 24,

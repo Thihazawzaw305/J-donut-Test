@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:j_donuts_app/core/constants/app_colors.dart';
 import 'package:j_donuts_app/features/auth/presentation/pages/welcome_page.dart';
 import 'package:j_donuts_app/features/auth/presentation/widgets/welcome_hero_gradient_overlay.dart';
 
@@ -28,6 +29,23 @@ void main() {
         1,
       ),
     );
+  });
+
+  testWidgets('gradient overlay reads colors from AppColors tokens', (
+    tester,
+  ) async {
+    await tester.pumpApp(const WelcomePage());
+    await tester.pumpAndSettle();
+
+    final box = tester.widget<DecoratedBox>(
+      find.descendant(
+        of: find.byKey(WelcomeHeroGradientOverlay.overlayKey),
+        matching: find.byType(DecoratedBox),
+      ),
+    );
+    final gradient =
+        (box.decoration as BoxDecoration).gradient! as LinearGradient;
+    expect(gradient.colors, AppColors.welcomeScrimColors);
   });
 
   testWidgets('narrow viewport with large text does not overflow', (

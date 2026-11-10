@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:j_donuts_app/core/constants/app_colors.dart';
 
 /// White scrim on the **bottom half** only.
 ///
@@ -22,18 +23,6 @@ class WelcomeHeroGradientOverlay extends StatelessWidget {
     1.0,
   ];
 
-  /// Top → bottom (gradient direction); opposites of bottom → top percents above.
-  static const List<Color> gradientColors = [
-    Color(0x00FFFFFF), // 0%
-    Color(0x1AFFFFFF), // 10%
-    Color(0x33FFFFFF), // 20%
-    Color(0x66FFFFFF), // 40%
-    Color(0x99FFFFFF), // 60%
-    Color(0xFFFFFFFF), // 100%
-    Color(0xFFFFFFFF), // 100%
-    Color(0xFFFFFFFF), // 100%
-  ];
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height * viewportHeightFraction;
@@ -50,7 +39,7 @@ class WelcomeHeroGradientOverlay extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               stops: gradientStops,
-              colors: gradientColors,
+              colors: AppColors.welcomeScrimColors,
             ),
           ),
         ),

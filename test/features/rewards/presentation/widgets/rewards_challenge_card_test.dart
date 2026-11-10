@@ -91,9 +91,9 @@ void main() {
     tester,
   ) async {
     await tester.pumpApp(
-      RewardsChallengeList(
+      const RewardsChallengeList(
         entrance: _entranceComplete,
-        challenges: const [_complete, _quarter, _coffee],
+        challenges: [_complete, _quarter, _coffee],
         giftSelected: true,
       ),
     );
@@ -105,11 +105,11 @@ void main() {
 
   testWidgets('eat tab lists donut and coffee challenges', (tester) async {
     await tester.pumpApp(
-      SizedBox(
+      const SizedBox(
         height: 800,
         child: RewardsChallengeList(
           entrance: _entranceComplete,
-          challenges: const [_complete, _quarter, _coffee],
+          challenges: [_complete, _quarter, _coffee],
           giftSelected: false,
         ),
       ),

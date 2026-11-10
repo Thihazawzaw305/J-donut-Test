@@ -36,6 +36,18 @@ abstract final class AppColors {
   static const onboardingBottomFade = [surfaceClear, surface, surface];
   static const onboardingBottomFadeStops = [0.0, 0.3, 1.0];
 
+  /// Welcome hero scrim, top → bottom: white at 0, 10, 20, 40, 60, 100% alpha.
+  static const welcomeScrimColors = [
+    surfaceClear,
+    Color(0x1AFFFFFF),
+    Color(0x33FFFFFF),
+    Color(0x66FFFFFF),
+    Color(0x99FFFFFF),
+    surface,
+    surface,
+    surface,
+  ];
+
   static const homeHeader = heroPeach;
   static const homeScreenBackground = Color(0xFFEBEDF0);
   static const notificationOrange = Color(0xFFF5A623);

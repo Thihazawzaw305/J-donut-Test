@@ -17,7 +17,7 @@ class RewardsTierConnector extends StatelessWidget {
       height: AppDimens.rewardsTierConnectorHeight,
       child: Center(
         child: CustomPaint(
-          size: Size(
+          size: const Size(
             AppDimens.rewardsTierConnectorWidth,
             AppDimens.rewardsTierConnectorHeight,
           ),

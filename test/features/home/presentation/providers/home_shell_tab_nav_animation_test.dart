@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:j_donuts_app/core/constants/app_colors.dart';
 import 'package:j_donuts_app/features/home/presentation/providers/home_shell_tab_provider.dart';
 import 'package:j_donuts_app/features/home/presentation/widgets/home_bottom_nav.dart';
 import 'package:j_donuts_app/features/home/presentation/widgets/home_shell.dart';

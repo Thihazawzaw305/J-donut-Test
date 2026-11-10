@@ -30,8 +30,8 @@ class RewardsChallengeArt extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              ColorFiltered(
-                colorFilter: const ColorFilter.matrix(<double>[
+              const ColorFiltered(
+                colorFilter: ColorFilter.matrix(<double>[
                   0.2126,
                   0.7152,
                   0.0722,
@@ -57,7 +57,10 @@ class RewardsChallengeArt extends StatelessWidget {
               ),
               ClipPath(
                 clipper: RewardsDonutQuarterClipper(progress: progress),
-                child: CatalogImage(asset: _donutColorAsset, fit: BoxFit.cover),
+                child: const CatalogImage(
+                  asset: _donutColorAsset,
+                  fit: BoxFit.cover,
+                ),
               ),
               CustomPaint(
                 painter: _RewardsDonutQuarterOutlinePainter(progress: progress),
