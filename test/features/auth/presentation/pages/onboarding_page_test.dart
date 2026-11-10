@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:j_donuts_app/core/constants/app_motion.dart';
+import 'package:j_donuts_app/features/auth/presentation/widgets/legal_footer.dart';
 import 'package:j_donuts_app/features/auth/presentation/widgets/step_progress_ring.dart';
 
 import '../../../../helpers/pump_jdonuts_app.dart';
 
 Future<void> pumpToast(WidgetTester tester) async {
   await tester.pump();
-  await tester.pump(AppMotion.toastDisplay + const Duration(milliseconds: 300));
+  await tester.pump(const Duration(milliseconds: 100));
 }
 
 void main() {
@@ -27,7 +28,7 @@ void main() {
   });
 
   testWidgets('bottom entrance starts after hero slide gate', (tester) async {
-    await pumpJDonutsApp(tester, settle: false);
+    await pumpJDonutsApp(tester, settle: false, disableAnimations: false);
     await tester.pump();
     final headline = find.text('Round food for every mood');
     expect(headline, findsOneWidget);
@@ -72,10 +73,17 @@ void main() {
   ) async {
     await pumpJDonutsApp(tester);
 
+    await tester.ensureVisible(find.byTooltip('Continue with Google'));
     await tester.tap(find.byTooltip('Continue with Google'));
     await pumpToast(tester);
     expect(find.text('Coming soon'), findsOneWidget);
 
+    await tester.ensureVisible(find.byTooltip('Continue with Apple'));
+    await tester.tap(find.byTooltip('Continue with Apple'));
+    await pumpToast(tester);
+    expect(find.text('Coming soon'), findsOneWidget);
+
+    await tester.ensureVisible(find.byTooltip('Continue with Facebook'));
     await tester.tap(find.byTooltip('Continue with Facebook'));
     await pumpToast(tester);
     expect(find.text('Coming soon'), findsOneWidget);
@@ -84,6 +92,7 @@ void main() {
   testWidgets('Terms of Use shows a coming soon toast', (tester) async {
     await pumpJDonutsApp(tester);
 
+    await tester.ensureVisible(find.byType(LegalFooter));
     await tester.tapOnText(find.textRange.ofSubstring('Terms of Use'));
     await pumpToast(tester);
 
@@ -93,6 +102,7 @@ void main() {
   testWidgets('Privacy Policy shows a coming soon toast', (tester) async {
     await pumpJDonutsApp(tester);
 
+    await tester.ensureVisible(find.byType(LegalFooter));
     await tester.tapOnText(find.textRange.ofSubstring('Privacy Policy'));
     await pumpToast(tester);
 

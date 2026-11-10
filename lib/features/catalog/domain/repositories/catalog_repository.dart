@@ -14,4 +14,6 @@ abstract interface class CatalogRepository {
   Stream<List<CatalogShop>> watchShops();
 
   Future<CatalogProduct?> productById(String id);
+
+  Future<void> updateMemberDisplayName(String displayName);
 }

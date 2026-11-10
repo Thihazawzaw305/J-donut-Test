@@ -79,7 +79,7 @@ class _PhonePageState extends ConsumerState<PhonePage> {
           }
           notifier.onInputChanged(value);
         },
-        onSubmitted: (_) => _onKeyboardDone(state),
+        onSubmitted: (_) => _onKeyboardDone(),
         onRegisterTap: () => context.pushReplacement(AppRoutes.registerPhone),
       ),
       action: PrimaryButton(
@@ -98,7 +98,12 @@ class _PhonePageState extends ConsumerState<PhonePage> {
     }
   }
 
-  void _onKeyboardDone(PhoneStepState state) {
+  void _onKeyboardDone() {
+    final focusScope = FocusScope.of(context);
+    _focusNode.unfocus();
+    focusScope.unfocus();
+
+    final state = ref.read(_provider);
     if (state.canSubmit) {
       ref.read(_provider.notifier).submit();
       return;

@@ -32,7 +32,7 @@ abstract final class AppColors {
   static const onboardingGradient = [surface, backgroundBottom];
 
   static const homeHeader = heroPeach;
-  static const homeScreenBackground = Color(0xFFF5F6F8);
+  static const homeScreenBackground = Color(0xFFEBEDF0);
   static const notificationOrange = Color(0xFFF5A623);
   static const homeNavBar = primary;
   static const homeNavActive = accent;
@@ -40,5 +40,16 @@ abstract final class AppColors {
   static const homeShopsGrass = Color(0xFF8FD14F);
   static const productHelpGreen = Color(0xFF8BC34A);
   static const quantityTrack = Color(0xFFE8E8EA);
+  static const skeletonBase = Color(0xFFC9C9CE);
+  static const skeletonHighlight = Color(0xFFDCDCE0);
   static const tierCapsuleBorder = Color(0xFFE2E2E6);
+  static const rewardsDonutTrack = Color(0xFFE6E6EA);
+  static const rewardsDonutFrosting = Color(0xFFFF5AA8);
+  static const rewardsDonutFrostingHi = Color(0xFFFF9AC8);
+  static const rewardsDonutFrostingMid = Color(0xFFFF6EB4);
+  static const rewardsDonutFrostingLo = Color(0xFFF04098);
+  static const rewardsDonutSprinkle = Color(0xFFFFD6E8);
+  static const rewardsConnectorFill = Color(0xFF3D3D42);
+  static const rewardsConnectorTrack = Color(0xFFD8D8DD);
+  static const rewardsBackgroundTop = Color(0xFFFAFBFC);
 }

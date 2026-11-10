@@ -112,6 +112,38 @@ void main() {
     expect(gap, AppDimens.spaceMd);
   });
 
+  testWidgets('empty section shows inline empty message', (tester) async {
+    await tester.pumpApp(
+      const HomeProductSection(
+        section: CatalogSection(
+          id: 'popular',
+          titleKey: 'homeSectionPopular',
+          cardStyle: ProductCardStyle.mediumRect,
+          productIds: [],
+          products: [],
+        ),
+      ),
+    );
+
+    expect(find.text('Nothing here right now.'), findsOneWidget);
+    expect(find.byType(ListView), findsNothing);
+  });
+
+  testWidgets('error section shows retry action', (tester) async {
+    var retried = false;
+    await tester.pumpApp(
+      HomeProductSection(
+        section: _section(),
+        errorMessage: 'Could not load this section.',
+        onRetry: () => retried = true,
+      ),
+    );
+
+    expect(find.text('Could not load this section.'), findsOneWidget);
+    await tester.tap(find.text('Try again'));
+    expect(retried, isTrue);
+  });
+
   testWidgets('seasonal section has extra top padding above title row', (
     tester,
   ) async {

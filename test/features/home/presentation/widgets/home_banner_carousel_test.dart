@@ -26,7 +26,7 @@ String visibleBannerAsset(WidgetTester tester) {
 }
 
 void main() {
-  testWidgets('does not auto-advance', (tester) async {
+  testWidgets('auto-advances after carousel interval', (tester) async {
     await tester.binding.setSurfaceSize(const Size(390, 200));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
@@ -37,7 +37,7 @@ void main() {
     await tester.pump(const Duration(seconds: 5));
     await tester.pumpAndSettle();
 
-    expect(visibleBannerAsset(tester), before);
+    expect(visibleBannerAsset(tester), isNot(before));
   });
 
   testWidgets('wraps infinitely when user swipes', (tester) async {

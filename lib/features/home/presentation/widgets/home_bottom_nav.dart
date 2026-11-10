@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../providers/home_shell_tab_provider.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimens.dart';
@@ -108,6 +111,10 @@ class HomeBottomNav extends StatelessWidget {
   }
 
   void _goShellTab(BuildContext context, HomeShellTab tab, String route) {
+    ProviderScope.containerOf(context)
+        .read(homeShellTabProvider.notifier)
+        .setTab(tab);
+
     final branch = homeShellBranchIndex(tab);
     final shell = StatefulNavigationShell.maybeOf(context);
     if (shell != null && branch >= 0) {

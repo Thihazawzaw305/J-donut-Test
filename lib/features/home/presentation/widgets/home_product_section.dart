@@ -12,15 +12,42 @@ import '../home_product_card_layout.dart';
 import 'home_product_tile.dart';
 
 class HomeProductSection extends StatelessWidget {
-  const HomeProductSection({super.key, required this.section});
+  const HomeProductSection({
+    super.key,
+    required this.section,
+    this.errorMessage,
+    this.onRetry,
+  });
 
   final CatalogSection section;
+  final String? errorMessage;
+  final VoidCallback? onRetry;
 
   @override
   Widget build(BuildContext context) {
-    if (section.products.isEmpty) return const SizedBox.shrink();
-
     final title = _sectionTitle(context, section);
+
+    if (errorMessage != null) {
+      return _sectionShell(
+        context,
+        title: title,
+        child: _SectionStatePanel(
+          message: errorMessage!,
+          actionLabel: context.l10n.homeRetry,
+          onAction: onRetry,
+        ),
+      );
+    }
+
+    if (section.products.isEmpty) {
+      return _sectionShell(
+        context,
+        title: title,
+        child: _SectionStatePanel(
+          message: context.l10n.homeSectionEmpty,
+        ),
+      );
+    }
 
     return Padding(
       padding: EdgeInsets.only(
@@ -53,13 +80,41 @@ class HomeProductSection extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceMd),
               scrollDirection: Axis.horizontal,
               itemCount: section.products.length,
-              separatorBuilder: (_, _) => const SizedBox(width: AppDimens.spaceMd),
+              separatorBuilder: (_, _) =>
+                  const SizedBox(width: AppDimens.spaceMd),
               itemBuilder: (context, index) => HomeProductTile(
                 product: section.products[index],
                 cardStyle: section.cardStyle,
                 sectionId: section.id,
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _sectionShell(
+    BuildContext context, {
+    required String title,
+    required Widget child,
+  }) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: _sectionTopPadding(section),
+        bottom: AppDimens.spaceLg,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceMd),
+            child: Text(title, style: AppTextStyles.homeSectionTitle),
+          ),
+          const SizedBox(height: AppDimens.spaceMd),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceMd),
+            child: child,
           ),
         ],
       ),
@@ -98,6 +153,42 @@ class HomeProductSection extends StatelessWidget {
       'seasonal' => '$base 💕',
       _ => base,
     };
+  }
+}
+
+class _SectionStatePanel extends StatelessWidget {
+  const _SectionStatePanel({
+    required this.message,
+    this.actionLabel,
+    this.onAction,
+  });
+
+  final String message;
+  final String? actionLabel;
+  final VoidCallback? onAction;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppDimens.spaceLg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppDimens.spaceMd),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(message, style: AppTextStyles.body, textAlign: TextAlign.center),
+          if (actionLabel != null && onAction != null) ...[
+            const SizedBox(height: AppDimens.spaceSm),
+            Align(
+              child: TextButton(onPressed: onAction, child: Text(actionLabel!)),
+            ),
+          ],
+        ],
+      ),
+    );
   }
 }
 

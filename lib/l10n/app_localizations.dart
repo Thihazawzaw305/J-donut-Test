@@ -136,6 +136,12 @@ abstract class AppLocalizations {
   /// **'Continue with Facebook'**
   String get continueWithFacebook;
 
+  /// No description provided for @continueWithApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get continueWithApple;
+
   /// No description provided for @legalNoticePrefix.
   ///
   /// In en, this message translates to:
@@ -493,14 +499,26 @@ abstract class AppLocalizations {
   /// No description provided for @memberSubtitleEwallet.
   ///
   /// In en, this message translates to:
-  /// **'E-wallet Customer'**
+  /// **'Bronze member'**
   String get memberSubtitleEwallet;
+
+  /// No description provided for @memberSubtitleSilver.
+  ///
+  /// In en, this message translates to:
+  /// **'Silver member'**
+  String get memberSubtitleSilver;
 
   /// No description provided for @memberTierProgressSilver.
   ///
   /// In en, this message translates to:
   /// **'{kyats} kyats left to become Silver'**
   String memberTierProgressSilver(String kyats);
+
+  /// No description provided for @memberTierProgressGold.
+  ///
+  /// In en, this message translates to:
+  /// **'{points} points left to become Gold member'**
+  String memberTierProgressGold(String points);
 
   /// No description provided for @homeSectionSeasonal.
   ///
@@ -585,6 +603,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rewards'**
   String get rewardsTitle;
+
+  /// No description provided for @rewardsScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'J\' Donuts Rewards'**
+  String get rewardsScreenTitle;
+
+  /// No description provided for @rewardsPillLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards'**
+  String get rewardsPillLabel;
+
+  /// No description provided for @rewardsTierSilverTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Silver'**
+  String get rewardsTierSilverTitle;
+
+  /// No description provided for @rewardsTierGoldTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gold'**
+  String get rewardsTierGoldTitle;
+
+  /// No description provided for @rewardsTierPlatinumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Platinum'**
+  String get rewardsTierPlatinumTitle;
+
+  /// No description provided for @rewardsTierSilverSubtitleHere.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re here now'**
+  String get rewardsTierSilverSubtitleHere;
+
+  /// No description provided for @rewardsTierGoldSubtitlePoints.
+  ///
+  /// In en, this message translates to:
+  /// **'{points} pts Remaining to become Gold'**
+  String rewardsTierGoldSubtitlePoints(String points);
+
+  /// No description provided for @rewardsTierPlatinumSubtitleSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ll be here soon'**
+  String get rewardsTierPlatinumSubtitleSoon;
+
+  /// No description provided for @rewardsTotalPointsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Total points'**
+  String get rewardsTotalPointsLabel;
+
+  /// No description provided for @rewardsEatMoreEarnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Eat more earn more'**
+  String get rewardsEatMoreEarnMore;
+
+  /// No description provided for @rewardsGiftTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Gift'**
+  String get rewardsGiftTab;
+
+  /// No description provided for @rewardsLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load rewards. Try again.'**
+  String get rewardsLoadError;
+
+  /// No description provided for @rewardsEmptyMember.
+  ///
+  /// In en, this message translates to:
+  /// **'No member profile found.'**
+  String get rewardsEmptyMember;
 
   /// No description provided for @walletTitle.
   ///
@@ -825,6 +921,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No catalog data yet.'**
   String get homeEmptyCatalog;
+
+  /// No description provided for @homeSectionEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here right now.'**
+  String get homeSectionEmpty;
+
+  /// No description provided for @homeSectionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this section.'**
+  String get homeSectionError;
+
+  /// No description provided for @homeCatalogLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong loading the catalog.'**
+  String get homeCatalogLoadError;
 
   /// No description provided for @productDetailTitle.
   ///

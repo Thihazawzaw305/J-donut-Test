@@ -9,7 +9,7 @@ class HomeNotificationButton extends StatelessWidget {
 
   final int count;
 
-  static final _stroke = BorderSide(
+  static const _stroke = BorderSide(
     color: AppColors.onPrimary,
     width: AppDimens.homeNotificationBorderWidth,
   );
@@ -23,9 +23,9 @@ class HomeNotificationButton extends StatelessWidget {
           minWidth: AppDimens.homeNotificationMinWidth,
         ),
         child: DecoratedBox(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.notificationOrange,
-            borderRadius: const BorderRadius.only(
+            borderRadius: BorderRadius.only(
               topLeft: Radius.circular(AppDimens.homeNotificationRadius),
               bottomLeft: Radius.circular(AppDimens.homeNotificationRadius),
             ),

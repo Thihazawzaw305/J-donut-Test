@@ -7,6 +7,8 @@ import 'package:j_donuts_app/features/auth/domain/entities/phone_number.dart';
 import 'package:j_donuts_app/features/auth/domain/failures/auth_failure.dart';
 import 'package:j_donuts_app/features/auth/domain/policies/otp_policy.dart';
 
+import '../../../../helpers/in_memory_registered_phones_store.dart';
+
 void main() {
   const known = PhoneNumber('9254135592');
   const unknown = PhoneNumber('912345678');
@@ -152,5 +154,20 @@ void main() {
       (await repo.requestOtp(phone, flow: AuthFlow.login)).isOk,
       isTrue,
     );
+  });
+
+  test('completeRegistration persists across repository instances', () async {
+    const phone = unknown;
+    final store = InMemoryRegisteredPhonesStore();
+
+    await FakeAuthRepository(latency: Duration.zero, store: store)
+        .completeRegistration(
+      phone,
+      firstName: 'Aye',
+      dateOfBirth: const DateOfBirth(year: 2000, month: 1, day: 1),
+    );
+
+    final relogin = FakeAuthRepository(latency: Duration.zero, store: store);
+    expect((await relogin.requestOtp(phone, flow: AuthFlow.login)).isOk, isTrue);
   });
 }

@@ -68,6 +68,8 @@ CatalogMember _parseMember(Map<String, dynamic> json) => CatalogMember(
   tierCode: json['tierCode'] as String,
   pointsBalance: json['pointsBalance'] as int,
   pointsToNextTier: json['pointsToNextTier'] as int,
+  rewardsPillCount: json['rewardsPillCount'] as int? ?? 0,
+  tierLadderFillBp: json['tierLadderFillBp'] as int? ?? 0,
 );
 
 CatalogBanner _parseBanner(Map<String, dynamic> json) => CatalogBanner(

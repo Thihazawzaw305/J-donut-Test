@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_dimens.dart';
+import '../../../../core/constants/app_motion.dart';
 import '../../../catalog/domain/entities/catalog_banner.dart';
 import '../../../catalog/presentation/widgets/catalog_image.dart';
 
@@ -15,6 +18,7 @@ class HomeBannerCarousel extends StatefulWidget {
 
 class _HomeBannerCarouselState extends State<HomeBannerCarousel> {
   late final PageController _controller;
+  Timer? _autoAdvance;
 
   @override
   void initState() {
@@ -30,7 +34,34 @@ class _HomeBannerCarouselState extends State<HomeBannerCarousel> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _scheduleAutoAdvance();
+  }
+
+  void _scheduleAutoAdvance() {
+    _autoAdvance?.cancel();
+    _autoAdvance = null;
+    if (widget.banners.length < 2) return;
+    if (MediaQuery.disableAnimationsOf(context)) return;
+
+    final interval = AppMotion.of(context, AppMotion.homeBannerAutoAdvance);
+    if (interval == Duration.zero) return;
+
+    _autoAdvance = Timer.periodic(interval, (_) {
+      if (!_controller.hasClients) return;
+      final next = _controller.page!.round() + 1;
+      _controller.animateToPage(
+        next,
+        duration: AppMotion.of(context, AppMotion.medium),
+        curve: AppMotion.standardCurve,
+      );
+    });
+  }
+
+  @override
   void dispose() {
+    _autoAdvance?.cancel();
     _controller.dispose();
     super.dispose();
   }

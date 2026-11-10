@@ -15,7 +15,7 @@ class SettingsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ListView(
       physics: AppMotion.homeScrollPhysics(context),
-      padding: EdgeInsets.fromLTRB(
+      padding: const EdgeInsets.fromLTRB(
         AppDimens.screenPadding,
         AppDimens.screenPadding,
         AppDimens.screenPadding,

@@ -17,8 +17,8 @@ final _fixedNow = DateTime(2026, 11, 9);
 final _birthday = DateTime(2000, 5, 30);
 
 void main() {
-  PrimaryButton continueButton(WidgetTester tester) => tester
-      .widget<PrimaryButton>(find.widgetWithText(PrimaryButton, 'CONTINUE'));
+  PrimaryButton continueButton(WidgetTester tester) =>
+      tester.widget<PrimaryButton>(find.byType(PrimaryButton));
 
   List<Override> dobOverrides({ControllableAuthRepository? repository}) => [
     authDraftProvider.overrideWith(_PrefillNameDraft.new),
@@ -129,7 +129,7 @@ void main() {
       tester.widgetList<TextField>(find.byType(TextField)),
       everyElement(predicate<TextField>((field) => field.enabled ?? true)),
     );
-    expect(find.widgetWithText(PrimaryButton, 'CONTINUE'), findsOneWidget);
+    expect(find.byType(PrimaryButton), findsOneWidget);
     expect(continueButton(tester).isLoading, isTrue);
     expect(repository.completeRegistrationCount, 1);
 

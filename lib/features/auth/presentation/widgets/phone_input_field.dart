@@ -51,7 +51,7 @@ class PhoneInputField extends StatelessWidget {
       focusNode: focusNode,
       readOnly: readOnly,
       keyboardType: TextInputType.phone,
-      textInputAction: TextInputAction.done,
+      textInputAction: TextInputAction.go,
       autofillHints: const [AutofillHints.telephoneNumberNational],
       inputFormatters: [
         FilteringTextInputFormatter.allow(_allowedCharacters),

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/datasources/local/registered_phones_store.dart';
 import '../../data/repositories/fake_auth_repository.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/usecases/complete_registration.dart';
@@ -10,8 +11,12 @@ import '../../domain/usecases/verify_otp.dart';
 
 final clockProvider = Provider<DateTime Function()>((ref) => DateTime.now);
 
+final registeredPhonesStoreProvider = Provider<RegisteredPhonesStore>(
+  (ref) => SecureRegisteredPhonesStore(),
+);
+
 final authRepositoryProvider = Provider<AuthRepository>(
-  (ref) => FakeAuthRepository(),
+  (ref) => FakeAuthRepository(store: ref.watch(registeredPhonesStoreProvider)),
 );
 
 final requestOtpProvider = Provider<RequestOtp>(

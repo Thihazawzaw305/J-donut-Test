@@ -30,7 +30,7 @@ class HomeProductTile extends StatelessWidget {
     final size = _cardSize(cardStyle, sectionId);
     final radius = _cardRadius(cardStyle, sectionId);
     final name = catalogString(context.l10n, product.nameKey);
-    final duration = AppMotion.of(context, AppMotion.medium);
+    final duration = AppMotion.of(context, AppMotion.productDetailContainer);
 
     return SizedBox(
       width: size.width,
@@ -38,9 +38,12 @@ class HomeProductTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OpenContainer<void>(
+            useRootNavigator: true,
             transitionDuration: duration,
+            transitionType: ContainerTransitionType.fadeThrough,
+            middleColor: AppColors.homeScreenBackground,
             openElevation: 0,
-            closedElevation: 2,
+            closedElevation: 0,
             closedColor: AppColors.surface,
             openColor: AppColors.homeScreenBackground,
             closedShape: RoundedRectangleBorder(
@@ -60,10 +63,13 @@ class HomeProductTile extends StatelessWidget {
                       SizedBox(
                         width: size.width,
                         height: size.height,
-                        child: CatalogImage(
-                          asset: product.imageAsset,
-                          networkUrl: product.imageUrl,
-                          fit: BoxFit.cover,
+                        child: Hero(
+                          tag: 'product-image-${product.id}',
+                          child: CatalogImage(
+                            asset: product.imageAsset,
+                            networkUrl: product.imageUrl,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       if (product.discountPercent != null)

@@ -30,6 +30,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get continueWithFacebook => 'Continue with Facebook';
 
   @override
+  String get continueWithApple => 'Continue with Apple';
+
+  @override
   String get legalNoticePrefix =>
       'By continuing, you acknowledge that you have read and agree to our ';
 
@@ -218,11 +221,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeOfflineBanner => 'You\'re offline. Showing saved catalog.';
 
   @override
-  String get memberSubtitleEwallet => 'E-wallet Customer';
+  String get memberSubtitleEwallet => 'Bronze member';
+
+  @override
+  String get memberSubtitleSilver => 'Silver member';
 
   @override
   String memberTierProgressSilver(String kyats) {
     return '$kyats kyats left to become Silver';
+  }
+
+  @override
+  String memberTierProgressGold(String points) {
+    return '$points points left to become Gold member';
   }
 
   @override
@@ -268,6 +279,47 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rewardsTitle => 'Rewards';
+
+  @override
+  String get rewardsScreenTitle => 'J\' Donuts Rewards';
+
+  @override
+  String get rewardsPillLabel => 'Rewards';
+
+  @override
+  String get rewardsTierSilverTitle => 'Silver';
+
+  @override
+  String get rewardsTierGoldTitle => 'Gold';
+
+  @override
+  String get rewardsTierPlatinumTitle => 'Platinum';
+
+  @override
+  String get rewardsTierSilverSubtitleHere => 'You\'re here now';
+
+  @override
+  String rewardsTierGoldSubtitlePoints(String points) {
+    return '$points pts Remaining to become Gold';
+  }
+
+  @override
+  String get rewardsTierPlatinumSubtitleSoon => 'You\'ll be here soon';
+
+  @override
+  String get rewardsTotalPointsLabel => 'Total points';
+
+  @override
+  String get rewardsEatMoreEarnMore => 'Eat more earn more';
+
+  @override
+  String get rewardsGiftTab => 'Gift';
+
+  @override
+  String get rewardsLoadError => 'Couldn\'t load rewards. Try again.';
+
+  @override
+  String get rewardsEmptyMember => 'No member profile found.';
 
   @override
   String get walletTitle => 'Wallet';
@@ -399,6 +451,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeEmptyCatalog => 'No catalog data yet.';
+
+  @override
+  String get homeSectionEmpty => 'Nothing here right now.';
+
+  @override
+  String get homeSectionError => 'Could not load this section.';
+
+  @override
+  String get homeCatalogLoadError =>
+      'Something went wrong loading the catalog.';
 
   @override
   String get productDetailTitle => 'Product';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:j_donuts_app/core/constants/app_motion.dart';
 import 'package:j_donuts_app/core/router/app_routes.dart';
 import 'package:j_donuts_app/features/auth/presentation/widgets/otp_boxes.dart';
 
@@ -31,6 +30,6 @@ void main() {
     await tester.pump(const Duration(milliseconds: 400));
 
     expect(find.text('Coconut Donut'), findsOneWidget);
-    expect(find.text('3,200 Ks'), findsWidgets);
+    expect(find.text('3,200 MMK'), findsWidgets);
   });
 }

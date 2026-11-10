@@ -78,6 +78,7 @@ flutter:
     - assets/images/welcome_hero.jpg
     - assets/seed/catalog_v1.json
     - assets/images/seed/
+    - assets/images/seed/rewards/
   fonts:
     - family: Urbanist
       fonts:

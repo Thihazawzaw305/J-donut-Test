@@ -117,6 +117,30 @@ class $MemberRowsTable extends MemberRows
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _rewardsPillCountMeta = const VerificationMeta(
+    'rewardsPillCount',
+  );
+  @override
+  late final GeneratedColumn<int> rewardsPillCount = GeneratedColumn<int>(
+    'rewards_pill_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _tierLadderFillBpMeta = const VerificationMeta(
+    'tierLadderFillBp',
+  );
+  @override
+  late final GeneratedColumn<int> tierLadderFillBp = GeneratedColumn<int>(
+    'tier_ladder_fill_bp',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -129,6 +153,8 @@ class $MemberRowsTable extends MemberRows
     tierCode,
     pointsBalance,
     pointsToNextTier,
+    rewardsPillCount,
+    tierLadderFillBp,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -243,6 +269,24 @@ class $MemberRowsTable extends MemberRows
     } else if (isInserting) {
       context.missing(_pointsToNextTierMeta);
     }
+    if (data.containsKey('rewards_pill_count')) {
+      context.handle(
+        _rewardsPillCountMeta,
+        rewardsPillCount.isAcceptableOrUnknown(
+          data['rewards_pill_count']!,
+          _rewardsPillCountMeta,
+        ),
+      );
+    }
+    if (data.containsKey('tier_ladder_fill_bp')) {
+      context.handle(
+        _tierLadderFillBpMeta,
+        tierLadderFillBp.isAcceptableOrUnknown(
+          data['tier_ladder_fill_bp']!,
+          _tierLadderFillBpMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -292,6 +336,14 @@ class $MemberRowsTable extends MemberRows
         DriftSqlType.int,
         data['${effectivePrefix}points_to_next_tier'],
       )!,
+      rewardsPillCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}rewards_pill_count'],
+      )!,
+      tierLadderFillBp: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}tier_ladder_fill_bp'],
+      )!,
     );
   }
 
@@ -312,6 +364,8 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
   final String tierCode;
   final int pointsBalance;
   final int pointsToNextTier;
+  final int rewardsPillCount;
+  final int tierLadderFillBp;
   const MemberRow({
     required this.id,
     required this.displayName,
@@ -323,6 +377,8 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
     required this.tierCode,
     required this.pointsBalance,
     required this.pointsToNextTier,
+    required this.rewardsPillCount,
+    required this.tierLadderFillBp,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -337,6 +393,8 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
     map['tier_code'] = Variable<String>(tierCode);
     map['points_balance'] = Variable<int>(pointsBalance);
     map['points_to_next_tier'] = Variable<int>(pointsToNextTier);
+    map['rewards_pill_count'] = Variable<int>(rewardsPillCount);
+    map['tier_ladder_fill_bp'] = Variable<int>(tierLadderFillBp);
     return map;
   }
 
@@ -352,6 +410,8 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
       tierCode: Value(tierCode),
       pointsBalance: Value(pointsBalance),
       pointsToNextTier: Value(pointsToNextTier),
+      rewardsPillCount: Value(rewardsPillCount),
+      tierLadderFillBp: Value(tierLadderFillBp),
     );
   }
 
@@ -371,6 +431,8 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
       tierCode: serializer.fromJson<String>(json['tierCode']),
       pointsBalance: serializer.fromJson<int>(json['pointsBalance']),
       pointsToNextTier: serializer.fromJson<int>(json['pointsToNextTier']),
+      rewardsPillCount: serializer.fromJson<int>(json['rewardsPillCount']),
+      tierLadderFillBp: serializer.fromJson<int>(json['tierLadderFillBp']),
     );
   }
   @override
@@ -387,6 +449,8 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
       'tierCode': serializer.toJson<String>(tierCode),
       'pointsBalance': serializer.toJson<int>(pointsBalance),
       'pointsToNextTier': serializer.toJson<int>(pointsToNextTier),
+      'rewardsPillCount': serializer.toJson<int>(rewardsPillCount),
+      'tierLadderFillBp': serializer.toJson<int>(tierLadderFillBp),
     };
   }
 
@@ -401,6 +465,8 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
     String? tierCode,
     int? pointsBalance,
     int? pointsToNextTier,
+    int? rewardsPillCount,
+    int? tierLadderFillBp,
   }) => MemberRow(
     id: id ?? this.id,
     displayName: displayName ?? this.displayName,
@@ -412,6 +478,8 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
     tierCode: tierCode ?? this.tierCode,
     pointsBalance: pointsBalance ?? this.pointsBalance,
     pointsToNextTier: pointsToNextTier ?? this.pointsToNextTier,
+    rewardsPillCount: rewardsPillCount ?? this.rewardsPillCount,
+    tierLadderFillBp: tierLadderFillBp ?? this.tierLadderFillBp,
   );
   MemberRow copyWithCompanion(MemberRowsCompanion data) {
     return MemberRow(
@@ -441,6 +509,12 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
       pointsToNextTier: data.pointsToNextTier.present
           ? data.pointsToNextTier.value
           : this.pointsToNextTier,
+      rewardsPillCount: data.rewardsPillCount.present
+          ? data.rewardsPillCount.value
+          : this.rewardsPillCount,
+      tierLadderFillBp: data.tierLadderFillBp.present
+          ? data.tierLadderFillBp.value
+          : this.tierLadderFillBp,
     );
   }
 
@@ -456,7 +530,9 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
           ..write('notificationCount: $notificationCount, ')
           ..write('tierCode: $tierCode, ')
           ..write('pointsBalance: $pointsBalance, ')
-          ..write('pointsToNextTier: $pointsToNextTier')
+          ..write('pointsToNextTier: $pointsToNextTier, ')
+          ..write('rewardsPillCount: $rewardsPillCount, ')
+          ..write('tierLadderFillBp: $tierLadderFillBp')
           ..write(')'))
         .toString();
   }
@@ -473,6 +549,8 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
     tierCode,
     pointsBalance,
     pointsToNextTier,
+    rewardsPillCount,
+    tierLadderFillBp,
   );
   @override
   bool operator ==(Object other) =>
@@ -487,7 +565,9 @@ class MemberRow extends DataClass implements Insertable<MemberRow> {
           other.notificationCount == this.notificationCount &&
           other.tierCode == this.tierCode &&
           other.pointsBalance == this.pointsBalance &&
-          other.pointsToNextTier == this.pointsToNextTier);
+          other.pointsToNextTier == this.pointsToNextTier &&
+          other.rewardsPillCount == this.rewardsPillCount &&
+          other.tierLadderFillBp == this.tierLadderFillBp);
 }
 
 class MemberRowsCompanion extends UpdateCompanion<MemberRow> {
@@ -501,6 +581,8 @@ class MemberRowsCompanion extends UpdateCompanion<MemberRow> {
   final Value<String> tierCode;
   final Value<int> pointsBalance;
   final Value<int> pointsToNextTier;
+  final Value<int> rewardsPillCount;
+  final Value<int> tierLadderFillBp;
   final Value<int> rowid;
   const MemberRowsCompanion({
     this.id = const Value.absent(),
@@ -513,6 +595,8 @@ class MemberRowsCompanion extends UpdateCompanion<MemberRow> {
     this.tierCode = const Value.absent(),
     this.pointsBalance = const Value.absent(),
     this.pointsToNextTier = const Value.absent(),
+    this.rewardsPillCount = const Value.absent(),
+    this.tierLadderFillBp = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   MemberRowsCompanion.insert({
@@ -526,6 +610,8 @@ class MemberRowsCompanion extends UpdateCompanion<MemberRow> {
     required String tierCode,
     required int pointsBalance,
     required int pointsToNextTier,
+    this.rewardsPillCount = const Value.absent(),
+    this.tierLadderFillBp = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id),
        displayName = Value(displayName),
@@ -548,6 +634,8 @@ class MemberRowsCompanion extends UpdateCompanion<MemberRow> {
     Expression<String>? tierCode,
     Expression<int>? pointsBalance,
     Expression<int>? pointsToNextTier,
+    Expression<int>? rewardsPillCount,
+    Expression<int>? tierLadderFillBp,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -561,6 +649,8 @@ class MemberRowsCompanion extends UpdateCompanion<MemberRow> {
       if (tierCode != null) 'tier_code': tierCode,
       if (pointsBalance != null) 'points_balance': pointsBalance,
       if (pointsToNextTier != null) 'points_to_next_tier': pointsToNextTier,
+      if (rewardsPillCount != null) 'rewards_pill_count': rewardsPillCount,
+      if (tierLadderFillBp != null) 'tier_ladder_fill_bp': tierLadderFillBp,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -576,6 +666,8 @@ class MemberRowsCompanion extends UpdateCompanion<MemberRow> {
     Value<String>? tierCode,
     Value<int>? pointsBalance,
     Value<int>? pointsToNextTier,
+    Value<int>? rewardsPillCount,
+    Value<int>? tierLadderFillBp,
     Value<int>? rowid,
   }) {
     return MemberRowsCompanion(
@@ -589,6 +681,8 @@ class MemberRowsCompanion extends UpdateCompanion<MemberRow> {
       tierCode: tierCode ?? this.tierCode,
       pointsBalance: pointsBalance ?? this.pointsBalance,
       pointsToNextTier: pointsToNextTier ?? this.pointsToNextTier,
+      rewardsPillCount: rewardsPillCount ?? this.rewardsPillCount,
+      tierLadderFillBp: tierLadderFillBp ?? this.tierLadderFillBp,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -626,6 +720,12 @@ class MemberRowsCompanion extends UpdateCompanion<MemberRow> {
     if (pointsToNextTier.present) {
       map['points_to_next_tier'] = Variable<int>(pointsToNextTier.value);
     }
+    if (rewardsPillCount.present) {
+      map['rewards_pill_count'] = Variable<int>(rewardsPillCount.value);
+    }
+    if (tierLadderFillBp.present) {
+      map['tier_ladder_fill_bp'] = Variable<int>(tierLadderFillBp.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -645,6 +745,8 @@ class MemberRowsCompanion extends UpdateCompanion<MemberRow> {
           ..write('tierCode: $tierCode, ')
           ..write('pointsBalance: $pointsBalance, ')
           ..write('pointsToNextTier: $pointsToNextTier, ')
+          ..write('rewardsPillCount: $rewardsPillCount, ')
+          ..write('tierLadderFillBp: $tierLadderFillBp, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -2471,6 +2573,8 @@ typedef $$MemberRowsTableCreateCompanionBuilder =
       required String tierCode,
       required int pointsBalance,
       required int pointsToNextTier,
+      Value<int> rewardsPillCount,
+      Value<int> tierLadderFillBp,
       Value<int> rowid,
     });
 typedef $$MemberRowsTableUpdateCompanionBuilder =
@@ -2485,6 +2589,8 @@ typedef $$MemberRowsTableUpdateCompanionBuilder =
       Value<String> tierCode,
       Value<int> pointsBalance,
       Value<int> pointsToNextTier,
+      Value<int> rewardsPillCount,
+      Value<int> tierLadderFillBp,
       Value<int> rowid,
     });
 
@@ -2544,6 +2650,16 @@ class $$MemberRowsTableFilterComposer
 
   ColumnFilters<int> get pointsToNextTier => $composableBuilder(
     column: $table.pointsToNextTier,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get rewardsPillCount => $composableBuilder(
+    column: $table.rewardsPillCount,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get tierLadderFillBp => $composableBuilder(
+    column: $table.tierLadderFillBp,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -2606,6 +2722,16 @@ class $$MemberRowsTableOrderingComposer
     column: $table.pointsToNextTier,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<int> get rewardsPillCount => $composableBuilder(
+    column: $table.rewardsPillCount,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get tierLadderFillBp => $composableBuilder(
+    column: $table.tierLadderFillBp,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$MemberRowsTableAnnotationComposer
@@ -2662,6 +2788,16 @@ class $$MemberRowsTableAnnotationComposer
     column: $table.pointsToNextTier,
     builder: (column) => column,
   );
+
+  GeneratedColumn<int> get rewardsPillCount => $composableBuilder(
+    column: $table.rewardsPillCount,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get tierLadderFillBp => $composableBuilder(
+    column: $table.tierLadderFillBp,
+    builder: (column) => column,
+  );
 }
 
 class $$MemberRowsTableTableManager
@@ -2705,6 +2841,8 @@ class $$MemberRowsTableTableManager
                 Value<String> tierCode = const Value.absent(),
                 Value<int> pointsBalance = const Value.absent(),
                 Value<int> pointsToNextTier = const Value.absent(),
+                Value<int> rewardsPillCount = const Value.absent(),
+                Value<int> tierLadderFillBp = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => MemberRowsCompanion(
                 id: id,
@@ -2717,6 +2855,8 @@ class $$MemberRowsTableTableManager
                 tierCode: tierCode,
                 pointsBalance: pointsBalance,
                 pointsToNextTier: pointsToNextTier,
+                rewardsPillCount: rewardsPillCount,
+                tierLadderFillBp: tierLadderFillBp,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -2731,6 +2871,8 @@ class $$MemberRowsTableTableManager
                 required String tierCode,
                 required int pointsBalance,
                 required int pointsToNextTier,
+                Value<int> rewardsPillCount = const Value.absent(),
+                Value<int> tierLadderFillBp = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => MemberRowsCompanion.insert(
                 id: id,
@@ -2743,6 +2885,8 @@ class $$MemberRowsTableTableManager
                 tierCode: tierCode,
                 pointsBalance: pointsBalance,
                 pointsToNextTier: pointsToNextTier,
+                rewardsPillCount: rewardsPillCount,
+                tierLadderFillBp: tierLadderFillBp,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0

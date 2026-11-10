@@ -15,18 +15,18 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
 
     await tester.pumpWidget(
-      MaterialApp(
+      const MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: MediaQuery(
-          data: const MediaQueryData(size: viewport),
+          data: MediaQueryData(size: viewport),
           child: Scaffold(
             bottomNavigationBar: SizedBox(
               height: 120,
               child: Stack(
                 children: [
-                  const HomeBottomNavAccentStrip(),
-                  const HomeBottomNav(active: HomeShellTab.home),
+                  HomeBottomNavAccentStrip(),
+                  HomeBottomNav(active: HomeShellTab.home),
                 ],
               ),
             ),
@@ -127,12 +127,12 @@ void main() {
 
   testWidgets('reduce motion shows active label', (tester) async {
     await tester.pumpWidget(
-      MaterialApp(
+      const MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: MediaQuery(
-          data: const MediaQueryData(disableAnimations: true),
-          child: const Scaffold(
+          data: MediaQueryData(disableAnimations: true),
+          child: Scaffold(
             body: HomeBottomNav(active: HomeShellTab.rewards),
           ),
         ),

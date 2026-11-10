@@ -6,7 +6,9 @@ import '../domain/entities/catalog_member.dart';
 
 String catalogMemberTierProgress(AppLocalizations l10n, CatalogMember member) {
   final kyats = NumberFormat('#,###').format(member.tierProgressKyats);
+  final points = NumberFormat('#,###').format(member.pointsToNextTier);
   return switch (member.tierProgressKey) {
+    'memberTierProgressGold' => l10n.memberTierProgressGold(points),
     'memberTierProgressSilver' => l10n.memberTierProgressSilver(kyats),
     _ => () {
         assert(() {
@@ -21,6 +23,7 @@ String catalogMemberTierProgress(AppLocalizations l10n, CatalogMember member) {
 String catalogString(AppLocalizations l10n, String key) {
   return switch (key) {
     'memberSubtitleEwallet' => l10n.memberSubtitleEwallet,
+    'memberSubtitleSilver' => l10n.memberSubtitleSilver,
     'homeSectionSeasonal' => l10n.homeSectionSeasonal,
     'homeSectionPopular' => l10n.homeSectionPopular,
     'homeSectionOrderAgain' => l10n.homeSectionOrderAgain,

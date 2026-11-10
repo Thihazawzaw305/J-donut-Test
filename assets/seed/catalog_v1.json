@@ -1,14 +1,16 @@
 {
   "member": {
     "displayName": "Thiha Zaw Zaw",
-    "subtitleKey": "memberSubtitleEwallet",
+    "subtitleKey": "memberSubtitleSilver",
     "avatarAsset": "assets/images/seed/member_avatar.png",
-    "tierProgressKey": "memberTierProgressSilver",
+    "tierProgressKey": "memberTierProgressGold",
     "tierProgressKyats": 50001,
-    "notificationCount": 0,
-    "tierCode": "bronze",
-    "pointsBalance": 0,
-    "pointsToNextTier": 1290
+    "notificationCount": 2,
+    "tierCode": "silver",
+    "pointsBalance": 680000,
+    "pointsToNextTier": 500,
+    "rewardsPillCount": 3,
+    "tierLadderFillBp": 5800
   },
   "banners": [
     {
@@ -35,7 +37,7 @@
       "priceMmk": 3200,
       "isNew": true,
       "discountPercent": null,
-      "imageAsset": "assets/images/seed/p_coconut.png",
+      "imageAsset": "assets/images/seed/p_square_iced_latte.jpg",
       "imageUrl": null,
       "descriptionKey": "productCoconutDescription"
     },
@@ -79,7 +81,7 @@
       "priceMmk": 1800,
       "isNew": false,
       "discountPercent": null,
-      "imageAsset": "assets/images/seed/p_candy_ring.png",
+      "imageAsset": "assets/images/seed/p_square_chocolate_ring.jpg",
       "imageUrl": null,
       "descriptionKey": "productGenericDonutDescription"
     },
@@ -90,7 +92,7 @@
       "priceMmk": 1900,
       "isNew": false,
       "discountPercent": null,
-      "imageAsset": "assets/images/seed/p_happy_bloom.png",
+      "imageAsset": "assets/images/seed/p_square_jelly.jpg",
       "imageUrl": null,
       "descriptionKey": "productGenericDonutDescription"
     },
@@ -101,7 +103,7 @@
       "priceMmk": 1500,
       "isNew": false,
       "discountPercent": null,
-      "imageAsset": "assets/images/seed/p_butter_bread.png",
+      "imageAsset": "assets/images/seed/p_square_chocolate_ring.jpg",
       "imageUrl": null,
       "descriptionKey": "productBreadDescription"
     },
@@ -112,7 +114,7 @@
       "priceMmk": 1600,
       "isNew": false,
       "discountPercent": null,
-      "imageAsset": "assets/images/seed/p_cheese_bread.png",
+      "imageAsset": "assets/images/seed/p_square_jelly.jpg",
       "imageUrl": null,
       "descriptionKey": "productBreadDescription"
     },
@@ -123,7 +125,7 @@
       "priceMmk": 1200,
       "isNew": false,
       "discountPercent": null,
-      "imageAsset": "assets/images/seed/p_bread_sticks.png",
+      "imageAsset": "assets/images/seed/p_square_iced_latte.jpg",
       "imageUrl": null,
       "descriptionKey": "productCookieDescription"
     },
@@ -134,7 +136,7 @@
       "priceMmk": 3500,
       "isNew": false,
       "discountPercent": null,
-      "imageAsset": "assets/images/seed/p_butter_biscuit.png",
+      "imageAsset": "assets/images/seed/p_square_chocolate_ring.jpg",
       "imageUrl": null,
       "descriptionKey": "productCookieDescription"
     },
@@ -145,7 +147,7 @@
       "priceMmk": 4200,
       "isNew": false,
       "discountPercent": null,
-      "imageAsset": "assets/images/seed/p_buttercake_10.png",
+      "imageAsset": "assets/images/seed/p_square_jelly.jpg",
       "imageUrl": null,
       "descriptionKey": "productCakeDescription"
     },
@@ -156,7 +158,7 @@
       "priceMmk": 2800,
       "isNew": false,
       "discountPercent": null,
-      "imageAsset": "assets/images/seed/p_buttercake_6.png",
+      "imageAsset": "assets/images/seed/p_square_iced_latte.jpg",
       "imageUrl": null,
       "descriptionKey": "productCakeDescription"
     },
@@ -195,7 +197,7 @@
       "id": "donuts",
       "titleKey": "homeSectionDonuts",
       "cardStyle": "square",
-      "productIds": ["p_candy_ring", "p_happy_bloom", "p_fancy_clover", "p_coconut"]
+      "productIds": ["p_candy_ring", "p_happy_bloom", "p_coconut"]
     },
     {
       "id": "bread",

@@ -11,6 +11,10 @@ class MemberRows extends Table {
   TextColumn get tierCode => text()();
   IntColumn get pointsBalance => integer()();
   IntColumn get pointsToNextTier => integer()();
+  IntColumn get rewardsPillCount =>
+      integer().withDefault(const Constant(0))();
+  IntColumn get tierLadderFillBp =>
+      integer().withDefault(const Constant(0))();
 
   @override
   Set<Column<Object>> get primaryKey => {id};

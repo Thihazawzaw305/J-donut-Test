@@ -1,5 +1,3 @@
-import 'dart:ui' show Size;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:j_donuts_app/core/theme/app_text_styles.dart';
@@ -13,12 +11,14 @@ const _member = CatalogMember(
   displayName: 'Hania',
   subtitleKey: 'memberSubtitleEwallet',
   avatarAsset: 'assets/images/seed/member_avatar.png',
-  tierProgressKey: 'memberTierProgressSilver',
+  tierProgressKey: 'memberTierProgressGold',
   tierProgressKyats: 50001,
   notificationCount: 2,
   tierCode: 'bronze',
   pointsBalance: 0,
   pointsToNextTier: 1290,
+  rewardsPillCount: 0,
+  tierLadderFillBp: 0,
 );
 
 const _banners = [
@@ -35,15 +35,15 @@ void main() {
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
     await tester.pumpApp(
-      HomeHeaderPanel(member: _member, banners: _banners),
+      const HomeHeaderPanel(member: _member, banners: _banners),
     );
     await tester.pumpAndSettle();
 
     final name = tester.widget<Text>(find.text('Hania'));
     expect(name.style?.fontSize, AppTextStyles.homeMemberName.fontSize);
 
-    expect(find.textContaining('50,001'), findsOneWidget);
-    final tierText = find.textContaining('kyats left');
+    expect(find.textContaining('1,290'), findsOneWidget);
+    final tierText = find.textContaining('points left');
     expect(tierText, findsOneWidget);
 
     final tierLabel = tester.widget<Text>(tierText);

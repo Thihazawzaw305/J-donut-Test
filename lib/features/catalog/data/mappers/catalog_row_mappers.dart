@@ -15,6 +15,8 @@ CatalogMember mapMemberRow(MemberRow row) => CatalogMember(
   tierCode: row.tierCode,
   pointsBalance: row.pointsBalance,
   pointsToNextTier: row.pointsToNextTier,
+  rewardsPillCount: row.rewardsPillCount,
+  tierLadderFillBp: row.tierLadderFillBp,
 );
 
 CatalogProduct mapProductRow(ProductRow row) => CatalogProduct(

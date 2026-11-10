@@ -18,12 +18,29 @@ final databaseProvider = FutureProvider<AppDatabase>((ref) async {
   return db;
 });
 
-/// Re-applies banner + shop rows from bundled seed (pull-to-refresh).
-Future<void> refreshCatalogFromSeed(WidgetRef ref) async {
+/// Syncs seed assets into SQLite, then re-subscribes catalog streams from the DB.
+Future<void> reloadHomeCatalogFromDatabase(WidgetRef ref) async {
   final db = await ref.read(databaseProvider.future);
   final bundle = await loadCatalogSeedBundle();
   await syncCatalogStaticContentFromSeed(db, bundle);
+
+  ref
+    ..invalidate(catalogMemberProvider)
+    ..invalidate(catalogBannersProvider)
+    ..invalidate(catalogSectionsProvider)
+    ..invalidate(catalogShopsProvider);
+
+  await Future.wait([
+    ref.read(catalogMemberProvider.future),
+    ref.read(catalogBannersProvider.future),
+    ref.read(catalogSectionsProvider.future),
+    ref.read(catalogShopsProvider.future),
+  ]);
 }
+
+/// Re-applies bundled seed and reloads home catalog streams (pull-to-refresh).
+Future<void> refreshCatalogFromSeed(WidgetRef ref) =>
+    reloadHomeCatalogFromDatabase(ref);
 
 final catalogRepositoryProvider = Provider<CatalogRepository>((ref) {
   final db = ref.watch(databaseProvider).requireValue;

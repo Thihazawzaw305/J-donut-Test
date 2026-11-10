@@ -4,16 +4,17 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimens.dart';
 import '../../../../core/l10n/l10n_extension.dart';
 
-/// Google and Facebook buttons. Icons are placeholders until brand assets
-/// are added.
+/// Google, Apple, and Facebook placeholder sign-in buttons.
 class SocialLoginRow extends StatelessWidget {
   const SocialLoginRow({
     super.key,
     required this.onGoogle,
+    required this.onApple,
     required this.onFacebook,
   });
 
   final VoidCallback onGoogle;
+  final VoidCallback onApple;
   final VoidCallback onFacebook;
 
   @override
@@ -27,7 +28,14 @@ class SocialLoginRow extends StatelessWidget {
           iconColor: AppColors.textPrimary,
           onTap: onGoogle,
         ),
-        const SizedBox(width: AppDimens.spaceXl),
+        const SizedBox(width: AppDimens.spaceLg),
+        _SocialButton(
+          tooltip: context.l10n.continueWithApple,
+          icon: Icons.apple,
+          iconColor: AppColors.textPrimary,
+          onTap: onApple,
+        ),
+        const SizedBox(width: AppDimens.spaceLg),
         _SocialButton(
           tooltip: context.l10n.continueWithFacebook,
           icon: Icons.facebook,

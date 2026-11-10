@@ -145,6 +145,7 @@ class _OtpBoxesState extends State<OtpBoxes>
         enableInteractiveSelection: false,
         autofocus: true,
         keyboardType: TextInputType.number,
+        autofillHints: const [AutofillHints.oneTimeCode],
         decoration: const InputDecoration(border: InputBorder.none),
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,

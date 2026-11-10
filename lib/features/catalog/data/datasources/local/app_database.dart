@@ -25,7 +25,17 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.memory() : super(NativeDatabase.memory());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onUpgrade: (migrator, from, to) async {
+          if (from < 2) {
+            await migrator.addColumn(memberRows, memberRows.rewardsPillCount);
+            await migrator.addColumn(memberRows, memberRows.tierLadderFillBp);
+          }
+        },
+      );
 
   Future<bool> hasProducts() async {
     final count = await customSelect(

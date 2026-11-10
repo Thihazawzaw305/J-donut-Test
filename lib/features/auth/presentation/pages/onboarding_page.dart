@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimens.dart';
 import '../../../../core/constants/app_motion.dart';
 import '../../../../core/l10n/l10n_extension.dart';
@@ -12,6 +13,7 @@ import '../../../../core/widgets/primary_button.dart';
 import '../widgets/legal_footer.dart';
 import '../widgets/login_prompt.dart';
 import '../widgets/onboarding_bottom_entrance.dart';
+import '../widgets/onboarding_hero_gradient_overlay.dart';
 import '../widgets/onboarding_hero_image.dart';
 import '../widgets/social_login_row.dart';
 
@@ -70,6 +72,7 @@ class _OnboardingPageState extends State<OnboardingPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.surface,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -77,6 +80,7 @@ class _OnboardingPageState extends State<OnboardingPage>
             alignment: Alignment.topCenter,
             child: OnboardingHeroImage(slideProgress: _slideController),
           ),
+          const OnboardingHeroGradientOverlay(),
           Align(
             alignment: Alignment.bottomCenter,
             child: SafeArea(
@@ -100,9 +104,10 @@ class _OnboardingPageState extends State<OnboardingPage>
     void comingSoon() =>
         AppToast.show(context, message: context.l10n.comingSoon);
 
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
     return OnboardingBottomEntrance(
       key: _bottomKey,
-      autoStart: false,
+      autoStart: reduceMotion,
       children: [
         Text(
           context.l10n.onboardingHeadline,
@@ -117,7 +122,11 @@ class _OnboardingPageState extends State<OnboardingPage>
         const SizedBox(height: AppDimens.spaceMd),
         LoginPrompt(onLogIn: () => context.push(AppRoutes.loginPhone)),
         const SizedBox(height: AppDimens.spaceMd),
-        SocialLoginRow(onGoogle: comingSoon, onFacebook: comingSoon),
+        SocialLoginRow(
+          onGoogle: comingSoon,
+          onApple: comingSoon,
+          onFacebook: comingSoon,
+        ),
         const SizedBox(height: AppDimens.spaceLg),
         LegalFooter(onTermsTap: comingSoon, onPrivacyTap: comingSoon),
         const SizedBox(height: AppDimens.spaceMd),

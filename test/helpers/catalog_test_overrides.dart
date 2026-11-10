@@ -20,7 +20,7 @@ Override catalogDatabaseOverride() {
     );
     await seedCatalogIfEmpty(db, bundle);
     if (await db.hasProducts()) {
-      await syncBannersFromSeed(db, bundle);
+      await syncCatalogStaticContentFromSeed(db, bundle);
     }
     ref.onDispose(db.close);
     return db;

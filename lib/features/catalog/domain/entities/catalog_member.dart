@@ -9,6 +9,8 @@ class CatalogMember {
     required this.tierCode,
     required this.pointsBalance,
     required this.pointsToNextTier,
+    required this.rewardsPillCount,
+    required this.tierLadderFillBp,
   });
 
   final String displayName;
@@ -20,4 +22,26 @@ class CatalogMember {
   final String tierCode;
   final int pointsBalance;
   final int pointsToNextTier;
+  final int rewardsPillCount;
+  final int tierLadderFillBp;
+
+  CatalogMember copyWith({
+    int? tierLadderFillBp,
+    int? rewardsPillCount,
+    int? pointsBalance,
+  }) {
+    return CatalogMember(
+      displayName: displayName,
+      subtitleKey: subtitleKey,
+      avatarAsset: avatarAsset,
+      tierProgressKey: tierProgressKey,
+      tierProgressKyats: tierProgressKyats,
+      notificationCount: notificationCount,
+      tierCode: tierCode,
+      pointsBalance: pointsBalance ?? this.pointsBalance,
+      pointsToNextTier: pointsToNextTier,
+      rewardsPillCount: rewardsPillCount ?? this.rewardsPillCount,
+      tierLadderFillBp: tierLadderFillBp ?? this.tierLadderFillBp,
+    );
+  }
 }

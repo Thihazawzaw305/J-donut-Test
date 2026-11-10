@@ -16,6 +16,7 @@ void main() {
     );
     expect(find.text("LET'S EXPLORE"), findsOneWidget);
     expect(find.byKey(const Key('welcome_hero_image')), findsOneWidget);
+    expect(find.byType(Image), findsWidgets);
     expect(
       find.byKey(WelcomeHeroGradientOverlay.overlayKey),
       findsOneWidget,
@@ -37,12 +38,12 @@ void main() {
 
   testWidgets('narrow viewport with large text does not overflow', (tester) async {
     await tester.pumpApp(
-      MediaQuery(
-        data: const MediaQueryData(
+      const MediaQuery(
+        data: MediaQueryData(
           size: Size(320, 568),
           textScaler: TextScaler.linear(1.3),
         ),
-        child: const WelcomePage(),
+        child: WelcomePage(),
       ),
     );
     await tester.pumpAndSettle();

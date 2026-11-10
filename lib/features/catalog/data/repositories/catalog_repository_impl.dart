@@ -74,6 +74,14 @@ class CatalogRepositoryImpl implements CatalogRepository {
   }
 
   @override
+  Future<void> updateMemberDisplayName(String displayName) async {
+    final trimmed = displayName.trim();
+    if (trimmed.isEmpty) return;
+    await (_db.update(_db.memberRows)..where((t) => t.id.equals('default')))
+        .write(MemberRowsCompanion(displayName: Value(trimmed)));
+  }
+
+  @override
   Future<CatalogProduct?> productById(String id) async {
     final row = await (_db.select(_db.productRows)
           ..where((t) => t.id.equals(id)))

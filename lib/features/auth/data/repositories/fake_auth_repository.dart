@@ -6,19 +6,35 @@ import '../../domain/entities/phone_number.dart';
 import '../../domain/failures/auth_failure.dart';
 import '../../domain/policies/otp_policy.dart';
 import '../../domain/repositories/auth_repository.dart';
+import '../datasources/local/registered_phones_store.dart';
 
-/// Simulates a backend: waits [latency], keeps registered numbers in memory.
+/// Simulates a backend: waits [latency], keeps registered numbers locally.
 class FakeAuthRepository implements AuthRepository {
   FakeAuthRepository({
     this.latency = defaultLatency,
+    this.store,
     Set<String>? registeredNumbers,
-  }) : _registeredNumbers = registeredNumbers ?? <String>{};
+  }) : _seed = registeredNumbers;
 
   static const defaultLatency = Duration(seconds: 1);
 
   final Duration latency;
-  final Set<String> _registeredNumbers;
+  final RegisteredPhonesStore? store;
+  final Set<String>? _seed;
+  Set<String>? _registeredNumbers;
   final Map<String, int> _otpAttempts = <String, int>{};
+
+  Future<Set<String>> _numbers() async {
+    final cached = _registeredNumbers;
+    if (cached != null) return cached;
+    if (_seed != null) {
+      _registeredNumbers = {..._seed};
+      return _registeredNumbers!;
+    }
+    final stored = await store?.readAll() ?? {};
+    _registeredNumbers = {...stored};
+    return _registeredNumbers!;
+  }
 
   @override
   Future<Result<void, AuthFailure>> requestOtp(
@@ -26,7 +42,8 @@ class FakeAuthRepository implements AuthRepository {
     required AuthFlow flow,
   }) async {
     await Future<void>.delayed(latency);
-    final isRegistered = _registeredNumbers.contains(phone.e164);
+    final registered = await _numbers();
+    final isRegistered = registered.contains(phone.e164);
     return switch (flow) {
       AuthFlow.login when !isRegistered => const Err(AuthFailure.notRegistered),
       AuthFlow.register when isRegistered => const Err(
@@ -43,7 +60,8 @@ class FakeAuthRepository implements AuthRepository {
     required AuthFlow flow,
   }) async {
     await Future<void>.delayed(latency);
-    final isRegistered = _registeredNumbers.contains(phone.e164);
+    final registered = await _numbers();
+    final isRegistered = registered.contains(phone.e164);
     if (flow == AuthFlow.login && !isRegistered) {
       return const Err(AuthFailure.notRegistered);
     }
@@ -87,7 +105,9 @@ class FakeAuthRepository implements AuthRepository {
     required DateOfBirth dateOfBirth,
   }) async {
     await Future<void>.delayed(latency);
-    _registeredNumbers.add(phone.e164);
+    final registered = await _numbers();
+    registered.add(phone.e164);
+    await store?.add(phone.e164);
     return const Ok(null);
   }
 }

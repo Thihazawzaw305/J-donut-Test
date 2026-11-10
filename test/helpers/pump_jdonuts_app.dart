@@ -19,6 +19,7 @@ Future<void> pumpJDonutsApp(
   Size viewport = const Size(800, 600),
   double textScale = 1.0,
   bool settle = true,
+  bool disableAnimations = true,
   SessionStorage? sessionStorage,
 }) async {
   tester.view.physicalSize = viewport;
@@ -30,7 +31,7 @@ Future<void> pumpJDonutsApp(
       data: MediaQueryData(
         size: viewport,
         textScaler: TextScaler.linear(textScale),
-        disableAnimations: true,
+        disableAnimations: disableAnimations,
       ),
       child: ProviderScope(
         overrides: [

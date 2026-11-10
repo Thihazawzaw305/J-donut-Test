@@ -73,14 +73,14 @@ class _HomeHeaderDelegate extends SliverPersistentHeaderDelegate {
     return SizedBox(
       height: visibleHeight,
       width: double.infinity,
-      child: Opacity(
-        opacity: opacity,
-        child: ClipRect(
-          child: Transform.translate(
-            offset: Offset(0, shiftY),
-            child: Align(
-              alignment: Alignment.topCenter,
-              heightFactor: 1,
+      child: ClipRect(
+        child: OverflowBox(
+          maxHeight: double.infinity,
+          alignment: Alignment.topCenter,
+          child: Opacity(
+            opacity: opacity,
+            child: Transform.translate(
+              offset: Offset(0, shiftY),
               child: HomeHeaderPanel(member: member, banners: banners),
             ),
           ),

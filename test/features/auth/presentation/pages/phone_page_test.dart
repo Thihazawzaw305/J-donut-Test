@@ -83,7 +83,7 @@ void main() {
     await pumpJDonutsApp(tester, location: AppRoutes.registerPhone);
     await tester.tap(find.byType(TextField));
     await typeNumber(tester, '0912');
-    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.testTextInput.receiveAction(TextInputAction.go);
     await tester.pumpAndSettle();
 
     expect(find.text(invalidMessage), findsOneWidget);

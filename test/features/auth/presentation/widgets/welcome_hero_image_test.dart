@@ -9,9 +9,9 @@ void main() {
 
   testWidgets('welcome hero fills viewport behind fade', (tester) async {
     await tester.pumpApp(
-      MediaQuery(
-        data: const MediaQueryData(size: viewport),
-        child: const WelcomeHeroImage(),
+      const MediaQuery(
+        data: MediaQueryData(size: viewport),
+        child: WelcomeHeroImage(),
       ),
     );
     await tester.pump();

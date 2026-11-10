@@ -18,7 +18,7 @@ abstract final class HomeDonutRefreshControl {
 
   static Widget sliver({required Future<void> Function() onRefresh}) {
     return CupertinoSliverRefreshControl(
-      onRefresh: () => refreshWithSpinLeadIn(onRefresh),
+      onRefresh: onRefresh,
       refreshTriggerPullDistance: AppDimens.homeRefreshTriggerPull,
       refreshIndicatorExtent: AppDimens.homeRefreshIndicatorExtent,
       builder: (

@@ -7,6 +7,7 @@
   "logIn": "Log In",
   "continueWithGoogle": "Continue with Google",
   "continueWithFacebook": "Continue with Facebook",
+  "continueWithApple": "Continue with Apple",
   "legalNoticePrefix": "By continuing, you acknowledge that you have read and agree to our ",
   "termsOfUse": "Terms of Use",
   "legalNoticeConjunction": " and ",
@@ -83,11 +84,18 @@
   "homeNavWallet": "Wallet",
   "homeNavSettings": "Settings",
   "homeOfflineBanner": "You're offline. Showing saved catalog.",
-  "memberSubtitleEwallet": "E-wallet Customer",
+  "memberSubtitleEwallet": "Bronze member",
+  "memberSubtitleSilver": "Silver member",
   "memberTierProgressSilver": "{kyats} kyats left to become Silver",
   "@memberTierProgressSilver": {
     "placeholders": {
       "kyats": {"type": "String"}
+    }
+  },
+  "memberTierProgressGold": "{points} points left to become Gold member",
+  "@memberTierProgressGold": {
+    "placeholders": {
+      "points": {"type": "String"}
     }
   },
   "homeSectionSeasonal": "Seasonal specials",
@@ -109,6 +117,24 @@
   "settingsTitle": "Settings",
   "logOut": "Log out",
   "rewardsTitle": "Rewards",
+  "rewardsScreenTitle": "J' Donuts Rewards",
+  "rewardsPillLabel": "Rewards",
+  "rewardsTierSilverTitle": "Silver",
+  "rewardsTierGoldTitle": "Gold",
+  "rewardsTierPlatinumTitle": "Platinum",
+  "rewardsTierSilverSubtitleHere": "You're here now",
+  "rewardsTierGoldSubtitlePoints": "{points} pts Remaining to become Gold",
+  "@rewardsTierGoldSubtitlePoints": {
+    "placeholders": {
+      "points": {"type": "String"}
+    }
+  },
+  "rewardsTierPlatinumSubtitleSoon": "You'll be here soon",
+  "rewardsTotalPointsLabel": "Total points",
+  "rewardsEatMoreEarnMore": "Eat more earn more",
+  "rewardsGiftTab": "Gift",
+  "rewardsLoadError": "Couldn't load rewards. Try again.",
+  "rewardsEmptyMember": "No member profile found.",
   "walletTitle": "Wallet",
   "storesTitle": "Stores",
   "productCoconutDonut": "Coconut Donut",
@@ -149,6 +175,9 @@
   "addedToCart": "Added to cart",
   "homeRetry": "Try again",
   "homeEmptyCatalog": "No catalog data yet.",
+  "homeSectionEmpty": "Nothing here right now.",
+  "homeSectionError": "Could not load this section.",
+  "homeCatalogLoadError": "Something went wrong loading the catalog.",
   "productDetailTitle": "Product",
   "discountBadge": "-{percent}%",
   "@discountBadge": {

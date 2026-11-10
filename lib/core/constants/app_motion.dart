@@ -3,11 +3,30 @@ import 'package:flutter/widgets.dart';
 abstract final class AppMotion {
   static const short = Duration(milliseconds: 150);
   static const medium = Duration(milliseconds: 300);
+  static const productDetailContainer = Duration(milliseconds: 450);
   static const homeNavSelection = medium;
   static const long = Duration(milliseconds: 600);
   static const toastDisplay = Duration(seconds: 3);
   static const homeRefreshSpinLeadIn = Duration(seconds: 1);
   static const homeRefreshSpinPeriod = Duration(seconds: 1);
+  static const homeShimmerPeriod = Duration(milliseconds: 1400);
+  static const homeBannerAutoAdvance = Duration(seconds: 4);
+  static const homeSectionEntrance = Duration(milliseconds: 400);
+  static const homeSectionEntranceStagger = Duration(milliseconds: 60);
+
+  static const rewardsEntrance = Duration(milliseconds: 500);
+  static const rewardsEntranceOffset = 24.0;
+  static const rewardsTierStagger = Duration(milliseconds: 80);
+  static const rewardsRingSweep = Duration(milliseconds: 1400);
+  static const rewardsPointsCountUp = rewardsRingSweep;
+  static const rewardsPillPopDelay = Duration(milliseconds: 200);
+  static const rewardsPillPop = Duration(milliseconds: 320);
+  static const rewardsTabThumb = Duration(milliseconds: 280);
+
+  static const welcomeDonutStagger = Duration(milliseconds: 70);
+  static const welcomeDonutEntrance = Duration(milliseconds: 450);
+  static const welcomeTitleDelay = Duration(milliseconds: 280);
+  static const welcomeTitleEntrance = Duration(milliseconds: 500);
 
   static const onboardingHeroEntrance = Duration(milliseconds: 600);
   static const onboardingSlide = Duration(milliseconds: 600);
