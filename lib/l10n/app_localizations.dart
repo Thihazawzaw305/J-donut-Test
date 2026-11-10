@@ -682,6 +682,42 @@ abstract class AppLocalizations {
   /// **'No member profile found.'**
   String get rewardsEmptyMember;
 
+  /// No description provided for @challengeEatCocoDonuts.
+  ///
+  /// In en, this message translates to:
+  /// **'Eat 4 Coco donuts'**
+  String get challengeEatCocoDonuts;
+
+  /// No description provided for @challengeDrinkAmericano.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink 12 cups americano'**
+  String get challengeDrinkAmericano;
+
+  /// No description provided for @rewardsEarn.
+  ///
+  /// In en, this message translates to:
+  /// **'EARN'**
+  String get rewardsEarn;
+
+  /// No description provided for @rewardsPtsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{points} pts'**
+  String rewardsPtsLabel(int points);
+
+  /// No description provided for @rewardsChallengeProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{current}/{total}'**
+  String rewardsChallengeProgress(int current, int total);
+
+  /// No description provided for @rewardsGiftEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No Promotion Found'**
+  String get rewardsGiftEmpty;
+
   /// No description provided for @walletTitle.
   ///
   /// In en, this message translates to:

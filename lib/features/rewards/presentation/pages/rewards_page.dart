@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/constants/app_colors.dart';
+import '../../../../core/constants/rewards_system_ui.dart';
 import '../../../../core/constants/app_dimens.dart';
 import '../../../../core/constants/app_motion.dart';
 import '../../../../core/di/catalog_providers.dart';
 import '../../../../core/l10n/l10n_extension.dart';
+import '../../../catalog/domain/entities/catalog_challenge.dart';
 import '../../../catalog/domain/entities/catalog_member.dart';
 import '../../../home/presentation/providers/home_shell_tab_provider.dart';
 import '../../../home/presentation/widgets/home_bottom_nav.dart';
@@ -13,7 +17,7 @@ import '../widgets/rewards_donut_ring.dart';
 import '../widgets/rewards_error_body.dart';
 import '../widgets/rewards_hero_row.dart';
 import '../widgets/rewards_loading_skeleton.dart';
-import '../widgets/rewards_screen_background.dart';
+import '../widgets/rewards_challenge_list.dart';
 import '../widgets/rewards_segmented_tabs.dart';
 import '../widgets/rewards_tier_ladder.dart';
 
@@ -113,32 +117,50 @@ class _RewardsPageState extends ConsumerState<RewardsPage>
 
     final memberAsync = ref.watch(catalogMemberProvider);
 
-    return RewardsScreenBackground(
-      child: SafeArea(
-        left: true,
-        top: true,
-        right: false,
-        bottom: true,
-        child: memberAsync.when(
-          loading: () => const RewardsLoadingSkeleton(),
-          error: (_, _) => RewardsErrorBody(
-            message: context.l10n.rewardsLoadError,
-            onRetry: () => ref.invalidate(catalogMemberProvider),
-          ),
-          data: (member) {
-            if (member == null) {
-              return RewardsErrorBody(
-                message: context.l10n.rewardsEmptyMember,
-                onRetry: () => ref.invalidate(databaseProvider),
-              );
-            }
-            _ensureControllers(member);
-            return _RewardsBody(
-              member: member,
-              entrance: _entranceController!,
-              pillPop: _pillPopController!,
-            );
-          },
+    final topInset = MediaQuery.paddingOf(context).top;
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: RewardsSystemUi.overlayStyle,
+      child: ColoredBox(
+        color: AppColors.homeScreenBackground,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            SafeArea(
+              left: true,
+              top: true,
+              right: false,
+              bottom: false,
+              child: memberAsync.when(
+                loading: () => const RewardsLoadingSkeleton(),
+                error: (_, _) => RewardsErrorBody(
+                  message: context.l10n.rewardsLoadError,
+                  onRetry: () => ref.invalidate(catalogMemberProvider),
+                ),
+                data: (member) {
+                  if (member == null) {
+                    return RewardsErrorBody(
+                      message: context.l10n.rewardsEmptyMember,
+                      onRetry: () => ref.invalidate(databaseProvider),
+                    );
+                  }
+                  _ensureControllers(member);
+                  return _RewardsBody(
+                    member: member,
+                    entrance: _entranceController!,
+                    pillPop: _pillPopController!,
+                  );
+                },
+              ),
+            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: topInset,
+              child: const ColoredBox(color: AppColors.rewardsBackgroundTop),
+            ),
+          ],
         ),
       ),
     );
@@ -178,7 +200,10 @@ class _RewardsBody extends StatelessWidget {
     final connectorTarget = rewardsRingSweepFraction(member);
     const ringTarget = AppDimens.rewardsDonutDisplaySweep;
 
-    return AnimatedBuilder(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        AnimatedBuilder(
       animation: Listenable.merge([entrance, pillPop]),
       builder: (context, _) {
         final t = entrance.value;
@@ -239,65 +264,131 @@ class _RewardsBody extends StatelessWidget {
         final pillSlide = rightSlide;
         final pillScale = 0.85 + 0.15 * pillPop.value;
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        return ColoredBox(
+              color: AppColors.rewardsBackgroundTop,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  RewardsHeroRow(
+                    pillCount: member.rewardsPillCount,
+                    pillScale: pillScale,
+                    titleFade: titleFade,
+                    titleSlide: titleSlide,
+                    pillFade: pillFade,
+                    pillSlide: pillSlide,
+                    onPillPressed: () {},
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: AppDimens.rewardsDonutSectionTopPadding,
+                    ),
+                    child: SizedBox(
+                      height: AppDimens.rewardsDonutDiameter,
+                      child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Positioned(
+                          left: 0,
+                          top: 0,
+                          bottom: 0,
+                          right:
+                              (AppDimens.rewardsDonutDiameter -
+                                  AppDimens.rewardsDonutEdgeOverflow) +
+                              AppDimens.rewardsLadderDonutGap,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: RewardsTierLadder(
+                              member: member,
+                              tierOpacities: tierStagger,
+                              tierSlides: tierSlides,
+                              connectorFill: connectorFill,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          bottom: 0,
+                          child: Center(
+                            child: RewardsDonutRing(
+                              ringProgress: ringProgress,
+                              displayedPoints: points,
+                              fade: rightFade,
+                              slide: rightSlide,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    ),
+                  ),
+                  const SizedBox(height: AppDimens.rewardsTabsSeamReserve),
+                ],
+              ),
+        );
+      },
+        ),
+        _RewardsLowerSection(entrance: entrance),
+      ],
+    );
+  }
+}
+
+class _RewardsLowerSection extends ConsumerStatefulWidget {
+  const _RewardsLowerSection({required this.entrance});
+
+  final Animation<double> entrance;
+
+  @override
+  ConsumerState<_RewardsLowerSection> createState() =>
+      _RewardsLowerSectionState();
+}
+
+class _RewardsLowerSectionState extends ConsumerState<_RewardsLowerSection> {
+  var _giftSelected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final challenges = ref.watch(catalogChallengesProvider).maybeWhen(
+          data: (value) => value,
+          orElse: () => const <CatalogChallenge>[],
+        );
+
+    final tabHalf = AppDimens.rewardsSegmentedBarHeight / 2;
+
+    return Expanded(
+      child: ColoredBox(
+        color: AppColors.homeScreenBackground,
+        child: Column(
           children: [
-            RewardsHeroRow(
-              pillCount: member.rewardsPillCount,
-              pillScale: pillScale,
-              titleFade: titleFade,
-              titleSlide: titleSlide,
-              pillFade: pillFade,
-              pillSlide: pillSlide,
-              onPillPressed: () {},
-            ),
-            Expanded(
-              child: Transform.translate(
-                offset: const Offset(0, -AppDimens.rewardsMainContentLift),
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Positioned(
-                      left: 0,
-                      top: 0,
-                      bottom: 0,
-                      right:
-                          (AppDimens.rewardsDonutDiameter -
-                              AppDimens.rewardsDonutEdgeOverflow) +
-                          AppDimens.rewardsLadderDonutGap,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: RewardsTierLadder(
-                          member: member,
-                          tierOpacities: tierStagger,
-                          tierSlides: tierSlides,
-                          connectorFill: connectorFill,
-                        ),
-                      ),
+            ClipRect(
+              clipBehavior: Clip.none,
+              child: SizedBox(
+                height: tabHalf,
+                child: OverflowBox(
+                  maxHeight: AppDimens.rewardsSegmentedBarHeight,
+                  alignment: Alignment.topCenter,
+                  child: Transform.translate(
+                    offset: Offset(0, -tabHalf),
+                    child: RewardsSegmentedTabs(
+                      giftSelected: _giftSelected,
+                      onGiftSelected: (gift) =>
+                          setState(() => _giftSelected = gift),
                     ),
-                    Positioned(
-                      right: 0,
-                      top: 0,
-                      bottom: 0,
-                      child: Center(
-                        child: RewardsDonutRing(
-                          ringProgress: ringProgress,
-                          displayedPoints: points,
-                          fade: rightFade,
-                          slide: rightSlide,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: AppDimens.spaceSm),
-            const RewardsSegmentedTabs(),
-            const SizedBox(height: AppDimens.spaceMd),
+            Expanded(
+              child: RewardsChallengeList(
+                entrance: widget.entrance,
+                challenges: challenges,
+                giftSelected: _giftSelected,
+              ),
+            ),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
 }

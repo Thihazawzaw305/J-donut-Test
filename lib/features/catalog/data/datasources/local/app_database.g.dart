@@ -2537,6 +2537,579 @@ class ShopRowsCompanion extends UpdateCompanion<ShopRow> {
   }
 }
 
+class $ChallengeRowsTable extends ChallengeRows
+    with TableInfo<$ChallengeRowsTable, ChallengeRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ChallengeRowsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _tabMeta = const VerificationMeta('tab');
+  @override
+  late final GeneratedColumn<String> tab = GeneratedColumn<String>(
+    'tab',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _kindMeta = const VerificationMeta('kind');
+  @override
+  late final GeneratedColumn<String> kind = GeneratedColumn<String>(
+    'kind',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _titleKeyMeta = const VerificationMeta(
+    'titleKey',
+  );
+  @override
+  late final GeneratedColumn<String> titleKey = GeneratedColumn<String>(
+    'title_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _progressCurrentMeta = const VerificationMeta(
+    'progressCurrent',
+  );
+  @override
+  late final GeneratedColumn<int> progressCurrent = GeneratedColumn<int>(
+    'progress_current',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _progressTotalMeta = const VerificationMeta(
+    'progressTotal',
+  );
+  @override
+  late final GeneratedColumn<int> progressTotal = GeneratedColumn<int>(
+    'progress_total',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _pointsRewardMeta = const VerificationMeta(
+    'pointsReward',
+  );
+  @override
+  late final GeneratedColumn<int> pointsReward = GeneratedColumn<int>(
+    'points_reward',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _imageAssetMeta = const VerificationMeta(
+    'imageAsset',
+  );
+  @override
+  late final GeneratedColumn<String> imageAsset = GeneratedColumn<String>(
+    'image_asset',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    tab,
+    kind,
+    titleKey,
+    progressCurrent,
+    progressTotal,
+    pointsReward,
+    imageAsset,
+    sortOrder,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'challenge_rows';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ChallengeRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('tab')) {
+      context.handle(
+        _tabMeta,
+        tab.isAcceptableOrUnknown(data['tab']!, _tabMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_tabMeta);
+    }
+    if (data.containsKey('kind')) {
+      context.handle(
+        _kindMeta,
+        kind.isAcceptableOrUnknown(data['kind']!, _kindMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_kindMeta);
+    }
+    if (data.containsKey('title_key')) {
+      context.handle(
+        _titleKeyMeta,
+        titleKey.isAcceptableOrUnknown(data['title_key']!, _titleKeyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_titleKeyMeta);
+    }
+    if (data.containsKey('progress_current')) {
+      context.handle(
+        _progressCurrentMeta,
+        progressCurrent.isAcceptableOrUnknown(
+          data['progress_current']!,
+          _progressCurrentMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_progressCurrentMeta);
+    }
+    if (data.containsKey('progress_total')) {
+      context.handle(
+        _progressTotalMeta,
+        progressTotal.isAcceptableOrUnknown(
+          data['progress_total']!,
+          _progressTotalMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_progressTotalMeta);
+    }
+    if (data.containsKey('points_reward')) {
+      context.handle(
+        _pointsRewardMeta,
+        pointsReward.isAcceptableOrUnknown(
+          data['points_reward']!,
+          _pointsRewardMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_pointsRewardMeta);
+    }
+    if (data.containsKey('image_asset')) {
+      context.handle(
+        _imageAssetMeta,
+        imageAsset.isAcceptableOrUnknown(data['image_asset']!, _imageAssetMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_imageAssetMeta);
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sortOrderMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ChallengeRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ChallengeRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      tab: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}tab'],
+      )!,
+      kind: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}kind'],
+      )!,
+      titleKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title_key'],
+      )!,
+      progressCurrent: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}progress_current'],
+      )!,
+      progressTotal: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}progress_total'],
+      )!,
+      pointsReward: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}points_reward'],
+      )!,
+      imageAsset: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}image_asset'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+    );
+  }
+
+  @override
+  $ChallengeRowsTable createAlias(String alias) {
+    return $ChallengeRowsTable(attachedDatabase, alias);
+  }
+}
+
+class ChallengeRow extends DataClass implements Insertable<ChallengeRow> {
+  final String id;
+  final String tab;
+  final String kind;
+  final String titleKey;
+  final int progressCurrent;
+  final int progressTotal;
+  final int pointsReward;
+  final String imageAsset;
+  final int sortOrder;
+  const ChallengeRow({
+    required this.id,
+    required this.tab,
+    required this.kind,
+    required this.titleKey,
+    required this.progressCurrent,
+    required this.progressTotal,
+    required this.pointsReward,
+    required this.imageAsset,
+    required this.sortOrder,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['tab'] = Variable<String>(tab);
+    map['kind'] = Variable<String>(kind);
+    map['title_key'] = Variable<String>(titleKey);
+    map['progress_current'] = Variable<int>(progressCurrent);
+    map['progress_total'] = Variable<int>(progressTotal);
+    map['points_reward'] = Variable<int>(pointsReward);
+    map['image_asset'] = Variable<String>(imageAsset);
+    map['sort_order'] = Variable<int>(sortOrder);
+    return map;
+  }
+
+  ChallengeRowsCompanion toCompanion(bool nullToAbsent) {
+    return ChallengeRowsCompanion(
+      id: Value(id),
+      tab: Value(tab),
+      kind: Value(kind),
+      titleKey: Value(titleKey),
+      progressCurrent: Value(progressCurrent),
+      progressTotal: Value(progressTotal),
+      pointsReward: Value(pointsReward),
+      imageAsset: Value(imageAsset),
+      sortOrder: Value(sortOrder),
+    );
+  }
+
+  factory ChallengeRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ChallengeRow(
+      id: serializer.fromJson<String>(json['id']),
+      tab: serializer.fromJson<String>(json['tab']),
+      kind: serializer.fromJson<String>(json['kind']),
+      titleKey: serializer.fromJson<String>(json['titleKey']),
+      progressCurrent: serializer.fromJson<int>(json['progressCurrent']),
+      progressTotal: serializer.fromJson<int>(json['progressTotal']),
+      pointsReward: serializer.fromJson<int>(json['pointsReward']),
+      imageAsset: serializer.fromJson<String>(json['imageAsset']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'tab': serializer.toJson<String>(tab),
+      'kind': serializer.toJson<String>(kind),
+      'titleKey': serializer.toJson<String>(titleKey),
+      'progressCurrent': serializer.toJson<int>(progressCurrent),
+      'progressTotal': serializer.toJson<int>(progressTotal),
+      'pointsReward': serializer.toJson<int>(pointsReward),
+      'imageAsset': serializer.toJson<String>(imageAsset),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+    };
+  }
+
+  ChallengeRow copyWith({
+    String? id,
+    String? tab,
+    String? kind,
+    String? titleKey,
+    int? progressCurrent,
+    int? progressTotal,
+    int? pointsReward,
+    String? imageAsset,
+    int? sortOrder,
+  }) => ChallengeRow(
+    id: id ?? this.id,
+    tab: tab ?? this.tab,
+    kind: kind ?? this.kind,
+    titleKey: titleKey ?? this.titleKey,
+    progressCurrent: progressCurrent ?? this.progressCurrent,
+    progressTotal: progressTotal ?? this.progressTotal,
+    pointsReward: pointsReward ?? this.pointsReward,
+    imageAsset: imageAsset ?? this.imageAsset,
+    sortOrder: sortOrder ?? this.sortOrder,
+  );
+  ChallengeRow copyWithCompanion(ChallengeRowsCompanion data) {
+    return ChallengeRow(
+      id: data.id.present ? data.id.value : this.id,
+      tab: data.tab.present ? data.tab.value : this.tab,
+      kind: data.kind.present ? data.kind.value : this.kind,
+      titleKey: data.titleKey.present ? data.titleKey.value : this.titleKey,
+      progressCurrent: data.progressCurrent.present
+          ? data.progressCurrent.value
+          : this.progressCurrent,
+      progressTotal: data.progressTotal.present
+          ? data.progressTotal.value
+          : this.progressTotal,
+      pointsReward: data.pointsReward.present
+          ? data.pointsReward.value
+          : this.pointsReward,
+      imageAsset: data.imageAsset.present
+          ? data.imageAsset.value
+          : this.imageAsset,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ChallengeRow(')
+          ..write('id: $id, ')
+          ..write('tab: $tab, ')
+          ..write('kind: $kind, ')
+          ..write('titleKey: $titleKey, ')
+          ..write('progressCurrent: $progressCurrent, ')
+          ..write('progressTotal: $progressTotal, ')
+          ..write('pointsReward: $pointsReward, ')
+          ..write('imageAsset: $imageAsset, ')
+          ..write('sortOrder: $sortOrder')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    tab,
+    kind,
+    titleKey,
+    progressCurrent,
+    progressTotal,
+    pointsReward,
+    imageAsset,
+    sortOrder,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ChallengeRow &&
+          other.id == this.id &&
+          other.tab == this.tab &&
+          other.kind == this.kind &&
+          other.titleKey == this.titleKey &&
+          other.progressCurrent == this.progressCurrent &&
+          other.progressTotal == this.progressTotal &&
+          other.pointsReward == this.pointsReward &&
+          other.imageAsset == this.imageAsset &&
+          other.sortOrder == this.sortOrder);
+}
+
+class ChallengeRowsCompanion extends UpdateCompanion<ChallengeRow> {
+  final Value<String> id;
+  final Value<String> tab;
+  final Value<String> kind;
+  final Value<String> titleKey;
+  final Value<int> progressCurrent;
+  final Value<int> progressTotal;
+  final Value<int> pointsReward;
+  final Value<String> imageAsset;
+  final Value<int> sortOrder;
+  final Value<int> rowid;
+  const ChallengeRowsCompanion({
+    this.id = const Value.absent(),
+    this.tab = const Value.absent(),
+    this.kind = const Value.absent(),
+    this.titleKey = const Value.absent(),
+    this.progressCurrent = const Value.absent(),
+    this.progressTotal = const Value.absent(),
+    this.pointsReward = const Value.absent(),
+    this.imageAsset = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  ChallengeRowsCompanion.insert({
+    required String id,
+    required String tab,
+    required String kind,
+    required String titleKey,
+    required int progressCurrent,
+    required int progressTotal,
+    required int pointsReward,
+    required String imageAsset,
+    required int sortOrder,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       tab = Value(tab),
+       kind = Value(kind),
+       titleKey = Value(titleKey),
+       progressCurrent = Value(progressCurrent),
+       progressTotal = Value(progressTotal),
+       pointsReward = Value(pointsReward),
+       imageAsset = Value(imageAsset),
+       sortOrder = Value(sortOrder);
+  static Insertable<ChallengeRow> custom({
+    Expression<String>? id,
+    Expression<String>? tab,
+    Expression<String>? kind,
+    Expression<String>? titleKey,
+    Expression<int>? progressCurrent,
+    Expression<int>? progressTotal,
+    Expression<int>? pointsReward,
+    Expression<String>? imageAsset,
+    Expression<int>? sortOrder,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (tab != null) 'tab': tab,
+      if (kind != null) 'kind': kind,
+      if (titleKey != null) 'title_key': titleKey,
+      if (progressCurrent != null) 'progress_current': progressCurrent,
+      if (progressTotal != null) 'progress_total': progressTotal,
+      if (pointsReward != null) 'points_reward': pointsReward,
+      if (imageAsset != null) 'image_asset': imageAsset,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  ChallengeRowsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? tab,
+    Value<String>? kind,
+    Value<String>? titleKey,
+    Value<int>? progressCurrent,
+    Value<int>? progressTotal,
+    Value<int>? pointsReward,
+    Value<String>? imageAsset,
+    Value<int>? sortOrder,
+    Value<int>? rowid,
+  }) {
+    return ChallengeRowsCompanion(
+      id: id ?? this.id,
+      tab: tab ?? this.tab,
+      kind: kind ?? this.kind,
+      titleKey: titleKey ?? this.titleKey,
+      progressCurrent: progressCurrent ?? this.progressCurrent,
+      progressTotal: progressTotal ?? this.progressTotal,
+      pointsReward: pointsReward ?? this.pointsReward,
+      imageAsset: imageAsset ?? this.imageAsset,
+      sortOrder: sortOrder ?? this.sortOrder,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (tab.present) {
+      map['tab'] = Variable<String>(tab.value);
+    }
+    if (kind.present) {
+      map['kind'] = Variable<String>(kind.value);
+    }
+    if (titleKey.present) {
+      map['title_key'] = Variable<String>(titleKey.value);
+    }
+    if (progressCurrent.present) {
+      map['progress_current'] = Variable<int>(progressCurrent.value);
+    }
+    if (progressTotal.present) {
+      map['progress_total'] = Variable<int>(progressTotal.value);
+    }
+    if (pointsReward.present) {
+      map['points_reward'] = Variable<int>(pointsReward.value);
+    }
+    if (imageAsset.present) {
+      map['image_asset'] = Variable<String>(imageAsset.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ChallengeRowsCompanion(')
+          ..write('id: $id, ')
+          ..write('tab: $tab, ')
+          ..write('kind: $kind, ')
+          ..write('titleKey: $titleKey, ')
+          ..write('progressCurrent: $progressCurrent, ')
+          ..write('progressTotal: $progressTotal, ')
+          ..write('pointsReward: $pointsReward, ')
+          ..write('imageAsset: $imageAsset, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2547,6 +3120,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $SectionProductRowsTable sectionProductRows =
       $SectionProductRowsTable(this);
   late final $ShopRowsTable shopRows = $ShopRowsTable(this);
+  late final $ChallengeRowsTable challengeRows = $ChallengeRowsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2558,6 +3132,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     sectionRows,
     sectionProductRows,
     shopRows,
+    challengeRows,
   ];
 }
 
@@ -3908,6 +4483,290 @@ typedef $$ShopRowsTableProcessedTableManager =
       ShopRow,
       PrefetchHooks Function()
     >;
+typedef $$ChallengeRowsTableCreateCompanionBuilder =
+    ChallengeRowsCompanion Function({
+      required String id,
+      required String tab,
+      required String kind,
+      required String titleKey,
+      required int progressCurrent,
+      required int progressTotal,
+      required int pointsReward,
+      required String imageAsset,
+      required int sortOrder,
+      Value<int> rowid,
+    });
+typedef $$ChallengeRowsTableUpdateCompanionBuilder =
+    ChallengeRowsCompanion Function({
+      Value<String> id,
+      Value<String> tab,
+      Value<String> kind,
+      Value<String> titleKey,
+      Value<int> progressCurrent,
+      Value<int> progressTotal,
+      Value<int> pointsReward,
+      Value<String> imageAsset,
+      Value<int> sortOrder,
+      Value<int> rowid,
+    });
+
+class $$ChallengeRowsTableFilterComposer
+    extends Composer<_$AppDatabase, $ChallengeRowsTable> {
+  $$ChallengeRowsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get tab => $composableBuilder(
+    column: $table.tab,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get kind => $composableBuilder(
+    column: $table.kind,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get titleKey => $composableBuilder(
+    column: $table.titleKey,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get progressCurrent => $composableBuilder(
+    column: $table.progressCurrent,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get progressTotal => $composableBuilder(
+    column: $table.progressTotal,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get pointsReward => $composableBuilder(
+    column: $table.pointsReward,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get imageAsset => $composableBuilder(
+    column: $table.imageAsset,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get sortOrder => $composableBuilder(
+    column: $table.sortOrder,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$ChallengeRowsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ChallengeRowsTable> {
+  $$ChallengeRowsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get tab => $composableBuilder(
+    column: $table.tab,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get kind => $composableBuilder(
+    column: $table.kind,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get titleKey => $composableBuilder(
+    column: $table.titleKey,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get progressCurrent => $composableBuilder(
+    column: $table.progressCurrent,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get progressTotal => $composableBuilder(
+    column: $table.progressTotal,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get pointsReward => $composableBuilder(
+    column: $table.pointsReward,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get imageAsset => $composableBuilder(
+    column: $table.imageAsset,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get sortOrder => $composableBuilder(
+    column: $table.sortOrder,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$ChallengeRowsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ChallengeRowsTable> {
+  $$ChallengeRowsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get tab =>
+      $composableBuilder(column: $table.tab, builder: (column) => column);
+
+  GeneratedColumn<String> get kind =>
+      $composableBuilder(column: $table.kind, builder: (column) => column);
+
+  GeneratedColumn<String> get titleKey =>
+      $composableBuilder(column: $table.titleKey, builder: (column) => column);
+
+  GeneratedColumn<int> get progressCurrent => $composableBuilder(
+    column: $table.progressCurrent,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get progressTotal => $composableBuilder(
+    column: $table.progressTotal,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get pointsReward => $composableBuilder(
+    column: $table.pointsReward,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get imageAsset => $composableBuilder(
+    column: $table.imageAsset,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get sortOrder =>
+      $composableBuilder(column: $table.sortOrder, builder: (column) => column);
+}
+
+class $$ChallengeRowsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ChallengeRowsTable,
+          ChallengeRow,
+          $$ChallengeRowsTableFilterComposer,
+          $$ChallengeRowsTableOrderingComposer,
+          $$ChallengeRowsTableAnnotationComposer,
+          $$ChallengeRowsTableCreateCompanionBuilder,
+          $$ChallengeRowsTableUpdateCompanionBuilder,
+          (
+            ChallengeRow,
+            BaseReferences<_$AppDatabase, $ChallengeRowsTable, ChallengeRow>,
+          ),
+          ChallengeRow,
+          PrefetchHooks Function()
+        > {
+  $$ChallengeRowsTableTableManager(_$AppDatabase db, $ChallengeRowsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ChallengeRowsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ChallengeRowsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ChallengeRowsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> tab = const Value.absent(),
+                Value<String> kind = const Value.absent(),
+                Value<String> titleKey = const Value.absent(),
+                Value<int> progressCurrent = const Value.absent(),
+                Value<int> progressTotal = const Value.absent(),
+                Value<int> pointsReward = const Value.absent(),
+                Value<String> imageAsset = const Value.absent(),
+                Value<int> sortOrder = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => ChallengeRowsCompanion(
+                id: id,
+                tab: tab,
+                kind: kind,
+                titleKey: titleKey,
+                progressCurrent: progressCurrent,
+                progressTotal: progressTotal,
+                pointsReward: pointsReward,
+                imageAsset: imageAsset,
+                sortOrder: sortOrder,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String tab,
+                required String kind,
+                required String titleKey,
+                required int progressCurrent,
+                required int progressTotal,
+                required int pointsReward,
+                required String imageAsset,
+                required int sortOrder,
+                Value<int> rowid = const Value.absent(),
+              }) => ChallengeRowsCompanion.insert(
+                id: id,
+                tab: tab,
+                kind: kind,
+                titleKey: titleKey,
+                progressCurrent: progressCurrent,
+                progressTotal: progressTotal,
+                pointsReward: pointsReward,
+                imageAsset: imageAsset,
+                sortOrder: sortOrder,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$ChallengeRowsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ChallengeRowsTable,
+      ChallengeRow,
+      $$ChallengeRowsTableFilterComposer,
+      $$ChallengeRowsTableOrderingComposer,
+      $$ChallengeRowsTableAnnotationComposer,
+      $$ChallengeRowsTableCreateCompanionBuilder,
+      $$ChallengeRowsTableUpdateCompanionBuilder,
+      (
+        ChallengeRow,
+        BaseReferences<_$AppDatabase, $ChallengeRowsTable, ChallengeRow>,
+      ),
+      ChallengeRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -3924,4 +4783,6 @@ class $AppDatabaseManager {
       $$SectionProductRowsTableTableManager(_db, _db.sectionProductRows);
   $$ShopRowsTableTableManager get shopRows =>
       $$ShopRowsTableTableManager(_db, _db.shopRows);
+  $$ChallengeRowsTableTableManager get challengeRows =>
+      $$ChallengeRowsTableTableManager(_db, _db.challengeRows);
 }

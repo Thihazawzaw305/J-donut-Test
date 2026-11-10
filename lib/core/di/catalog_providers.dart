@@ -4,6 +4,7 @@ import '../../features/catalog/data/datasources/local/app_database.dart';
 import '../../features/catalog/data/repositories/catalog_repository_impl.dart';
 import '../../features/catalog/data/seed/catalog_seeder.dart';
 import '../../features/catalog/domain/entities/catalog_banner.dart';
+import '../../features/catalog/domain/entities/catalog_challenge.dart';
 import '../../features/catalog/domain/entities/catalog_member.dart';
 import '../../features/catalog/domain/entities/catalog_product.dart';
 import '../../features/catalog/domain/entities/catalog_section.dart';
@@ -28,13 +29,15 @@ Future<void> reloadHomeCatalogFromDatabase(WidgetRef ref) async {
     ..invalidate(catalogMemberProvider)
     ..invalidate(catalogBannersProvider)
     ..invalidate(catalogSectionsProvider)
-    ..invalidate(catalogShopsProvider);
+    ..invalidate(catalogShopsProvider)
+    ..invalidate(catalogChallengesProvider);
 
   await Future.wait([
     ref.read(catalogMemberProvider.future),
     ref.read(catalogBannersProvider.future),
     ref.read(catalogSectionsProvider.future),
     ref.read(catalogShopsProvider.future),
+    ref.read(catalogChallengesProvider.future),
   ]);
 }
 
@@ -69,6 +72,12 @@ final catalogShopsProvider = StreamProvider<List<CatalogShop>>((ref) {
   final db = ref.watch(databaseProvider);
   if (!db.hasValue) return const Stream.empty();
   return ref.watch(catalogRepositoryProvider).watchShops();
+});
+
+final catalogChallengesProvider = StreamProvider<List<CatalogChallenge>>((ref) {
+  final db = ref.watch(databaseProvider);
+  if (!db.hasValue) return const Stream.empty();
+  return ref.watch(catalogRepositoryProvider).watchChallenges();
 });
 
 final productByIdProvider = FutureProvider.family<CatalogProduct?, String>((

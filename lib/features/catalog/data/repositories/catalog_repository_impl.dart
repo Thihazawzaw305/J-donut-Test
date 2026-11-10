@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 
 import '../../domain/entities/catalog_banner.dart';
+import '../../domain/entities/catalog_challenge.dart';
 import '../../domain/entities/catalog_member.dart';
 import '../../domain/entities/catalog_product.dart';
 import '../../domain/entities/catalog_section.dart';
@@ -71,6 +72,13 @@ class CatalogRepositoryImpl implements CatalogRepository {
     final q = _db.select(_db.shopRows)
       ..orderBy([(t) => OrderingTerm.asc(t.sortOrder)]);
     return q.watch().map((rows) => rows.map(mapShopRow).toList());
+  }
+
+  @override
+  Stream<List<CatalogChallenge>> watchChallenges() {
+    final q = _db.select(_db.challengeRows)
+      ..orderBy([(t) => OrderingTerm.asc(t.sortOrder)]);
+    return q.watch().map((rows) => rows.map(mapChallengeRow).toList());
   }
 
   @override

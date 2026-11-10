@@ -218,6 +218,41 @@
       "productIds": ["p_buttercake_10", "p_buttercake_6"]
     }
   ],
+  "challenges": [
+    {
+      "id": "c_coco_complete",
+      "tab": "eat",
+      "kind": "donut",
+      "titleKey": "challengeEatCocoDonuts",
+      "progressCurrent": 4,
+      "progressTotal": 4,
+      "pointsReward": 100,
+      "imageAsset": "assets/images/seed/rewards/challenge_coco_full.jpg",
+      "sortOrder": 0
+    },
+    {
+      "id": "c_coco_quarter",
+      "tab": "eat",
+      "kind": "donut",
+      "titleKey": "challengeEatCocoDonuts",
+      "progressCurrent": 1,
+      "progressTotal": 4,
+      "pointsReward": 100,
+      "imageAsset": "assets/images/seed/rewards/challenge_coco_quarter.jpg",
+      "sortOrder": 1
+    },
+    {
+      "id": "c_americano",
+      "tab": "eat",
+      "kind": "coffee",
+      "titleKey": "challengeDrinkAmericano",
+      "progressCurrent": 9,
+      "progressTotal": 12,
+      "pointsReward": 100,
+      "imageAsset": "assets/images/seed/p_square_iced_latte.jpg",
+      "sortOrder": 2
+    }
+  ],
   "shops": [
     {
       "id": "s_myaynigone",

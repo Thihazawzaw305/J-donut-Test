@@ -135,6 +135,23 @@
   "rewardsGiftTab": "Gift",
   "rewardsLoadError": "Couldn't load rewards. Try again.",
   "rewardsEmptyMember": "No member profile found.",
+  "challengeEatCocoDonuts": "Eat 4 Coco donuts",
+  "challengeDrinkAmericano": "Drink 12 cups americano",
+  "rewardsEarn": "EARN",
+  "rewardsPtsLabel": "{points} pts",
+  "@rewardsPtsLabel": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "rewardsChallengeProgress": "{current}/{total}",
+  "@rewardsChallengeProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "rewardsGiftEmpty": "No Promotion Found",
   "walletTitle": "Wallet",
   "storesTitle": "Stores",
   "productCoconutDonut": "Coconut Donut",

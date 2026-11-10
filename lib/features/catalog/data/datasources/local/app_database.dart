@@ -17,6 +17,7 @@ part 'app_database.g.dart';
     SectionRows,
     SectionProductRows,
     ShopRows,
+    ChallengeRows,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -25,7 +26,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.memory() : super(NativeDatabase.memory());
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -33,6 +34,9 @@ class AppDatabase extends _$AppDatabase {
           if (from < 2) {
             await migrator.addColumn(memberRows, memberRows.rewardsPillCount);
             await migrator.addColumn(memberRows, memberRows.tierLadderFillBp);
+          }
+          if (from < 3) {
+            await migrator.createTable(challengeRows);
           }
         },
       );

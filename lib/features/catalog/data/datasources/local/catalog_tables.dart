@@ -63,6 +63,21 @@ class SectionProductRows extends Table {
   Set<Column<Object>> get primaryKey => {sectionId, productId};
 }
 
+class ChallengeRows extends Table {
+  TextColumn get id => text()();
+  TextColumn get tab => text()();
+  TextColumn get kind => text()();
+  TextColumn get titleKey => text()();
+  IntColumn get progressCurrent => integer()();
+  IntColumn get progressTotal => integer()();
+  IntColumn get pointsReward => integer()();
+  TextColumn get imageAsset => text()();
+  IntColumn get sortOrder => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
 class ShopRows extends Table {
   TextColumn get id => text()();
   TextColumn get nameKey => text()();

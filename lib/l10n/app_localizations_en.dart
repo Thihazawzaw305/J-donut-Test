@@ -322,6 +322,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rewardsEmptyMember => 'No member profile found.';
 
   @override
+  String get challengeEatCocoDonuts => 'Eat 4 Coco donuts';
+
+  @override
+  String get challengeDrinkAmericano => 'Drink 12 cups americano';
+
+  @override
+  String get rewardsEarn => 'EARN';
+
+  @override
+  String rewardsPtsLabel(int points) {
+    return '$points pts';
+  }
+
+  @override
+  String rewardsChallengeProgress(int current, int total) {
+    return '$current/$total';
+  }
+
+  @override
+  String get rewardsGiftEmpty => 'No Promotion Found';
+
+  @override
   String get walletTitle => 'Wallet';
 
   @override

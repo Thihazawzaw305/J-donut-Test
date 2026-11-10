@@ -59,6 +59,8 @@ String catalogString(AppLocalizations l10n, String key) {
     'shopBoAungKyawAddress' => l10n.shopBoAungKyawAddress,
     'shopHledan' => l10n.shopHledan,
     'shopHledanAddress' => l10n.shopHledanAddress,
+    'challengeEatCocoDonuts' => l10n.challengeEatCocoDonuts,
+    'challengeDrinkAmericano' => l10n.challengeDrinkAmericano,
     _ => key,
   };
 }

@@ -26,7 +26,7 @@ class _HomeTabShellPageState extends ConsumerState<HomeTabShellPage> {
   @override
   void initState() {
     super.initState();
-    _syncShellTabPostFrame();
+    _syncShellTabToProvider(postFrame: true);
   }
 
   @override
@@ -34,28 +34,31 @@ class _HomeTabShellPageState extends ConsumerState<HomeTabShellPage> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.navigationShell.currentIndex !=
         widget.navigationShell.currentIndex) {
-      _syncShellTabPostFrame();
+      _syncShellTabToProvider(postFrame: true);
     }
   }
 
-  void _syncShellTabPostFrame() {
-    final tab = HomeTabShellPage.tabForBranchIndex(
-      widget.navigationShell.currentIndex,
-    );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  void _syncShellTabToProvider({bool postFrame = false}) {
+    void apply() {
       if (!mounted) return;
-      ref.read(homeShellTabProvider.notifier).setTab(tab);
-    });
+      final tab = HomeTabShellPage.tabForBranchIndex(
+        widget.navigationShell.currentIndex,
+      );
+      if (ref.read(homeShellTabProvider) != tab) {
+        ref.read(homeShellTabProvider.notifier).setTab(tab);
+      }
+    }
+
+    if (postFrame) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => apply());
+    } else {
+      apply();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final tab = HomeTabShellPage.tabForBranchIndex(
-      widget.navigationShell.currentIndex,
-    );
-
     return HomeShell(
-      activeTab: tab,
       body: widget.navigationShell,
     );
   }

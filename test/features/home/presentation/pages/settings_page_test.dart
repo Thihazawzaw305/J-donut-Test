@@ -13,7 +13,7 @@ void main() {
     await tester.pumpApp(
       const ProviderScope(
         child: HomeShell(
-          activeTab: HomeShellTab.settings,
+          activeTabOverride: HomeShellTab.settings,
           body: SettingsPage(),
         ),
       ),

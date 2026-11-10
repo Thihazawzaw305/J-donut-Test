@@ -25,5 +25,9 @@ void main() {
       isTrue,
     );
     expect(bundle.sections.first.productIds, isNotEmpty);
+    expect(bundle.challenges.length, 3);
+    expect(bundle.challenges.first.progressCurrent, 4);
+    expect(bundle.challenges[1].progressCurrent, 1);
+    expect(bundle.challenges[2].progressCurrent, 9);
   });
 }

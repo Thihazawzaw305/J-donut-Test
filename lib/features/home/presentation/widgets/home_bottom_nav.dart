@@ -1,3 +1,5 @@
+import 'dart:ui' show lerpDouble;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -38,13 +40,15 @@ class HomeBottomNavAccentStrip extends StatelessWidget {
   }
 }
 
-class HomeBottomNav extends StatelessWidget {
-  const HomeBottomNav({super.key, required this.active});
+class HomeBottomNav extends ConsumerWidget {
+  const HomeBottomNav({super.key, this.activeOverride});
 
-  final HomeShellTab active;
+  /// Tests may pin the active tab without Riverpod.
+  final HomeShellTab? activeOverride;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final active = activeOverride ?? ref.watch(homeShellTabProvider);
     final l10n = context.l10n;
 
     return SafeArea(
@@ -68,21 +72,30 @@ class HomeBottomNav extends StatelessWidget {
           child: SizedBox(
             height: AppDimens.homeNavHeight,
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _HomeBottomNavItem(
+                  key: const ValueKey('home_nav_home'),
                   selected: active == HomeShellTab.home,
                   label: l10n.homeNavHome,
                   icon: Icons.home_outlined,
-                      onTap: () => _goShellTab(context, HomeShellTab.home, AppRoutes.home),
+                  onTap: () =>
+                      _goShellTab(context, HomeShellTab.home, AppRoutes.home),
                 ),
                 _HomeBottomNavItem(
+                  key: const ValueKey('home_nav_rewards'),
                   selected: active == HomeShellTab.rewards,
                   label: l10n.homeNavReward,
                   icon: Icons.emoji_events_outlined,
-                      onTap: () => _goShellTab(context, HomeShellTab.rewards, AppRoutes.rewards),
+                  onTap: () => _goShellTab(
+                    context,
+                    HomeShellTab.rewards,
+                    AppRoutes.rewards,
+                  ),
                 ),
                 _HomeBottomNavItem(
+                  key: const ValueKey('home_nav_order'),
                   selected: false,
                   label: l10n.homeNavOrder,
                   icon: Icons.takeout_dining_outlined,
@@ -90,6 +103,7 @@ class HomeBottomNav extends StatelessWidget {
                       AppToast.show(context, message: l10n.comingSoon),
                 ),
                 _HomeBottomNavItem(
+                  key: const ValueKey('home_nav_wallet'),
                   selected: false,
                   label: l10n.homeNavWallet,
                   icon: Icons.account_balance_wallet_outlined,
@@ -97,10 +111,15 @@ class HomeBottomNav extends StatelessWidget {
                       AppToast.show(context, message: l10n.comingSoon),
                 ),
                 _HomeBottomNavItem(
+                  key: const ValueKey('home_nav_settings'),
                   selected: active == HomeShellTab.settings,
                   label: l10n.homeNavSettings,
                   icon: Icons.settings_outlined,
-                      onTap: () => _goShellTab(context, HomeShellTab.settings, AppRoutes.settings),
+                  onTap: () => _goShellTab(
+                    context,
+                    HomeShellTab.settings,
+                    AppRoutes.settings,
+                  ),
                 ),
               ],
             ),
@@ -111,14 +130,16 @@ class HomeBottomNav extends StatelessWidget {
   }
 
   void _goShellTab(BuildContext context, HomeShellTab tab, String route) {
-    ProviderScope.containerOf(context)
-        .read(homeShellTabProvider.notifier)
-        .setTab(tab);
-
+    final container = ProviderScope.containerOf(context);
     final branch = homeShellBranchIndex(tab);
+
+    container.read(homeShellTabProvider.notifier).setTab(tab);
+
     final shell = StatefulNavigationShell.maybeOf(context);
     if (shell != null && branch >= 0) {
-      shell.goBranch(branch, initialLocation: false);
+      if (shell.currentIndex != branch) {
+        shell.goBranch(branch, initialLocation: false);
+      }
       return;
     }
     if (GoRouterState.of(context).uri.path == route) return;
@@ -126,8 +147,9 @@ class HomeBottomNav extends StatelessWidget {
   }
 }
 
-class _HomeBottomNavItem extends StatelessWidget {
+class _HomeBottomNavItem extends StatefulWidget {
   const _HomeBottomNavItem({
+    super.key,
     required this.selected,
     required this.label,
     required this.icon,
@@ -140,63 +162,140 @@ class _HomeBottomNavItem extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
-  Widget build(BuildContext context) {
-    final duration = AppMotion.of(context, AppMotion.homeNavSelection);
-    const curve = AppMotion.standardCurve;
+  State<_HomeBottomNavItem> createState() => _HomeBottomNavItemState();
+}
 
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(AppDimens.homeNavPillRadius),
-      child: AnimatedContainer(
-        duration: duration,
-        curve: curve,
-        constraints: BoxConstraints(
-          minWidth: AppDimens.iconMd + AppDimens.spaceMd * 2,
-          minHeight: selected
-              ? 0
-              : AppDimens.iconMd + AppDimens.spaceMd * 2,
-        ),
-        padding: EdgeInsets.symmetric(
-          horizontal: selected
-              ? AppDimens.homeNavPillPaddingH
-              : AppDimens.spaceSm,
-          vertical: selected
-              ? AppDimens.homeNavPillPaddingV
-              : AppDimens.spaceSm,
-        ),
-        decoration: BoxDecoration(
-          color: selected ? AppColors.homeNavActive : Colors.transparent,
-          borderRadius: BorderRadius.circular(AppDimens.homeNavPillRadius),
-          border: selected
-              ? Border.all(
-                  color: AppColors.onPrimary,
+class _HomeBottomNavItemState extends State<_HomeBottomNavItem>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _t;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: AppMotion.homeNavSelection,
+      value: widget.selected ? 1 : 0,
+    );
+    _t = CurvedAnimation(parent: _controller, curve: AppMotion.standardCurve);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _controller.duration = AppMotion.of(context, AppMotion.homeNavSelection);
+  }
+
+  @override
+  void didUpdateWidget(_HomeBottomNavItem oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selected == widget.selected) return;
+    if (_controller.duration == Duration.zero) {
+      _controller.value = widget.selected ? 1 : 0;
+      return;
+    }
+    if (widget.selected) {
+      _controller.forward();
+    } else {
+      _controller.reverse();
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.center,
+      child: InkWell(
+        onTap: widget.onTap,
+        borderRadius: BorderRadius.circular(AppDimens.homeNavPillRadius),
+        child: AnimatedBuilder(
+          animation: _t,
+          builder: (context, _) {
+            final t = _t.value;
+            final pillHeight = lerpDouble(
+              AppDimens.homeNavIconOnlyHeight,
+              AppDimens.homeNavPillHeight,
+              t,
+            )!;
+            return Container(
+              alignment: Alignment.center,
+              constraints: BoxConstraints(
+                minWidth: AppDimens.iconMd + AppDimens.spaceMd * 2,
+                minHeight: pillHeight,
+                maxHeight: pillHeight,
+              ),
+              padding: EdgeInsets.lerp(
+                const EdgeInsets.all(AppDimens.spaceSm),
+                const EdgeInsets.symmetric(
+                  horizontal: AppDimens.homeNavPillPaddingH,
+                  vertical: AppDimens.homeNavPillPaddingV,
+                ),
+                t,
+              ),
+              decoration: BoxDecoration(
+                color: Color.lerp(
+                  Colors.transparent,
+                  AppColors.homeNavActive,
+                  t,
+                ),
+                borderRadius:
+                    BorderRadius.circular(AppDimens.homeNavPillRadius),
+                border: Border.all(
+                  color: Color.lerp(
+                    Colors.transparent,
+                    AppColors.onPrimary,
+                    t,
+                  )!,
                   width: AppDimens.homeNavPillBorderWidth,
-                )
-              : null,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: AppColors.onPrimary, size: AppDimens.iconMd),
-            AnimatedSize(
-              duration: duration,
-              curve: curve,
-              alignment: Alignment.centerLeft,
-              clipBehavior: Clip.hardEdge,
-              child: selected
-                  ? Padding(
-                      padding: const EdgeInsets.only(left: AppDimens.spaceXs),
-                      child: Text(
-                        label,
-                        style: AppTextStyles.bodyBold.copyWith(
-                          color: AppColors.onPrimary,
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    widget.icon,
+                    color: AppColors.onPrimary,
+                    size: AppDimens.iconMd,
+                  ),
+                  ClipRect(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      widthFactor: t,
+                      child: Opacity(
+                        opacity: t,
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: AppDimens.spaceXs),
+                          child: Text(
+                            widget.label,
+                            maxLines: 1,
+                            softWrap: false,
+                            textHeightBehavior: const TextHeightBehavior(
+                              applyHeightToFirstAscent: false,
+                              applyHeightToLastDescent: false,
+                            ),
+                            style: AppTextStyles.bodyBold.copyWith(
+                              color: AppColors.onPrimary,
+                              height: 1.0,
+                            ),
+                          ),
                         ),
                       ),
-                    )
-                  : const SizedBox(width: 0, height: 0),
-            ),
-          ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

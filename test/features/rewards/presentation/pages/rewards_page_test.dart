@@ -39,6 +39,7 @@ Widget _scoped(
   return ProviderScope(
     overrides: [
       catalogMemberProvider.overrideWith((ref) => Stream.value(_member)),
+      catalogChallengesProvider.overrideWith((ref) => Stream.value(const [])),
       homeShellTabProvider.overrideWith(
         () => _InitialShellTabNotifier(shellTab),
       ),
@@ -65,6 +66,7 @@ void main() {
       ProviderScope(
         overrides: [
           catalogMemberProvider.overrideWith((ref) => Stream.value(_member)),
+          catalogChallengesProvider.overrideWith((ref) => Stream.value(const [])),
           homeShellTabProvider.overrideWith(
             () => _InitialShellTabNotifier(HomeShellTab.home),
           ),

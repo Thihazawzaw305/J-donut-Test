@@ -5,28 +5,34 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimens.dart';
 
-/// Sprinkle on the frosting: [t] 0–1 on the arc, [radial] −1 inner / 1 outer,
-/// [tilt] rotation from the radial axis (mock sprinkles sit across the tube).
-typedef _Sprinkle = ({double t, double radial, double tilt, double scale});
+/// [t] progress along filled arc; [radial] −1..1 inner..outer frosting;
+/// [rotation] absolute radians (not tied to arc angle).
+typedef _Sprinkle = ({
+  double t,
+  double radial,
+  double rotation,
+  double scale,
+});
 
 class RewardsDonutRingPainter extends CustomPainter {
   RewardsDonutRingPainter({required this.progress});
 
   final double progress;
 
-  static const _sprinkles = <_Sprinkle>[
-    (t: 0.08, radial: 0.05, tilt: 0.35, scale: 1),
-    (t: 0.16, radial: -0.18, tilt: -0.45, scale: 0.9),
-    (t: 0.24, radial: 0.22, tilt: 0.15, scale: 1.05),
-    (t: 0.33, radial: -0.08, tilt: 0.55, scale: 0.95),
-    (t: 0.41, radial: 0.28, tilt: -0.25, scale: 1.1),
-    (t: 0.50, radial: -0.22, tilt: 0.20, scale: 0.88),
-    (t: 0.58, radial: 0.10, tilt: -0.50, scale: 1),
-    (t: 0.66, radial: 0.30, tilt: 0.40, scale: 0.92),
-    (t: 0.74, radial: -0.12, tilt: -0.18, scale: 1.08),
-    (t: 0.82, radial: 0.18, tilt: 0.48, scale: 0.9),
-    (t: 0.90, radial: -0.05, tilt: -0.32, scale: 1),
-  ];
+  static const _sprinkleSeed = 17;
+  static final List<_Sprinkle> _sprinkles = _generateSprinkles();
+
+  static List<_Sprinkle> _generateSprinkles() {
+    final random = math.Random(_sprinkleSeed);
+    return List.generate(AppDimens.rewardsDonutSprinkleCount, (_) {
+      return (
+        t: random.nextDouble(),
+        radial: random.nextDouble() * 2 - 1,
+        rotation: random.nextDouble() * 2 * math.pi,
+        scale: 0.85 + random.nextDouble() * 0.22,
+      );
+    });
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -55,7 +61,7 @@ class RewardsDonutRingPainter extends CustomPainter {
 
     final sweep = math.pi *
         2 *
-        progress.clamp(0, 1) *
+        progress.clamp(0, AppDimens.rewardsDonutDisplaySweep) *
         AppDimens.rewardsDonutSweepSign;
     if (sweep == 0) return;
 
@@ -135,12 +141,17 @@ class RewardsDonutRingPainter extends CustomPainter {
     final paint = Paint()..color = AppColors.rewardsDonutSprinkle;
     final baseLength = AppDimens.rewardsDonutSprinkleLength;
     final thickness = AppDimens.rewardsDonutSprinkleThickness;
+    final bandHalf =
+        stroke / 2 - AppDimens.rewardsDonutSprinkleEdgeInset;
+  final arcSpan = AppDimens.rewardsDonutDisplaySweep;
+    final fillAlongArc =
+        (progress.clamp(0, arcSpan) / arcSpan).clamp(0.0, 1.0);
 
     for (final sprinkle in _sprinkles) {
-      if (sprinkle.t > progress.clamp(0, 1)) continue;
+      if (sprinkle.t > fillAlongArc) continue;
 
       final angle = start + sweep * sprinkle.t;
-      final ringR = radius + sprinkle.radial * stroke * 0.22;
+      final ringR = radius + sprinkle.radial * bandHalf;
       final pos = center + Offset(math.cos(angle), math.sin(angle)) * ringR;
       final length = baseLength * sprinkle.scale;
       final capsule = RRect.fromRectAndRadius(
@@ -154,7 +165,7 @@ class RewardsDonutRingPainter extends CustomPainter {
 
       canvas.save();
       canvas.translate(pos.dx, pos.dy);
-      canvas.rotate(angle + sprinkle.tilt);
+      canvas.rotate(sprinkle.rotation);
       canvas.drawRRect(capsule, paint);
       canvas.restore();
     }

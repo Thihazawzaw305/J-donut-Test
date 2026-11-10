@@ -1,4 +1,5 @@
 import '../../domain/entities/catalog_banner.dart';
+import '../../domain/entities/catalog_challenge.dart';
 import '../../domain/entities/catalog_member.dart';
 import '../../domain/entities/catalog_product.dart';
 import '../../domain/entities/catalog_shop.dart';
@@ -33,6 +34,18 @@ CatalogProduct mapProductRow(ProductRow row) => CatalogProduct(
 
 CatalogBanner mapBannerRow(BannerRow row) => CatalogBanner(
   id: row.id,
+  imageAsset: row.imageAsset,
+  sortOrder: row.sortOrder,
+);
+
+CatalogChallenge mapChallengeRow(ChallengeRow row) => CatalogChallenge(
+  id: row.id,
+  tab: CatalogChallengeTab.fromSeed(row.tab),
+  kind: CatalogChallengeKind.fromSeed(row.kind),
+  titleKey: row.titleKey,
+  progressCurrent: row.progressCurrent,
+  progressTotal: row.progressTotal,
+  pointsReward: row.pointsReward,
   imageAsset: row.imageAsset,
   sortOrder: row.sortOrder,
 );

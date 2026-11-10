@@ -21,6 +21,7 @@ Future<void> syncCatalogStaticContentFromSeed(
   await syncShopsFromSeed(db, bundle);
   await syncProductsFromSeed(db, bundle);
   await syncSectionsFromSeed(db, bundle);
+  await syncChallengesFromSeed(db, bundle);
 }
 
 Future<void> seedCatalogIfEmpty(
@@ -36,6 +37,7 @@ Future<void> seedCatalogIfEmpty(
     await db.delete(db.sectionRows).go();
     await db.delete(db.sectionProductRows).go();
     await db.delete(db.shopRows).go();
+    await db.delete(db.challengeRows).go();
 
     final m = bundle.member;
     await db.into(db.memberRows).insert(
@@ -113,6 +115,8 @@ Future<void> seedCatalogIfEmpty(
         ),
       );
     }
+
+    await _insertChallenges(db, bundle);
   });
 }
 
@@ -235,6 +239,37 @@ Future<void> syncProductsFromSeed(
       }
     }
   });
+}
+
+Future<void> syncChallengesFromSeed(
+  AppDatabase db,
+  CatalogSeedBundle bundle,
+) async {
+  await db.transaction(() async {
+    await db.delete(db.challengeRows).go();
+    await _insertChallenges(db, bundle);
+  });
+}
+
+Future<void> _insertChallenges(
+  AppDatabase db,
+  CatalogSeedBundle bundle,
+) async {
+  for (final c in bundle.challenges) {
+    await db.into(db.challengeRows).insert(
+      ChallengeRowsCompanion.insert(
+        id: c.id,
+        tab: c.tab.name,
+        kind: c.kind.name,
+        titleKey: c.titleKey,
+        progressCurrent: c.progressCurrent,
+        progressTotal: c.progressTotal,
+        pointsReward: c.pointsReward,
+        imageAsset: c.imageAsset,
+        sortOrder: c.sortOrder,
+      ),
+    );
+  }
 }
 
 /// Replaces home section layout and product membership from bundled seed.

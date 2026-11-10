@@ -24,6 +24,10 @@ void main() {
       'SELECT COUNT(*) AS c FROM product_rows',
     ).getSingle();
     expect(count.data['c'], bundle.products.length);
+    final challengeCount = await db.customSelect(
+      'SELECT COUNT(*) AS c FROM challenge_rows',
+    ).getSingle();
+    expect(challengeCount.data['c'], bundle.challenges.length);
 
     await db.close();
   });

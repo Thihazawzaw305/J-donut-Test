@@ -31,7 +31,7 @@ class RewardsHeroRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(
         AppDimens.spaceMd,
-        AppDimens.spaceSm,
+        AppDimens.rewardsHeroTopPadding,
         0,
         AppDimens.spaceMd,
       ),

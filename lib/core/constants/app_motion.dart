@@ -22,6 +22,13 @@ abstract final class AppMotion {
   static const rewardsPillPopDelay = Duration(milliseconds: 200);
   static const rewardsPillPop = Duration(milliseconds: 320);
   static const rewardsTabThumb = Duration(milliseconds: 280);
+  static const rewardsCardEntrance = Duration(milliseconds: 420);
+  static const rewardsCardStagger = Duration(milliseconds: 80);
+  /// Stagger step on the shared [0, 1] rewards entrance for list cards.
+  static const rewardsCardStaggerStep = 0.1;
+  static const rewardsCardEntranceSpan = 0.28;
+  static const rewardsEarnPulse = Duration(milliseconds: 900);
+  static const rewardsTabListSwitch = Duration(milliseconds: 280);
 
   static const welcomeDonutStagger = Duration(milliseconds: 70);
   static const welcomeDonutEntrance = Duration(milliseconds: 450);

@@ -52,4 +52,8 @@ abstract final class AppColors {
   static const rewardsConnectorFill = Color(0xFF3D3D42);
   static const rewardsConnectorTrack = Color(0xFFD8D8DD);
   static const rewardsBackgroundTop = Color(0xFFFAFBFC);
+  static const rewardsSegmentedUnselected = rewardsBackgroundTop;
+  static const rewardsEarnInactive = Color(0xFFC8C8CD);
+  static const rewardsCoffeeArc = Color(0xFFFF7A18);
+  static const rewardsCoffeeArcTrack = Color(0xFFE4E4E8);
 }
