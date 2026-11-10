@@ -19,4 +19,11 @@ void main() {
       'assets/images/home_shops_background.jpg',
     );
   });
+
+  test('home shops grass overlay asset path is registered', () {
+    expect(
+      AppAssets.homeShopsGrassOverlay,
+      'assets/images/home_shops_grass_overlay.png',
+    );
+  });
 }

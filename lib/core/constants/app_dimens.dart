@@ -35,12 +35,14 @@ abstract final class AppDimens {
   static const homeNavRadius = 20.0;
   static const homeNavHeight = 80.0;
   static const homeNavPillBorderWidth = 1.0;
-  static const homeNavPillPaddingH = 17.0;
-  static const homeNavPillPaddingV = 7.0;
+  static const homeNavPillPaddingH = 13.0;
+  static const homeNavPillPaddingV = 10.0;
   /// Stadium capsule; larger than pill height for fully rounded ends.
   static const homeNavPillRadius = 32.0;
   /// Clearance between scrollable shell content and the floating nav.
   static const homeNavContentGap = 16.0;
+  /// Trailing gap after the last home scroll section.
+  static const homeScrollBottomInset = 25.0;
   static const homeProductLargeWidth = 252.0;
   static const homeProductLargeHeight = 160.0;
   static const homeProductLargeCardRadius = 12.0;
@@ -63,9 +65,9 @@ abstract final class AppDimens {
   static const homeShopsBackgroundWidth = 682.0;
   static const homeShopsBackgroundHeight = 1024.0;
   static const homeShopCardWidth = 300.0;
-  static const homeShopCardImageHeight = 172.0;
+  static const homeShopCardImageHeight = 168.0;
+  static const homeShopCardImageRadius = 12.0;
   static const homeShopCardRadius = 20.0;
-  static const homeShopListHeight = 336.0;
   static const homeBannerHeight = 180.0;
   static const homeBannerViewportFraction = 0.86;
   static const homeBannerVirtualPageCount = 10000;

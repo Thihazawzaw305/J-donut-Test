@@ -42,6 +42,7 @@ void main() {
       material.borderRadius,
       BorderRadius.circular(AppDimens.homeShopCardRadius),
     );
+    expect(material.clipBehavior, Clip.none);
 
     final imageBox = tester.widget<SizedBox>(
       find.descendant(
@@ -54,6 +55,29 @@ void main() {
       ),
     );
     expect(imageBox.height, AppDimens.homeShopCardImageHeight);
+
+    final clipRRect = tester.widget<ClipRRect>(
+      find.descendant(
+        of: find.byType(HomeShopCard),
+        matching: find.byType(ClipRRect),
+      ),
+    );
+    expect(
+      clipRRect.borderRadius,
+      BorderRadius.circular(AppDimens.homeShopCardImageRadius),
+    );
+
+    final inset = tester.widget<Padding>(
+      find.descendant(
+        of: find.byType(Material),
+        matching: find.byWidgetPredicate(
+          (w) =>
+              w is Padding &&
+              w.padding == const EdgeInsets.all(AppDimens.spaceMd),
+        ),
+      ).first,
+    );
+    expect(inset.padding, const EdgeInsets.all(AppDimens.spaceMd));
 
     final name = tester.widget<Text>(find.text('Bo Aung Kyaw'));
     expect(name.style?.fontSize, AppTextStyles.homeShopCardTitle.fontSize);

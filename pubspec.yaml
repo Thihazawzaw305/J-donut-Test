@@ -74,6 +74,7 @@ flutter:
     - assets/images/onboarding_hero.jpg
     - assets/images/home_refresh_donut.png
     - assets/images/home_shops_background.jpg
+    - assets/images/home_shops_grass_overlay.png
     - assets/images/welcome_hero.jpg
     - assets/seed/catalog_v1.json
     - assets/images/seed/

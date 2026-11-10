@@ -88,6 +88,9 @@ class _HomeCatalogBody extends ConsumerWidget {
             for (final section in sections)
               SliverToBoxAdapter(child: HomeProductSection(section: section)),
             SliverToBoxAdapter(child: HomeShopsSection(shops: shops)),
+            const SliverToBoxAdapter(
+              child: SizedBox(height: AppDimens.homeScrollBottomInset),
+            ),
           ],
         ),
         HomePinnedNotification(count: member.notificationCount),

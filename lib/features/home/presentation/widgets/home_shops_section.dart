@@ -23,10 +23,10 @@ class HomeShopsSection extends StatelessWidget {
         final backgroundHeight = constraints.maxWidth *
             AppDimens.homeShopsBackgroundHeight /
             AppDimens.homeShopsBackgroundWidth;
-
         return ConstrainedBox(
           constraints: BoxConstraints(minHeight: backgroundHeight),
           child: Stack(
+            clipBehavior: Clip.none,
             alignment: Alignment.topCenter,
             children: [
               SizedBox(
@@ -39,6 +39,7 @@ class HomeShopsSection extends StatelessWidget {
                 ),
               ),
               Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
@@ -88,20 +89,39 @@ class HomeShopsSection extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: AppDimens.spaceLg),
-                  SizedBox(
-                    height: AppDimens.homeShopListHeight,
-                    child: ListView.separated(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: shops.length,
-                      separatorBuilder: (_, _) =>
-                          const SizedBox(width: AppDimens.spaceMd),
-                      itemBuilder: (context, index) =>
-                          HomeShopCard(shop: shops[index]),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppDimens.spaceMd,
+                    ),
+                    child: IntrinsicHeight(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          for (var index = 0; index < shops.length; index++) ...[
+                            if (index > 0)
+                              const SizedBox(width: AppDimens.spaceMd),
+                            HomeShopCard(shop: shops[index]),
+                          ],
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: AppDimens.spaceMd),
                 ],
+              ),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: IgnorePointer(
+                  child: Image.asset(
+                    AppAssets.homeShopsGrassOverlay,
+                    fit: BoxFit.fitWidth,
+                    width: constraints.maxWidth,
+                    alignment: Alignment.bottomCenter,
+                  ),
+                ),
               ),
             ],
           ),

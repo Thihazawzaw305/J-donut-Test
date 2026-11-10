@@ -15,61 +15,53 @@ class HomeShopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: SizedBox(
-        width: AppDimens.homeShopCardWidth,
-        child: Material(
+    return SizedBox(
+      width: AppDimens.homeShopCardWidth,
+      child: Material(
         color: AppColors.surface,
         elevation: 3,
         shadowColor: AppColors.shadow,
         borderRadius: BorderRadius.circular(AppDimens.homeShopCardRadius),
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(
-              height: AppDimens.homeShopCardImageHeight,
-              child: CatalogImage(
-                asset: shop.imageAsset,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                AppDimens.spaceMd,
-                AppDimens.spaceMd,
-                AppDimens.spaceMd,
-                AppDimens.spaceLg,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    catalogString(context.l10n, shop.nameKey),
-                    style: AppTextStyles.homeShopCardTitle,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+        child: Padding(
+          padding: const EdgeInsets.all(AppDimens.spaceMd),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(
+                  AppDimens.homeShopCardImageRadius,
+                ),
+                child: SizedBox(
+                  height: AppDimens.homeShopCardImageHeight,
+                  child: CatalogImage(
+                    asset: shop.imageAsset,
+                    fit: BoxFit.cover,
                   ),
-                  const SizedBox(height: AppDimens.spaceXs),
-                  Text(
-                    catalogString(context.l10n, shop.addressKey),
-                    style: AppTextStyles.caption,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: AppDimens.spaceMd),
-                  Text(
-                    context.l10n.homeOrderOnline,
-                    style: AppTextStyles.link,
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: AppDimens.spaceSm),
+              Text(
+                catalogString(context.l10n, shop.nameKey),
+                style: AppTextStyles.homeShopCardTitle,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: AppDimens.spaceXs),
+              Text(
+                catalogString(context.l10n, shop.addressKey),
+                style: AppTextStyles.caption,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: AppDimens.spaceSm),
+              Text(
+                context.l10n.homeOrderOnline,
+                style: AppTextStyles.link,
+              ),
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
