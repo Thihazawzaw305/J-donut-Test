@@ -75,30 +75,30 @@ class _HomeBannerCarouselState extends State<HomeBannerCarousel> {
         ? bannerCount
         : AppDimens.homeBannerVirtualPageCount;
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppDimens.homeHeaderPaddingBottom),
-      child: SizedBox(
-        height: AppDimens.homeBannerHeight,
-        child: PageView.builder(
-          controller: _controller,
-          itemCount: virtualCount,
-          itemBuilder: (context, index) {
-            final banner = widget.banners[index % bannerCount];
-            return Padding(
-              padding: const EdgeInsets.only(left: AppDimens.spaceMd),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(AppDimens.homeBannerRadius),
-                  topRight: Radius.circular(AppDimens.homeBannerRadius),
-                ),
-                child: CatalogImage(
-                  asset: banner.imageAsset,
-                  fit: BoxFit.cover,
-                ),
+    return SizedBox(
+      height: AppDimens.homeBannerHeight,
+      child: PageView.builder(
+        controller: _controller,
+        padEnds: false,
+        itemCount: virtualCount,
+        itemBuilder: (context, index) {
+          final banner = widget.banners[index % bannerCount];
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppDimens.homeBannerItemPaddingH,
+            ),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(AppDimens.homeBannerRadius),
+                topRight: Radius.circular(AppDimens.homeBannerRadius),
               ),
-            );
-          },
-        ),
+              child: CatalogImage(
+                asset: banner.imageAsset,
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

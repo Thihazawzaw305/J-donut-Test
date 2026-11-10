@@ -16,8 +16,8 @@ import '../widgets/home_loading_skeleton.dart';
 import '../widgets/home_offline_banner.dart';
 import '../widgets/home_pinned_notification.dart';
 import '../widgets/home_product_section.dart';
-import '../widgets/home_section_entrance.dart';
 import '../widgets/home_product_section_skeleton.dart';
+import '../widgets/home_section_entrance.dart';
 import '../widgets/home_shops_section.dart';
 import '../widgets/home_shops_section_skeleton.dart';
 
@@ -54,15 +54,14 @@ class _HomeCatalogBody extends ConsumerWidget {
     final bannersAsync = ref.watch(catalogBannersProvider);
     final sectionsAsync = ref.watch(catalogSectionsProvider);
     final shopsAsync = ref.watch(catalogShopsProvider);
-
     final refreshing = ref.watch(homeCatalogRefreshingProvider);
-    final loading = memberAsync.isLoading ||
-        bannersAsync.isLoading ||
-        sectionsAsync.isLoading ||
-        shopsAsync.isLoading;
 
-    final hadCatalog = memberAsync.hasValue && sectionsAsync.hasValue;
-    if (loading && !hadCatalog) {
+    final loading = (memberAsync.isLoading && !memberAsync.hasValue) ||
+        (bannersAsync.isLoading && !bannersAsync.hasValue) ||
+        (sectionsAsync.isLoading && !sectionsAsync.hasValue) ||
+        (shopsAsync.isLoading && !shopsAsync.hasValue);
+
+    if (loading) {
       return const HomeLoadingSkeleton();
     }
 

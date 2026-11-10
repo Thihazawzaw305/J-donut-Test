@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:j_donuts_app/core/theme/app_text_styles.dart';
 import 'package:j_donuts_app/features/catalog/domain/entities/catalog_banner.dart';
 import 'package:j_donuts_app/features/catalog/domain/entities/catalog_member.dart';
+import 'package:j_donuts_app/features/home/presentation/widgets/home_banner_carousel.dart';
 import 'package:j_donuts_app/features/home/presentation/widgets/home_header_panel.dart';
 
 import '../../../../helpers/pump_app.dart';
@@ -58,5 +59,10 @@ void main() {
     final pillLeft = tester.getTopLeft(find.byKey(pillFinder));
     final headerLeft = tester.getTopLeft(find.byType(HomeHeaderPanel));
     expect(pillLeft.dx - headerLeft.dx, lessThan(40));
+
+    final panelBottom = tester.getBottomLeft(find.byType(HomeHeaderPanel)).dy;
+    final carouselBottom =
+        tester.getBottomLeft(find.byType(HomeBannerCarousel)).dy;
+    expect(carouselBottom, panelBottom);
   });
 }

@@ -32,13 +32,9 @@ Future<void> reloadHomeCatalogFromDatabase(WidgetRef ref) async {
     ..invalidate(catalogShopsProvider)
     ..invalidate(catalogChallengesProvider);
 
-  await Future.wait([
-    ref.read(catalogMemberProvider.future),
-    ref.read(catalogBannersProvider.future),
-    ref.read(catalogSectionsProvider.future),
-    ref.read(catalogShopsProvider.future),
-    ref.read(catalogChallengesProvider.future),
-  ]);
+  // Drift watch streams emit on subscribe; do not await StreamProvider.future
+  // here — that can hang after invalidate while the refresh flag stays true.
+  await Future<void>.delayed(Duration.zero);
 }
 
 /// Re-applies bundled seed and reloads home catalog streams (pull-to-refresh).

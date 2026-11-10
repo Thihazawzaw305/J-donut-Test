@@ -76,6 +76,8 @@ abstract final class AppDimens {
   static const homeBannerHeight = 180.0;
   static const homeBannerViewportFraction = 0.86;
   static const homeBannerVirtualPageCount = 10000;
+  /// Horizontal inset around each banner page; bottom stays flush in header.
+  static const homeBannerItemPaddingH = spaceSm;
 
   static const homeNotificationHeight = 36.0;
   static const homeNotificationMinWidth = 60.0;
@@ -93,10 +95,21 @@ abstract final class AppDimens {
   static const homeHeaderTopPadding = 40.0;
   static const homeHeaderGapProfileToPill = 14.0;
   static const homeHeaderGapPillToBanner = 24.0;
-  static const homeHeaderPaddingBottom = 0.0;
+
+  /// Profile row height (avatar).
+  static const homeHeaderProfileRowHeight = 52.0;
+
+  /// Tier pill block height (vertical padding + single line text).
+  static const homeHeaderTierPillBlockHeight = 34.0;
 
   /// Profile, tier pill, gaps, and banner — excludes top safe inset.
-  static const homeHeaderExpandedBodyHeight = 354.0;
+  static const homeHeaderExpandedBodyHeight =
+      homeHeaderTopPadding +
+      homeHeaderProfileRowHeight +
+      homeHeaderGapProfileToPill +
+      homeHeaderTierPillBlockHeight +
+      homeHeaderGapPillToBanner +
+      homeBannerHeight;
 
   /// Upward slide distance when the home header fully collapses.
   static const homeHeaderCollapseShift = 28.0;

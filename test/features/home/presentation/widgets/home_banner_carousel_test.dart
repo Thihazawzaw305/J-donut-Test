@@ -1,6 +1,8 @@
 import 'dart:ui' show Size;
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:j_donuts_app/core/constants/app_dimens.dart';
 import 'package:j_donuts_app/features/catalog/domain/entities/catalog_banner.dart';
 import 'package:j_donuts_app/features/catalog/presentation/widgets/catalog_image.dart';
 import 'package:j_donuts_app/features/home/presentation/widgets/home_banner_carousel.dart';
@@ -26,6 +28,25 @@ String visibleBannerAsset(WidgetTester tester) {
 }
 
 void main() {
+  testWidgets('banner slides have horizontal padding only', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(390, 200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpApp(const HomeBannerCarousel(banners: _banners));
+    await tester.pumpAndSettle();
+
+    final slidePadding = find.ancestor(
+      of: find.byType(ClipRRect).first,
+      matching: find.byType(Padding),
+    );
+    expect(slidePadding, findsOneWidget);
+    final insets = tester.widget<Padding>(slidePadding).padding as EdgeInsets;
+    expect(insets.left, AppDimens.homeBannerItemPaddingH);
+    expect(insets.right, AppDimens.homeBannerItemPaddingH);
+    expect(insets.top, 0);
+    expect(insets.bottom, 0);
+  });
+
   testWidgets('auto-advances after carousel interval', (tester) async {
     await tester.binding.setSurfaceSize(const Size(390, 200));
     addTearDown(() => tester.binding.setSurfaceSize(null));

@@ -16,14 +16,16 @@ class HomeCatalogRefreshingNotifier extends Notifier<bool> {
   void setRefreshing(bool value) => state = value;
 }
 
-/// Pull-to-refresh: show home skeleton, sync seed → DB, await fresh stream data.
+/// Pull-to-refresh: donut lead-in, then section skeletons, then data.
 Future<void> handleHomePullRefresh(WidgetRef ref) async {
   if (ref.read(homeCatalogRefreshingProvider)) return;
 
+  await Future<void>.delayed(AppMotion.homeRefreshSpinLeadIn);
+
   final notifier = ref.read(homeCatalogRefreshingProvider.notifier);
   notifier.setRefreshing(true);
+  await Future<void>.delayed(Duration.zero);
   try {
-    await Future<void>.delayed(AppMotion.homeRefreshSpinLeadIn);
     await reloadHomeCatalogFromDatabase(ref);
   } finally {
     notifier.setRefreshing(false);
