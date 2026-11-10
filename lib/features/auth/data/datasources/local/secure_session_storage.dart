@@ -4,7 +4,7 @@ import 'session_storage.dart';
 
 class SecureSessionStorage implements SessionStorage {
   SecureSessionStorage({FlutterSecureStorage? storage})
-      : _storage = storage ?? const FlutterSecureStorage();
+    : _storage = storage ?? const FlutterSecureStorage();
 
   static const _keyActivePhone = 'active_phone_e164';
 

@@ -2,6 +2,7 @@ import '../../../../core/errors/result.dart';
 import '../failures/name_validation_failure.dart';
 
 const _maxNameLength = 50;
+
 /// Myanmar and similar scripts use vowel signs (`\p{M}`) after consonants (`\p{L}`).
 final _letterPattern = RegExp(r'^[\p{L}\p{M} ]+$', unicode: true);
 final _digitPattern = RegExp(r'\d');

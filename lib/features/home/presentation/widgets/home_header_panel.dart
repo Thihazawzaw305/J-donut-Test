@@ -82,7 +82,9 @@ class HomeHeaderPanel extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: AppDimens.homeHeaderGapProfileToPill),
+                    const SizedBox(
+                      height: AppDimens.homeHeaderGapProfileToPill,
+                    ),
                     IntrinsicWidth(
                       child: Container(
                         key: const Key('home_tier_pill'),
@@ -95,7 +97,9 @@ class HomeHeaderPanel extends StatelessWidget {
                           borderRadius: BorderRadius.circular(
                             AppDimens.homeTierPillRadius,
                           ),
-                          border: Border.all(color: AppColors.tierCapsuleBorder),
+                          border: Border.all(
+                            color: AppColors.tierCapsuleBorder,
+                          ),
                         ),
                         child: Text(
                           tierText,

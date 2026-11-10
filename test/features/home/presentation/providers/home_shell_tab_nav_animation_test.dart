@@ -12,11 +12,7 @@ void main() {
   testWidgets('pill transitions when shell tab provider changes', (
     tester,
   ) async {
-    await tester.pumpApp(
-      const ProviderScope(
-        child: HomeBottomNav(),
-      ),
-    );
+    await tester.pumpApp(const ProviderScope(child: HomeBottomNav()));
     await tester.pump();
 
     expect(find.text('Home'), findsOneWidget);
@@ -49,9 +45,7 @@ void main() {
     tester,
   ) async {
     await tester.pumpApp(
-      const ProviderScope(
-        child: HomeShell(body: SizedBox.expand()),
-      ),
+      const ProviderScope(child: HomeShell(body: SizedBox.expand())),
     );
     await tester.pump();
 

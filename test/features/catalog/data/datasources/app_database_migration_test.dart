@@ -8,7 +8,9 @@ void main() {
     final db = AppDatabase(NativeDatabase.memory());
     addTearDown(db.close);
 
-    await db.into(db.memberRows).insert(
+    await db
+        .into(db.memberRows)
+        .insert(
           MemberRowsCompanion.insert(
             id: 'default',
             displayName: 'T',

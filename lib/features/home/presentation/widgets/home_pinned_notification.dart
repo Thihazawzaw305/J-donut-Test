@@ -11,8 +11,8 @@ class HomePinnedNotification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final top = MediaQuery.paddingOf(context).top +
-        AppDimens.homeNotificationTopOffset;
+    final top =
+        MediaQuery.paddingOf(context).top + AppDimens.homeNotificationTopOffset;
 
     return Positioned(
       top: top,

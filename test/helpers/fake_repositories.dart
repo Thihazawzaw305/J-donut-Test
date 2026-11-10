@@ -13,8 +13,7 @@ class ControllableAuthRepository implements AuthRepository {
   final _completer = Completer<Result<void, AuthFailure>>();
   final _verifyCompleters = <Completer<Result<void, AuthFailure>>>[];
   final _saveNameCompleter = Completer<Result<void, AuthFailure>>();
-  final _completeRegistrationCompleter =
-      Completer<Result<void, AuthFailure>>();
+  final _completeRegistrationCompleter = Completer<Result<void, AuthFailure>>();
   int requestCount = 0;
   int verifyCount = 0;
   int resendCount = 0;

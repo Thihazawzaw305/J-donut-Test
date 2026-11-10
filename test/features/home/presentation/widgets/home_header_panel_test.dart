@@ -31,7 +31,9 @@ const _banners = [
 ];
 
 void main() {
-  testWidgets('shows compact member name and hugging tier pill', (tester) async {
+  testWidgets('shows compact member name and hugging tier pill', (
+    tester,
+  ) async {
     await tester.binding.setSurfaceSize(const Size(390, 844));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
@@ -61,8 +63,9 @@ void main() {
     expect(pillLeft.dx - headerLeft.dx, lessThan(40));
 
     final panelBottom = tester.getBottomLeft(find.byType(HomeHeaderPanel)).dy;
-    final carouselBottom =
-        tester.getBottomLeft(find.byType(HomeBannerCarousel)).dy;
+    final carouselBottom = tester
+        .getBottomLeft(find.byType(HomeBannerCarousel))
+        .dy;
     expect(carouselBottom, panelBottom);
   });
 }

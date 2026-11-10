@@ -22,8 +22,8 @@ Future<bool> _evaluateOffline(
   Connectivity connectivity,
   List<ConnectivityResult> results,
 ) async {
-  final noLink = results.isEmpty ||
-      results.every((r) => r == ConnectivityResult.none);
+  final noLink =
+      results.isEmpty || results.every((r) => r == ConnectivityResult.none);
   if (noLink) return true;
   return !(await hasReachableInternet());
 }

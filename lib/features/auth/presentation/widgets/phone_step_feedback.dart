@@ -41,10 +41,8 @@ final class PhoneStepFeedback {
         AuthFlow.register,
       ),
       AuthFailure.alreadyRegistered => (context.l10n.logIn, AuthFlow.login),
-      AuthFailure.wrongOtp || AuthFailure.otpLocked => (
-        context.l10n.continueLabel,
-        AuthFlow.login,
-      ),
+      AuthFailure.wrongOtp ||
+      AuthFailure.otpLocked => (context.l10n.continueLabel, AuthFlow.login),
     };
     AppToast.show(
       context,

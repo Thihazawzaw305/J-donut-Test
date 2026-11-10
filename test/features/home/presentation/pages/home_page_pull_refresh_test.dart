@@ -43,7 +43,9 @@ void main() {
     }
     expect(find.byType(HomeProductSection), findsWidgets);
 
-    final container = ProviderScope.containerOf(tester.element(find.byType(HomePage)));
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(HomePage)),
+    );
     container.read(homeCatalogRefreshingProvider.notifier).setRefreshing(true);
     await tester.pump();
 

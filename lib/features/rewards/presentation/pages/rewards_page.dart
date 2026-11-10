@@ -43,7 +43,9 @@ class _RewardsPageState extends ConsumerState<RewardsPage>
   }
 
   void _onEntranceTick() {
-    if (_pillPopStarted || _entranceController == null || _pillPopController == null) {
+    if (_pillPopStarted ||
+        _entranceController == null ||
+        _pillPopController == null) {
       return;
     }
     if (_entranceController!.value >= 0.15) {
@@ -79,7 +81,13 @@ class _RewardsPageState extends ConsumerState<RewardsPage>
     _pillPopController?.value = 0;
   }
 
-  void _ensureControllers(CatalogMember member) {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _initEntranceControllersIfNeeded();
+  }
+
+  void _initEntranceControllersIfNeeded() {
     if (_entranceController != null) return;
 
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
@@ -144,11 +152,16 @@ class _RewardsPageState extends ConsumerState<RewardsPage>
                       onRetry: () => ref.invalidate(databaseProvider),
                     );
                   }
-                  _ensureControllers(member);
+                  final entrance = _entranceController;
+                  final pillPop = _pillPopController;
+                  if (entrance == null || pillPop == null) {
+                    return const RewardsLoadingSkeleton();
+                  }
                   return _RewardsBody(
                     member: member,
-                    entrance: _entranceController!,
-                    pillPop: _pillPopController!,
+                    entrance: entrance,
+                    pillPop: pillPop,
+                    badgePop: pillPop,
                   );
                 },
               ),
@@ -172,11 +185,13 @@ class _RewardsBody extends StatelessWidget {
     required this.member,
     required this.entrance,
     required this.pillPop,
+    required this.badgePop,
   });
 
   final CatalogMember member;
   final Animation<double> entrance;
   final Animation<double> pillPop;
+  final Animation<double> badgePop;
 
   double _leftFade(Animation<double> parent, double start, double end) {
     final curve = CurvedAnimation(
@@ -198,80 +213,80 @@ class _RewardsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
     final connectorTarget = rewardsRingSweepFraction(member);
-    const ringTarget = AppDimens.rewardsDonutDisplaySweep;
+    final ringTarget = rewardsDonutRingTarget(member);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         AnimatedBuilder(
-      animation: Listenable.merge([entrance, pillPop]),
-      builder: (context, _) {
-        final t = entrance.value;
-        final progressAnim = reduceMotion ? 1.0 : t;
-        final ringProgress = progressAnim * ringTarget;
-        final connectorFill = progressAnim * connectorTarget;
-        final points = (member.pointsBalance * progressAnim).round();
+          animation: Listenable.merge([entrance, pillPop, badgePop]),
+          builder: (context, _) {
+            final t = entrance.value;
+            final progressAnim = reduceMotion ? 1.0 : t;
+            final ringProgress = progressAnim * ringTarget;
+            final connectorFill = progressAnim * connectorTarget;
+            final points = (member.pointsBalance * progressAnim).round();
 
-        final tierStagger = reduceMotion
-            ? const [1.0, 1.0, 1.0]
-            : [
-                _leftFade(entrance, 0, 0.35),
-                _leftFade(entrance, 0.12, 0.5),
-                _leftFade(entrance, 0.24, 0.65),
-              ];
+            final tierStagger = reduceMotion
+                ? const [1.0, 1.0, 1.0]
+                : [
+                    _leftFade(entrance, 0, 0.35),
+                    _leftFade(entrance, 0.12, 0.5),
+                    _leftFade(entrance, 0.24, 0.65),
+                  ];
 
-        final tierSlides = reduceMotion
-            ? const [0.0, 0.0, 0.0]
-            : [
-                _leftSlide(entrance, 0, 0.35),
-                _leftSlide(entrance, 0.12, 0.5),
-                _leftSlide(entrance, 0.24, 0.65),
-              ];
+            final tierSlides = reduceMotion
+                ? const [0.0, 0.0, 0.0]
+                : [
+                    _leftSlide(entrance, 0, 0.35),
+                    _leftSlide(entrance, 0.12, 0.5),
+                    _leftSlide(entrance, 0.24, 0.65),
+                  ];
 
-        final rightFade = reduceMotion
-            ? 1.0
-            : CurvedAnimation(
-                parent: entrance,
-                curve: const Interval(0.15, 0.55, curve: AppMotion.standardCurve),
-              ).value;
+            final rightFade = reduceMotion
+                ? 1.0
+                : CurvedAnimation(
+                    parent: entrance,
+                    curve: AppMotion.rewardsSideInterval,
+                  ).value;
 
-        final rightSlide = reduceMotion
-            ? 0.0
-            : (1 -
-                    CurvedAnimation(
-                      parent: entrance,
-                      curve: const Interval(0.15, 0.55, curve: AppMotion.standardCurve),
-                    ).value) *
-                AppMotion.rewardsEntranceOffset;
+            final rightSlide = reduceMotion
+                ? 0.0
+                : (1 -
+                          CurvedAnimation(
+                            parent: entrance,
+                            curve: AppMotion.rewardsSideInterval,
+                          ).value) *
+                      AppMotion.rewardsEntranceOffset;
 
-        final titleFade = reduceMotion
-            ? 1.0
-            : CurvedAnimation(
-                parent: entrance,
-                curve: const Interval(0, 0.4, curve: AppMotion.standardCurve),
-              ).value;
+            final titleFade = reduceMotion
+                ? 1.0
+                : CurvedAnimation(
+                    parent: entrance,
+                    curve: AppMotion.rewardsTitleInterval,
+                  ).value;
 
-        final titleSlide = reduceMotion
-            ? 0.0
-            : (1 -
-                    CurvedAnimation(
-                      parent: entrance,
-                      curve: const Interval(0, 0.4, curve: AppMotion.standardCurve),
-                    ).value) *
-                AppMotion.rewardsEntranceOffset;
+            final titleSlide = reduceMotion
+                ? 0.0
+                : (1 -
+                          CurvedAnimation(
+                            parent: entrance,
+                            curve: AppMotion.rewardsTitleInterval,
+                          ).value) *
+                      AppMotion.rewardsEntranceOffset;
 
-        final pillFade = rightFade;
-        final pillSlide = rightSlide;
-        final pillScale = 0.85 + 0.15 * pillPop.value;
+            final pillFade = rightFade;
+            final pillSlide = rightSlide;
+            final badgeScale = 0.85 + 0.15 * badgePop.value;
 
-        return ColoredBox(
+            return ColoredBox(
               color: AppColors.rewardsBackgroundTop,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   RewardsHeroRow(
                     pillCount: member.rewardsPillCount,
-                    pillScale: pillScale,
+                    badgeScale: badgeScale,
                     titleFade: titleFade,
                     titleSlide: titleSlide,
                     pillFade: pillFade,
@@ -285,48 +300,48 @@ class _RewardsBody extends StatelessWidget {
                     child: SizedBox(
                       height: AppDimens.rewardsDonutDiameter,
                       child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Positioned(
-                          left: 0,
-                          top: 0,
-                          bottom: 0,
-                          right:
-                              (AppDimens.rewardsDonutDiameter -
-                                  AppDimens.rewardsDonutEdgeOverflow) +
-                              AppDimens.rewardsLadderDonutGap,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: RewardsTierLadder(
-                              member: member,
-                              tierOpacities: tierStagger,
-                              tierSlides: tierSlides,
-                              connectorFill: connectorFill,
+                        clipBehavior: Clip.none,
+                        children: [
+                          Positioned(
+                            left: 0,
+                            top: 0,
+                            bottom: 0,
+                            right:
+                                (AppDimens.rewardsDonutDiameter -
+                                    AppDimens.rewardsDonutEdgeOverflow) +
+                                AppDimens.rewardsLadderDonutGap,
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: RewardsTierLadder(
+                                member: member,
+                                tierOpacities: tierStagger,
+                                tierSlides: tierSlides,
+                                connectorFill: connectorFill,
+                              ),
                             ),
                           ),
-                        ),
-                        Positioned(
-                          right: 0,
-                          top: 0,
-                          bottom: 0,
-                          child: Center(
-                            child: RewardsDonutRing(
-                              ringProgress: ringProgress,
-                              displayedPoints: points,
-                              fade: rightFade,
-                              slide: rightSlide,
+                          Positioned(
+                            right: 0,
+                            top: 0,
+                            bottom: 0,
+                            child: Center(
+                              child: RewardsDonutRing(
+                                ringProgress: ringProgress,
+                                displayedPoints: points,
+                                fade: rightFade,
+                                slide: rightSlide,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: AppDimens.rewardsTabsSeamReserve),
                 ],
               ),
-        );
-      },
+            );
+          },
         ),
         _RewardsLowerSection(entrance: entrance),
       ],
@@ -349,7 +364,9 @@ class _RewardsLowerSectionState extends ConsumerState<_RewardsLowerSection> {
 
   @override
   Widget build(BuildContext context) {
-    final challenges = ref.watch(catalogChallengesProvider).maybeWhen(
+    final challenges = ref
+        .watch(catalogChallengesProvider)
+        .maybeWhen(
           data: (value) => value,
           orElse: () => const <CatalogChallenge>[],
         );

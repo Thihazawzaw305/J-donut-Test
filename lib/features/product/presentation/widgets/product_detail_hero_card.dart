@@ -52,8 +52,8 @@ class ProductDetailHeroCard extends StatelessWidget {
                   left: AppDimens.spaceLg,
                   top: AppDimens.spaceLg,
                   right: AppDimens.spaceLg,
-                  bottom: AppDimens.spaceLg +
-                      AppDimens.productDetailStepperOverlap,
+                  bottom:
+                      AppDimens.spaceLg + AppDimens.productDetailStepperOverlap,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

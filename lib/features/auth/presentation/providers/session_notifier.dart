@@ -21,5 +21,6 @@ class SessionNotifier extends AsyncNotifier<String?> {
   }
 }
 
-final sessionProvider =
-    AsyncNotifierProvider<SessionNotifier, String?>(SessionNotifier.new);
+final sessionProvider = AsyncNotifierProvider<SessionNotifier, String?>(
+  SessionNotifier.new,
+);

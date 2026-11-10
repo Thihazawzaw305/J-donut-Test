@@ -64,6 +64,13 @@ void main() {
     expect(earn.color, AppColors.primary);
   });
 
+  testWidgets('donut challenge uses quarter clip progress art', (tester) async {
+    await tester.pumpApp(const RewardsChallengeCard(challenge: _quarter));
+    await tester.pump();
+
+    expect(find.byType(ClipPath), findsOneWidget);
+  });
+
   testWidgets('incomplete challenge uses grey earn button', (tester) async {
     await tester.pumpApp(const RewardsChallengeCard(challenge: _quarter));
     await tester.pump();

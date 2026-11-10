@@ -21,19 +21,20 @@ abstract final class HomeDonutRefreshControl {
       onRefresh: onRefresh,
       refreshTriggerPullDistance: AppDimens.homeRefreshTriggerPull,
       refreshIndicatorExtent: AppDimens.homeRefreshIndicatorExtent,
-      builder: (
-        context,
-        refreshState,
-        pulledExtent,
-        refreshTriggerPullDistance,
-        refreshIndicatorExtent,
-      ) {
-        return HomeDonutRefreshIndicator(
-          refreshState: refreshState,
-          pulledExtent: pulledExtent,
-          refreshTriggerPullDistance: refreshTriggerPullDistance,
-        );
-      },
+      builder:
+          (
+            context,
+            refreshState,
+            pulledExtent,
+            refreshTriggerPullDistance,
+            refreshIndicatorExtent,
+          ) {
+            return HomeDonutRefreshIndicator(
+              refreshState: refreshState,
+              pulledExtent: pulledExtent,
+              refreshTriggerPullDistance: refreshTriggerPullDistance,
+            );
+          },
     );
   }
 }
@@ -99,7 +100,8 @@ class _HomeDonutRefreshIndicatorState extends State<HomeDonutRefreshIndicator>
   @override
   Widget build(BuildContext context) {
     final disableMotion = MediaQuery.disableAnimationsOf(context);
-    final pulling = widget.refreshState == RefreshIndicatorMode.drag ||
+    final pulling =
+        widget.refreshState == RefreshIndicatorMode.drag ||
         widget.refreshState == RefreshIndicatorMode.armed;
     final refreshing = widget.refreshState == RefreshIndicatorMode.refresh;
 
@@ -117,17 +119,16 @@ class _HomeDonutRefreshIndicatorState extends State<HomeDonutRefreshIndicator>
     if (refreshing && !disableMotion) {
       donut = RotationTransition(turns: _spin, child: donut);
     } else if (pulling && !disableMotion) {
-      donut = Transform.rotate(
-        angle: pullTurns * math.pi * 2,
-        child: donut,
-      );
+      donut = Transform.rotate(angle: pullTurns * math.pi * 2, child: donut);
     }
 
     final opacity = switch (widget.refreshState) {
       RefreshIndicatorMode.inactive => 0.0,
       RefreshIndicatorMode.done => 0.0,
-      _ => (widget.pulledExtent / widget.refreshTriggerPullDistance)
-          .clamp(0.0, 1.0),
+      _ => (widget.pulledExtent / widget.refreshTriggerPullDistance).clamp(
+        0.0,
+        1.0,
+      ),
     };
 
     return SizedBox(
@@ -136,10 +137,7 @@ class _HomeDonutRefreshIndicatorState extends State<HomeDonutRefreshIndicator>
         AppDimens.homeRefreshIndicatorExtent,
       ),
       child: Center(
-        child: Opacity(
-          opacity: refreshing ? 1.0 : opacity,
-          child: donut,
-        ),
+        child: Opacity(opacity: refreshing ? 1.0 : opacity, child: donut),
       ),
     );
   }

@@ -5,10 +5,7 @@ import 'package:j_donuts_app/features/auth/domain/validators/name_validator.dart
 void main() {
   group('validateFirstName', () {
     test('rejects blank input as empty', () {
-      expect(
-        validateFirstName('').errorOrNull,
-        NameValidationFailure.empty,
-      );
+      expect(validateFirstName('').errorOrNull, NameValidationFailure.empty);
     });
 
     test('rejects more than fifty characters as tooLong', () {

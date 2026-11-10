@@ -12,9 +12,9 @@ Future<void> pumpToast(WidgetTester tester) async {
 }
 
 void main() {
-  testWidgets('shows onboarding headline', (tester) async {
+  testWidgets('does not show a headline above the actions', (tester) async {
     await pumpJDonutsApp(tester);
-    expect(find.text('Round food for every mood'), findsOneWidget);
+    expect(find.text('Round food for every mood'), findsNothing);
   });
 
   testWidgets('first launch shows onboarding with brand and actions', (
@@ -22,28 +22,38 @@ void main() {
   ) async {
     await pumpJDonutsApp(tester);
 
-    expect(find.byKey(const Key('onboarding_hero_image')), findsOneWidget);
+    expect(find.byKey(const Key('onboarding_hero_image')), findsNothing);
     expect(find.text("LET'S GET STARTED"), findsOneWidget);
     expect(find.text('Already have an account?'), findsOneWidget);
   });
 
-  testWidgets('bottom entrance starts after hero slide gate', (tester) async {
+  testWidgets('bottom entrance starts without hero background', (tester) async {
     await pumpJDonutsApp(tester, settle: false, disableAnimations: false);
     await tester.pump();
-    final headline = find.text('Round food for every mood');
+    final headline = find.text("LET'S GET STARTED");
     expect(headline, findsOneWidget);
     final opacityAtStart = tester.widget<Opacity>(
-      find.ancestor(of: headline, matching: find.byType(Opacity)),
+      find.ancestor(of: headline, matching: find.byType(Opacity)).first,
     );
     expect(opacityAtStart.opacity, 0);
 
-    await tester.pump(AppMotion.onboardingSlide * 0.8);
     await tester.pump(AppMotion.onboardingBottomDelay);
     await tester.pump(const Duration(milliseconds: 100));
     final opacityMid = tester.widget<Opacity>(
       find.ancestor(of: headline, matching: find.byType(Opacity)),
     );
     expect(opacityMid.opacity, greaterThan(0));
+  });
+
+  testWidgets('shows hero donuts and a bottom gradient backdrop', (
+    tester,
+  ) async {
+    await pumpJDonutsApp(tester);
+
+    for (var i = 0; i < 5; i++) {
+      expect(find.byKey(ValueKey('onboarding_donut_$i')), findsOneWidget);
+    }
+    expect(find.byKey(const Key('onboarding_bottom_gradient')), findsOneWidget);
   });
 
   testWidgets("Let's get started opens registration step 1", (tester) async {

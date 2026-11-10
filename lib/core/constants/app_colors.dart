@@ -12,6 +12,8 @@ abstract final class AppColors {
   static const backgroundTop = Color(0xFFFFD6E6);
   static const backgroundMiddle = Color(0xFFFFECF2);
   static const backgroundBottom = Color(0xFFFFF7FA);
+  static const inputBorderIdle = Color(0x00000000);
+  static const inputBorderFocused = primary;
   static const surface = Color(0xFFFFFFFF);
   static const textPrimary = Color(0xFF1E1E22);
   static const textHint = Color(0xFF999999);
@@ -30,6 +32,9 @@ abstract final class AppColors {
     backgroundBottom,
   ];
   static const onboardingGradient = [surface, backgroundBottom];
+  static const surfaceClear = Color(0x00FFFFFF);
+  static const onboardingBottomFade = [surfaceClear, surface, surface];
+  static const onboardingBottomFadeStops = [0.0, 0.3, 1.0];
 
   static const homeHeader = heroPeach;
   static const homeScreenBackground = Color(0xFFEBEDF0);

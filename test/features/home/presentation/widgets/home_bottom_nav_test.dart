@@ -47,7 +47,9 @@ void main() {
   });
 
   testWidgets('cyan bar rounds top corners only', (tester) async {
-    await tester.pumpApp(const HomeBottomNav(activeOverride: HomeShellTab.home));
+    await tester.pumpApp(
+      const HomeBottomNav(activeOverride: HomeShellTab.home),
+    );
 
     final materialFinder = find.descendant(
       of: find.byType(HomeBottomNav),
@@ -69,22 +71,30 @@ void main() {
   });
 
   testWidgets('active home shows pill label Home', (tester) async {
-    await tester.pumpApp(const HomeBottomNav(activeOverride: HomeShellTab.home));
+    await tester.pumpApp(
+      const HomeBottomNav(activeOverride: HomeShellTab.home),
+    );
     expect(find.text('Home'), findsOneWidget);
   });
 
   testWidgets('active rewards shows pill label Reward', (tester) async {
-    await tester.pumpApp(const HomeBottomNav(activeOverride: HomeShellTab.rewards));
+    await tester.pumpApp(
+      const HomeBottomNav(activeOverride: HomeShellTab.rewards),
+    );
     expect(find.text('Reward'), findsOneWidget);
   });
 
   testWidgets('active settings shows pill label Settings', (tester) async {
-    await tester.pumpApp(const HomeBottomNav(activeOverride: HomeShellTab.settings));
+    await tester.pumpApp(
+      const HomeBottomNav(activeOverride: HomeShellTab.settings),
+    );
     expect(find.text('Settings'), findsOneWidget);
   });
 
   testWidgets('inactive tabs hide labels from hit testing', (tester) async {
-    await tester.pumpApp(const HomeBottomNav(activeOverride: HomeShellTab.home));
+    await tester.pumpApp(
+      const HomeBottomNav(activeOverride: HomeShellTab.home),
+    );
     expect(find.text('Home').hitTestable(), findsOneWidget);
     expect(find.text('Reward').hitTestable(), findsNothing);
     expect(find.text('Order').hitTestable(), findsNothing);
@@ -93,18 +103,18 @@ void main() {
   });
 
   testWidgets('pill uses thin white border', (tester) async {
-    await tester.pumpApp(const HomeBottomNav(activeOverride: HomeShellTab.home));
+    await tester.pumpApp(
+      const HomeBottomNav(activeOverride: HomeShellTab.home),
+    );
     final pill = find.descendant(
       of: find.byType(HomeBottomNav),
-      matching: find.byWidgetPredicate(
-        (w) {
-          if (w is! Container) return false;
-          final decoration = w.decoration;
-          if (decoration is! BoxDecoration) return false;
-          return decoration.color == AppColors.homeNavActive &&
-              decoration.border != null;
-        },
-      ),
+      matching: find.byWidgetPredicate((w) {
+        if (w is! Container) return false;
+        final decoration = w.decoration;
+        if (decoration is! BoxDecoration) return false;
+        return decoration.color == AppColors.homeNavActive &&
+            decoration.border != null;
+      }),
     );
     expect(pill, findsOneWidget);
     final decoration =
@@ -118,7 +128,9 @@ void main() {
   testWidgets('tap order shows coming soon without selecting order', (
     tester,
   ) async {
-    await tester.pumpApp(const HomeBottomNav(activeOverride: HomeShellTab.home));
+    await tester.pumpApp(
+      const HomeBottomNav(activeOverride: HomeShellTab.home),
+    );
     await tester.tap(find.byIcon(Icons.takeout_dining_outlined));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));

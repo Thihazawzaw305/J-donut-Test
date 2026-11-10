@@ -3,9 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 Future<void> selectBirthdayInTest(WidgetTester tester, DateTime date) async {
   final chrome = tester.getRect(
-    find
-        .ancestor(of: find.text('Day'), matching: find.byType(Container))
-        .first,
+    find.ancestor(of: find.text('Day'), matching: find.byType(Container)).first,
   );
   await tester.tapAt(chrome.topLeft + const Offset(8, 8));
   await tester.pumpAndSettle();

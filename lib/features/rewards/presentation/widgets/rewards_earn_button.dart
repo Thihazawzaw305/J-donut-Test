@@ -7,10 +7,7 @@ import '../../../../core/l10n/l10n_extension.dart';
 import '../../../../core/theme/app_text_styles.dart';
 
 class RewardsEarnButton extends StatefulWidget {
-  const RewardsEarnButton({
-    super.key,
-    required this.enabled,
-  });
+  const RewardsEarnButton({super.key, required this.enabled});
 
   final bool enabled;
 
@@ -74,10 +71,7 @@ class _RewardsEarnButtonState extends State<RewardsEarnButton>
       animation: _pulse,
       builder: (context, child) {
         final pulseScale = widget.enabled ? 1 + 0.04 * _pulse.value : 1.0;
-        return Transform.scale(
-          scale: pressScale * pulseScale,
-          child: child,
-        );
+        return Transform.scale(scale: pressScale * pulseScale, child: child);
       },
       child: Material(
         color: fill,

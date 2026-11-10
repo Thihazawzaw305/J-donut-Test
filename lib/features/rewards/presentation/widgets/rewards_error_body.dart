@@ -22,7 +22,11 @@ class RewardsErrorBody extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(message, style: AppTextStyles.body, textAlign: TextAlign.center),
+            Text(
+              message,
+              style: AppTextStyles.body,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: AppDimens.spaceMd),
             TextButton(onPressed: onRetry, child: Text(context.l10n.homeRetry)),
           ],

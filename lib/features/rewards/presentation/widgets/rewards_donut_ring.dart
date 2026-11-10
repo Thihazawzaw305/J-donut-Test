@@ -38,7 +38,9 @@ class RewardsDonutRing extends StatelessWidget {
                 painter: RewardsDonutRingPainter(progress: ringProgress),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceSm),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimens.spaceSm,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

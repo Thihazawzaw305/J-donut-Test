@@ -6,17 +6,18 @@ import 'package:j_donuts_app/features/rewards/presentation/widgets/rewards_segme
 import '../../../../helpers/pump_app.dart';
 
 void main() {
-  testWidgets('eat pill selected uses cyan fill and white label', (tester) async {
+  testWidgets('eat pill selected uses cyan fill and white label', (
+    tester,
+  ) async {
     await tester.pumpApp(
       RewardsSegmentedTabs(giftSelected: false, onGiftSelected: (_) {}),
     );
     await tester.pumpAndSettle();
 
-    final eat = tester.widget<AnimatedContainer>(
-      find.byKey(const Key('rewards_tab_eat')),
+    final thumb = tester.widget<AnimatedContainer>(
+      find.byKey(const Key('rewards_tab_thumb')),
     );
-    final decoration = eat.decoration! as BoxDecoration;
-
+    final decoration = thumb.decoration! as BoxDecoration;
     expect(decoration.color, AppColors.primary);
     final eatText = tester.widget<Text>(find.text('Eat more earn more'));
     expect(eatText.style?.color, AppColors.onPrimary);
@@ -30,12 +31,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    final gift = tester.widget<AnimatedContainer>(
-      find.byKey(const Key('rewards_tab_gift')),
-    );
-    final decoration = gift.decoration! as BoxDecoration;
-
-    expect(decoration.color, AppColors.rewardsSegmentedUnselected);
+    expect(find.byKey(const Key('rewards_tab_thumb')), findsOneWidget);
     final giftText = tester.widget<Text>(find.text('Gift'));
     expect(giftText.style?.color, AppColors.textPrimary);
   });
@@ -51,8 +47,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    final eat = tester.getSize(find.byKey(const Key('rewards_tab_eat')));
-    final gift = tester.getSize(find.byKey(const Key('rewards_tab_gift')));
+    final eat = tester.getSize(find.byKey(const Key('rewards_tab_eat_hit')));
+    final gift = tester.getSize(find.byKey(const Key('rewards_tab_gift_hit')));
     expect(gift.width, lessThan(eat.width));
     expect(eat.width, lessThan(300));
     expect(gift.width, lessThan(120));

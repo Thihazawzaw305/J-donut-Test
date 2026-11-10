@@ -8,6 +8,7 @@ import '../../../../core/l10n/l10n_extension.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../auth/presentation/providers/session_notifier.dart';
+
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
 
@@ -22,10 +23,7 @@ class SettingsPage extends ConsumerWidget {
         AppDimens.screenPadding,
       ),
       children: [
-        Text(
-          context.l10n.settingsTitle,
-          style: AppTextStyles.headline,
-        ),
+        Text(context.l10n.settingsTitle, style: AppTextStyles.headline),
         ListTile(
           title: Text(context.l10n.logOut, style: AppTextStyles.body),
           onTap: () async {

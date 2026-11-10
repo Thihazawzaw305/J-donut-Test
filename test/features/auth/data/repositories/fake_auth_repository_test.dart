@@ -58,18 +58,27 @@ void main() {
       const wrong = OtpCode('000000');
 
       expect(
-        (await repo.verifyOtp(unknown, wrong, flow: AuthFlow.register))
-            .errorOrNull,
+        (await repo.verifyOtp(
+          unknown,
+          wrong,
+          flow: AuthFlow.register,
+        )).errorOrNull,
         AuthFailure.wrongOtp,
       );
       expect(
-        (await repo.verifyOtp(unknown, wrong, flow: AuthFlow.register))
-            .errorOrNull,
+        (await repo.verifyOtp(
+          unknown,
+          wrong,
+          flow: AuthFlow.register,
+        )).errorOrNull,
         AuthFailure.wrongOtp,
       );
       expect(
-        (await repo.verifyOtp(unknown, wrong, flow: AuthFlow.register))
-            .errorOrNull,
+        (await repo.verifyOtp(
+          unknown,
+          wrong,
+          flow: AuthFlow.register,
+        )).errorOrNull,
         AuthFailure.otpLocked,
       );
     });
@@ -84,8 +93,11 @@ void main() {
       }
 
       expect(
-        (await repo.verifyOtp(unknown, correct, flow: AuthFlow.register))
-            .errorOrNull,
+        (await repo.verifyOtp(
+          unknown,
+          correct,
+          flow: AuthFlow.register,
+        )).errorOrNull,
         AuthFailure.otpLocked,
       );
 
@@ -105,16 +117,22 @@ void main() {
         await repo.verifyOtp(unknown, wrong, flow: AuthFlow.register);
       }
       expect(
-        (await repo.verifyOtp(unknown, wrong, flow: AuthFlow.register))
-            .errorOrNull,
+        (await repo.verifyOtp(
+          unknown,
+          wrong,
+          flow: AuthFlow.register,
+        )).errorOrNull,
         AuthFailure.otpLocked,
       );
 
       await repo.resendOtp(unknown);
 
       expect(
-        (await repo.verifyOtp(unknown, wrong, flow: AuthFlow.register))
-            .errorOrNull,
+        (await repo.verifyOtp(
+          unknown,
+          wrong,
+          flow: AuthFlow.register,
+        )).errorOrNull,
         AuthFailure.wrongOtp,
       );
     });
@@ -150,24 +168,26 @@ void main() {
       dateOfBirth: const DateOfBirth(year: 2000, month: 1, day: 1),
     );
 
-    expect(
-      (await repo.requestOtp(phone, flow: AuthFlow.login)).isOk,
-      isTrue,
-    );
+    expect((await repo.requestOtp(phone, flow: AuthFlow.login)).isOk, isTrue);
   });
 
   test('completeRegistration persists across repository instances', () async {
     const phone = unknown;
     final store = InMemoryRegisteredPhonesStore();
 
-    await FakeAuthRepository(latency: Duration.zero, store: store)
-        .completeRegistration(
+    await FakeAuthRepository(
+      latency: Duration.zero,
+      store: store,
+    ).completeRegistration(
       phone,
       firstName: 'Aye',
       dateOfBirth: const DateOfBirth(year: 2000, month: 1, day: 1),
     );
 
     final relogin = FakeAuthRepository(latency: Duration.zero, store: store);
-    expect((await relogin.requestOtp(phone, flow: AuthFlow.login)).isOk, isTrue);
+    expect(
+      (await relogin.requestOtp(phone, flow: AuthFlow.login)).isOk,
+      isTrue,
+    );
   });
 }

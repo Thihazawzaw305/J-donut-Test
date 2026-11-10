@@ -15,9 +15,7 @@ extension AuthFlowRoutes on AuthFlow {
   /// Name and DOB exist only on the registration stack.
   String get nameRoute => switch (this) {
     AuthFlow.register => AppRoutes.registerName,
-    AuthFlow.login => throw UnsupportedError(
-      'Name is a register-only step',
-    ),
+    AuthFlow.login => throw UnsupportedError('Name is a register-only step'),
   };
 
   String get dobRoute => switch (this) {

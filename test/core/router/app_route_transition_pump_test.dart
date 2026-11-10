@@ -7,7 +7,9 @@ import '../../helpers/in_memory_session_storage.dart';
 import '../../helpers/pump_jdonuts_app.dart';
 
 void main() {
-  testWidgets('go register OTP ready after transition duration', (tester) async {
+  testWidgets('go register OTP ready after transition duration', (
+    tester,
+  ) async {
     await pumpJDonutsApp(
       tester,
       location: AppRoutes.registerOtp,
@@ -18,7 +20,9 @@ void main() {
     expect(find.byType(OtpBoxes), findsOneWidget);
   });
 
-  testWidgets('go product route ready after transition duration', (tester) async {
+  testWidgets('go product route ready after transition duration', (
+    tester,
+  ) async {
     final storage = InMemorySessionStorage();
     await storage.write('+959254135592');
     await pumpJDonutsApp(

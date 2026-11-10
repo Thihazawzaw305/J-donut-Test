@@ -16,6 +16,7 @@ import 'package:j_donuts_app/features/auth/presentation/widgets/otp_boxes.dart';
 
 import '../../../../helpers/catalog_test_overrides.dart';
 import '../../../../helpers/pump_jdonuts_app.dart';
+import '../../../../helpers/select_birthday.dart';
 
 const _phoneInput = '09254135592';
 const _e164 = '+959254135592';
@@ -40,18 +41,6 @@ void main() {
         .widget<PrimaryButton>(find.widgetWithText(PrimaryButton, label))
         .onPressed!();
     await pumpZeroLatency(tester);
-  }
-
-  Future<void> selectBirthday(WidgetTester tester, DateTime date) async {
-    await tester.tap(find.byType(TextFormField).first);
-    await tester.pump();
-    await tester.pump(AppMotion.medium);
-    tester
-        .widget<CupertinoDatePicker>(find.byType(CupertinoDatePicker))
-        .onDateTimeChanged(date);
-    await tester.pump();
-    await pressLabeledButton(tester, 'SELECT');
-    await tester.pump(AppMotion.medium);
   }
 
   testWidgets(
@@ -85,7 +74,7 @@ void main() {
       await pressLabeledButton(tester, 'CONTINUE');
       expect(find.text("What's your date of birth?"), findsOneWidget);
 
-      await selectBirthday(tester, _birthday);
+      await selectBirthdayInTest(tester, _birthday);
       await pressLabeledButton(tester, 'CONTINUE');
       await tester.pump();
       await tester.pump();
@@ -104,7 +93,7 @@ void main() {
       await tester.pump(AppMotion.medium);
       await tester.pump(AppMotion.medium);
       await tester.pump(const Duration(milliseconds: 400));
-      expect(find.text('Thiha Zaw Zaw'), findsOneWidget);
+      expect(find.text('Ada'), findsOneWidget);
 
       await tearDownCatalog(tester);
     },

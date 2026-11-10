@@ -63,6 +63,16 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   drift_dev: ^2.29.0
   build_runner: ^2.10.4
+  flutter_launcher_icons: ^0.14.4
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/icon/app_icon.png
+  remove_alpha_ios: true
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: assets/icon/app_icon.png
+  adaptive_icon_foreground_inset: 16
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -71,11 +81,11 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-    - assets/images/onboarding_hero.jpg
     - assets/images/home_refresh_donut.png
     - assets/images/home_shops_background.jpg
     - assets/images/home_shops_grass_overlay.png
-    - assets/images/welcome_hero.jpg
+    - assets/images/welcome/
+    - assets/images/onboarding/
     - assets/seed/catalog_v1.json
     - assets/images/seed/
     - assets/images/seed/rewards/

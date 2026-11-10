@@ -110,9 +110,7 @@ void main() {
     expect(continueButton(tester).onPressed, isNotNull);
   });
 
-  testWidgets('submit shows button loading then opens Welcome', (
-    tester,
-  ) async {
+  testWidgets('submit shows button loading then opens Welcome', (tester) async {
     final repository = ControllableAuthRepository();
     await pumpDob(tester, repository: repository);
 

@@ -7,12 +7,7 @@ import '../../../../core/constants/app_dimens.dart';
 
 /// [t] progress along filled arc; [radial] −1..1 inner..outer frosting;
 /// [rotation] absolute radians (not tied to arc angle).
-typedef _Sprinkle = ({
-  double t,
-  double radial,
-  double rotation,
-  double scale,
-});
+typedef _Sprinkle = ({double t, double radial, double rotation, double scale});
 
 class RewardsDonutRingPainter extends CustomPainter {
   RewardsDonutRingPainter({required this.progress});
@@ -59,7 +54,8 @@ class RewardsDonutRingPainter extends CustomPainter {
         ..strokeCap = StrokeCap.round,
     );
 
-    final sweep = math.pi *
+    final sweep =
+        math.pi *
         2 *
         progress.clamp(0, AppDimens.rewardsDonutDisplaySweep) *
         AppDimens.rewardsDonutSweepSign;
@@ -141,11 +137,9 @@ class RewardsDonutRingPainter extends CustomPainter {
     final paint = Paint()..color = AppColors.rewardsDonutSprinkle;
     final baseLength = AppDimens.rewardsDonutSprinkleLength;
     final thickness = AppDimens.rewardsDonutSprinkleThickness;
-    final bandHalf =
-        stroke / 2 - AppDimens.rewardsDonutSprinkleEdgeInset;
-  final arcSpan = AppDimens.rewardsDonutDisplaySweep;
-    final fillAlongArc =
-        (progress.clamp(0, arcSpan) / arcSpan).clamp(0.0, 1.0);
+    final bandHalf = stroke / 2 - AppDimens.rewardsDonutSprinkleEdgeInset;
+    final arcSpan = AppDimens.rewardsDonutDisplaySweep;
+    final fillAlongArc = (progress.clamp(0, arcSpan) / arcSpan).clamp(0.0, 1.0);
 
     for (final sprinkle in _sprinkles) {
       if (sprinkle.t > fillAlongArc) continue;
@@ -155,11 +149,7 @@ class RewardsDonutRingPainter extends CustomPainter {
       final pos = center + Offset(math.cos(angle), math.sin(angle)) * ringR;
       final length = baseLength * sprinkle.scale;
       final capsule = RRect.fromRectAndRadius(
-        Rect.fromCenter(
-          center: Offset.zero,
-          width: length,
-          height: thickness,
-        ),
+        Rect.fromCenter(center: Offset.zero, width: length, height: thickness),
         Radius.circular(thickness / 2),
       );
 

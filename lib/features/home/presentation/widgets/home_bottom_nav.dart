@@ -17,11 +17,11 @@ import '../../../../core/widgets/app_toast.dart';
 enum HomeShellTab { home, rewards, order, wallet, settings }
 
 int homeShellBranchIndex(HomeShellTab tab) => switch (tab) {
-      HomeShellTab.home => 0,
-      HomeShellTab.rewards => 1,
-      HomeShellTab.settings => 2,
-      HomeShellTab.order || HomeShellTab.wallet => -1,
-    };
+  HomeShellTab.home => 0,
+  HomeShellTab.rewards => 1,
+  HomeShellTab.settings => 2,
+  HomeShellTab.order || HomeShellTab.wallet => -1,
+};
 
 /// Full-bleed accent band behind the inset cyan bar (lower half of nav height).
 class HomeBottomNavAccentStrip extends StatelessWidget {
@@ -99,16 +99,14 @@ class HomeBottomNav extends ConsumerWidget {
                   selected: false,
                   label: l10n.homeNavOrder,
                   icon: Icons.takeout_dining_outlined,
-                  onTap: () =>
-                      AppToast.show(context, message: l10n.comingSoon),
+                  onTap: () => AppToast.show(context, message: l10n.comingSoon),
                 ),
                 _HomeBottomNavItem(
                   key: const ValueKey('home_nav_wallet'),
                   selected: false,
                   label: l10n.homeNavWallet,
                   icon: Icons.account_balance_wallet_outlined,
-                  onTap: () =>
-                      AppToast.show(context, message: l10n.comingSoon),
+                  onTap: () => AppToast.show(context, message: l10n.comingSoon),
                 ),
                 _HomeBottomNavItem(
                   key: const ValueKey('home_nav_settings'),
@@ -245,8 +243,9 @@ class _HomeBottomNavItemState extends State<_HomeBottomNavItem>
                   AppColors.homeNavActive,
                   t,
                 ),
-                borderRadius:
-                    BorderRadius.circular(AppDimens.homeNavPillRadius),
+                borderRadius: BorderRadius.circular(
+                  AppDimens.homeNavPillRadius,
+                ),
                 border: Border.all(
                   color: Color.lerp(
                     Colors.transparent,
@@ -273,8 +272,9 @@ class _HomeBottomNavItemState extends State<_HomeBottomNavItem>
                       child: Opacity(
                         opacity: t,
                         child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: AppDimens.spaceXs),
+                          padding: const EdgeInsets.only(
+                            left: AppDimens.spaceXs,
+                          ),
                           child: Text(
                             widget.label,
                             maxLines: 1,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:j_donuts_app/core/constants/app_motion.dart';
 import 'package:j_donuts_app/features/auth/presentation/widgets/step_progress_ring.dart';
 
 import '../../../../helpers/pump_app.dart';
@@ -48,24 +49,77 @@ void main() {
 
   testWidgets('paints completed check when showCheck is true', (tester) async {
     await tester.pumpApp(
-      const StepProgressRing(
-        currentStep: 4,
-        totalSteps: 4,
-        showCheck: true,
-      ),
+      const StepProgressRing(currentStep: 4, totalSteps: 4, showCheck: true),
     );
 
     await tester.pumpAndSettle();
-    final painter = tester
-        .widget<CustomPaint>(
-          find.descendant(
-            of: find.byType(StepProgressRing),
-            matching: find.byType(CustomPaint),
-          ),
-        )
-        .painter! as StepProgressPainter;
+    final painter =
+        tester
+                .widget<CustomPaint>(
+                  find.descendant(
+                    of: find.byType(StepProgressRing),
+                    matching: find.byType(CustomPaint),
+                  ),
+                )
+                .painter!
+            as StepProgressPainter;
     expect(painter.progress, 1);
     expect(painter.showCheck, isTrue);
     expect(painter.showsCompletedCheck, isTrue);
+    expect(painter.checkProgress, 1);
+  });
+
+  StepProgressPainter painterOf(WidgetTester tester) =>
+      tester
+              .widget<CustomPaint>(
+                find.descendant(
+                  of: find.byType(StepProgressRing),
+                  matching: find.byType(CustomPaint),
+                ),
+              )
+              .painter!
+          as StepProgressPainter;
+
+  testWidgets('draws the check only after the ring completes', (tester) async {
+    await tester.pumpApp(
+      const StepProgressRing(currentStep: 4, totalSteps: 4, showCheck: true),
+    );
+
+    await tester.pump(AppMotion.long ~/ 2);
+    expect(painterOf(tester).checkProgress, 0);
+
+    await tester.pump(AppMotion.long ~/ 2 + AppMotion.stepCheckDraw ~/ 2);
+    final mid = painterOf(tester).checkProgress;
+    expect(mid, greaterThan(0));
+    expect(mid, lessThan(1));
+
+    await tester.pumpAndSettle();
+    expect(painterOf(tester).checkProgress, 1);
+  });
+
+  testWidgets('shows the full check at once when motion is reduced', (
+    tester,
+  ) async {
+    await tester.pumpApp(
+      Builder(
+        builder: (context) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(disableAnimations: true),
+          child: const StepProgressRing(
+            currentStep: 4,
+            totalSteps: 4,
+            showCheck: true,
+          ),
+        ),
+      ),
+    );
+
+    expect(painterOf(tester).checkProgress, 1);
+  });
+
+  testWidgets('has no check progress when showCheck is false', (tester) async {
+    await tester.pumpApp(const StepProgressRing(currentStep: 4, totalSteps: 4));
+    await tester.pumpAndSettle();
+
+    expect(painterOf(tester).checkProgress, 0);
   });
 }

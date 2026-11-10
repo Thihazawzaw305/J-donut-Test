@@ -9,10 +9,7 @@ import 'package:j_donuts_app/l10n/app_localizations.dart';
 
 import '../../../helpers/catalog_test_overrides.dart';
 
-Future<void> _pumpDetail(
-  WidgetTester tester,
-  Widget child,
-) async {
+Future<void> _pumpDetail(WidgetTester tester, Widget child) async {
   tester.view.physicalSize = const Size(390, 900);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
@@ -80,9 +77,9 @@ void main() {
       tester,
       ProviderScope(
         overrides: [
-          productByIdProvider('p_coconut').overrideWith(
-            (ref) async => overrideProduct,
-          ),
+          productByIdProvider(
+            'p_coconut',
+          ).overrideWith((ref) async => overrideProduct),
         ],
         child: const MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -118,9 +115,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          productByIdProvider('p_coconut').overrideWith(
-            (ref) async => overrideProduct,
-          ),
+          productByIdProvider(
+            'p_coconut',
+          ).overrideWith((ref) async => overrideProduct),
         ],
         child: const MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -151,9 +148,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          productByIdProvider('p_coconut').overrideWith(
-            (ref) async => overrideProduct,
-          ),
+          productByIdProvider(
+            'p_coconut',
+          ).overrideWith((ref) async => overrideProduct),
         ],
         child: const MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,

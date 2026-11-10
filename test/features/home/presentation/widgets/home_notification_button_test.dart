@@ -16,10 +16,12 @@ void main() {
     expect(box.height, AppDimens.homeNotificationHeight);
 
     final decorated = tester.widget<DecoratedBox>(
-      find.descendant(
-        of: find.byType(HomeNotificationButton),
-        matching: find.byType(DecoratedBox),
-      ).first,
+      find
+          .descendant(
+            of: find.byType(HomeNotificationButton),
+            matching: find.byType(DecoratedBox),
+          )
+          .first,
     );
     final border = decorated.decoration as BoxDecoration;
     expect(border.border, isA<Border>());

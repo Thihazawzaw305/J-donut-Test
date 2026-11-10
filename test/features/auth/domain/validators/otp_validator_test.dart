@@ -6,17 +6,11 @@ import 'package:j_donuts_app/features/auth/domain/validators/otp_validator.dart'
 void main() {
   group('validateOtp', () {
     test('rejects five digits as incomplete', () {
-      expect(
-        validateOtp('12345').errorOrNull,
-        OtpValidationFailure.incomplete,
-      );
+      expect(validateOtp('12345').errorOrNull, OtpValidationFailure.incomplete);
     });
 
     test('rejects a letter among digits as nonDigit', () {
-      expect(
-        validateOtp('12345a').errorOrNull,
-        OtpValidationFailure.nonDigit,
-      );
+      expect(validateOtp('12345a').errorOrNull, OtpValidationFailure.nonDigit);
     });
 
     test('accepts exactly six digits', () {

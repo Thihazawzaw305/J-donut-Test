@@ -48,7 +48,10 @@ class ProductQuantityStepper extends StatelessWidget {
                 return FadeTransition(
                   opacity: animation,
                   child: ScaleTransition(
-                    scale: Tween<double>(begin: 0.85, end: 1).animate(animation),
+                    scale: Tween<double>(
+                      begin: 0.85,
+                      end: 1,
+                    ).animate(animation),
                     child: child,
                   ),
                 );

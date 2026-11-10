@@ -50,9 +50,7 @@ void main() {
     expect(
       find.descendant(
         of: find.byType(HomeShopsSection),
-        matching: find.image(
-          const AssetImage(AppAssets.homeShopsGrassOverlay),
-        ),
+        matching: find.image(const AssetImage(AppAssets.homeShopsGrassOverlay)),
       ),
       findsOneWidget,
     );
@@ -97,12 +95,14 @@ void main() {
     );
 
     final cardHeight = tester.getSize(find.byType(HomeShopCard)).height;
-    final rowHeight = tester.getSize(
-      find.descendant(
-        of: find.byType(HomeShopsSection),
-        matching: find.byType(Row),
-      ),
-    ).height;
+    final rowHeight = tester
+        .getSize(
+          find.descendant(
+            of: find.byType(HomeShopsSection),
+            matching: find.byType(Row),
+          ),
+        )
+        .height;
     expect(rowHeight, cardHeight);
   });
 

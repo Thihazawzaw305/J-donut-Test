@@ -18,10 +18,7 @@ void main() {
     final overrides = [
       authDraftProvider.overrideWith(_PrefillPhoneDraft.new),
       authRepositoryProvider.overrideWithValue(
-        FakeAuthRepository(
-          latency: Duration.zero,
-          registeredNumbers: {e164},
-        ),
+        FakeAuthRepository(latency: Duration.zero, registeredNumbers: {e164}),
       ),
     ];
 

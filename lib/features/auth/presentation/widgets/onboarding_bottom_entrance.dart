@@ -83,10 +83,7 @@ class OnboardingBottomEntranceState extends State<OnboardingBottomEntrance>
   Widget build(BuildContext context) {
     final totalMs = _totalDuration.inMilliseconds;
     if (totalMs == 0) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: widget.children,
-      );
+      return Column(mainAxisSize: MainAxisSize.min, children: widget.children);
     }
 
     final delayMs = AppMotion.onboardingBottomDelay.inMilliseconds;
@@ -132,7 +129,7 @@ class _StaggeredChild extends StatelessWidget {
         ? 0.0
         : progress >= end
         ? 1.0
-        : Curves.easeOutCubic.transform((progress - start) / (end - start));
+        : AppMotion.standardCurve.transform((progress - start) / (end - start));
 
     return Opacity(
       opacity: t,

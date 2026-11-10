@@ -50,11 +50,7 @@ class OtpStepNotifier extends Notifier<OtpStepState> {
     if (code == null || phone == null) return;
 
     state = state.copyWith(status: const OtpSubmitting());
-    final result = await ref.read(verifyOtpProvider)(
-      phone,
-      code,
-      flow: flow,
-    );
+    final result = await ref.read(verifyOtpProvider)(phone, code, flow: flow);
     if (!ref.mounted) return;
     switch (result) {
       case Ok():

@@ -5,17 +5,12 @@ import 'package:j_donuts_app/features/product/presentation/widgets/product_detai
 import 'package:j_donuts_app/l10n/app_localizations.dart';
 
 Widget _wrap(Widget child) => MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: Scaffold(
-        body: SingleChildScrollView(child: child),
-      ),
-    );
+  localizationsDelegates: AppLocalizations.localizationsDelegates,
+  supportedLocales: AppLocalizations.supportedLocales,
+  home: Scaffold(body: SingleChildScrollView(child: child)),
+);
 
-ProductDetailHeroCard _card({
-  bool showNewBadge = false,
-  int quantity = 1,
-}) =>
+ProductDetailHeroCard _card({bool showNewBadge = false, int quantity = 1}) =>
     ProductDetailHeroCard(
       productId: 'p_coconut',
       productCode: 'JD022123',

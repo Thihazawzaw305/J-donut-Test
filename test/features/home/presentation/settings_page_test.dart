@@ -4,7 +4,9 @@ import '../../../helpers/in_memory_session_storage.dart';
 import '../../../helpers/pump_jdonuts_app.dart';
 
 void main() {
-  testWidgets('log out clears session and returns to onboarding', (tester) async {
+  testWidgets('log out clears session and returns to onboarding', (
+    tester,
+  ) async {
     final storage = InMemorySessionStorage();
     await storage.write('+959254135592');
 

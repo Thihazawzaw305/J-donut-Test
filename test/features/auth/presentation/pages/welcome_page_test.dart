@@ -10,23 +10,17 @@ void main() {
     await tester.pumpApp(const WelcomePage());
     await tester.pumpAndSettle();
 
-    expect(
-      find.textContaining('Welcome to the'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('Welcome to the'), findsOneWidget);
     expect(find.text("LET'S EXPLORE"), findsOneWidget);
-    expect(find.byKey(const Key('welcome_hero_image')), findsOneWidget);
-    expect(find.byType(Image), findsWidgets);
-    expect(
-      find.byKey(WelcomeHeroGradientOverlay.overlayKey),
-      findsOneWidget,
-    );
+    expect(find.byKey(const Key('welcome_hero_image')), findsNothing);
+    expect(find.byType(Image), findsNWidgets(4));
+    expect(find.byKey(WelcomeHeroGradientOverlay.overlayKey), findsOneWidget);
 
     final overlayBox = tester.renderObject<RenderBox>(
       find.byKey(WelcomeHeroGradientOverlay.overlayKey),
     );
-    final viewportHeight = tester.view.physicalSize.height /
-        tester.view.devicePixelRatio;
+    final viewportHeight =
+        tester.view.physicalSize.height / tester.view.devicePixelRatio;
     expect(
       overlayBox.size.height,
       closeTo(
@@ -36,7 +30,9 @@ void main() {
     );
   });
 
-  testWidgets('narrow viewport with large text does not overflow', (tester) async {
+  testWidgets('narrow viewport with large text does not overflow', (
+    tester,
+  ) async {
     await tester.pumpApp(
       const MediaQuery(
         data: MediaQueryData(

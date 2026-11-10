@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimens.dart';
 import '../../../catalog/domain/entities/catalog_challenge.dart';
 import '../../../catalog/presentation/widgets/catalog_image.dart';
 import 'rewards_coffee_arc_painter.dart';
+import 'rewards_donut_quarter_clipper.dart';
 
 class RewardsChallengeArt extends StatelessWidget {
   const RewardsChallengeArt({
@@ -15,6 +17,9 @@ class RewardsChallengeArt extends StatelessWidget {
   final CatalogChallenge challenge;
   final double progress;
 
+  static const _donutColorAsset =
+      'assets/images/seed/rewards/challenge_coco_full.jpg';
+
   @override
   Widget build(BuildContext context) {
     if (challenge.kind != CatalogChallengeKind.coffee) {
@@ -22,9 +27,42 @@ class RewardsChallengeArt extends StatelessWidget {
         child: SizedBox(
           width: AppDimens.rewardsChallengeImageSize,
           height: AppDimens.rewardsChallengeImageSize,
-          child: CatalogImage(
-            asset: challenge.imageAsset,
-            fit: BoxFit.cover,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              ColorFiltered(
+                colorFilter: const ColorFilter.matrix(<double>[
+                  0.2126,
+                  0.7152,
+                  0.0722,
+                  0,
+                  0,
+                  0.2126,
+                  0.7152,
+                  0.0722,
+                  0,
+                  0,
+                  0.2126,
+                  0.7152,
+                  0.0722,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                ]),
+                child: CatalogImage(asset: _donutColorAsset, fit: BoxFit.cover),
+              ),
+              ClipPath(
+                clipper: RewardsDonutQuarterClipper(progress: progress),
+                child: CatalogImage(asset: _donutColorAsset, fit: BoxFit.cover),
+              ),
+              CustomPaint(
+                painter: _RewardsDonutQuarterOutlinePainter(progress: progress),
+              ),
+            ],
           ),
         ),
       );
@@ -65,5 +103,30 @@ class RewardsChallengeArt extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class _RewardsDonutQuarterOutlinePainter extends CustomPainter {
+  const _RewardsDonutQuarterOutlinePainter({required this.progress});
+
+  final double progress;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (progress <= 0) return;
+    final paint = Paint()
+      ..color = AppColors.rewardsDonutFrosting.withValues(alpha: 0.35)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.5;
+    canvas.drawCircle(
+      size.center(Offset.zero),
+      size.shortestSide / 2 - 1,
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _RewardsDonutQuarterOutlinePainter oldDelegate) {
+    return oldDelegate.progress != progress;
   }
 }

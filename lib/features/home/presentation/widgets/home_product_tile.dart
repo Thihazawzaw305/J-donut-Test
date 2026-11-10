@@ -112,7 +112,9 @@ class HomeProductTile extends StatelessWidget {
       switch (style) {
         ProductCardStyle.largeRect => AppDimens.homeProductLargeCardRadius,
         ProductCardStyle.mediumRect
-            when HomeProductCardLayout.isMediumFeaturedSection(sectionId ?? '') =>
+            when HomeProductCardLayout.isMediumFeaturedSection(
+              sectionId ?? '',
+            ) =>
           AppDimens.homeProductPopularCardRadius,
         ProductCardStyle.mediumRect => AppDimens.homeCardRadius,
         ProductCardStyle.square => AppDimens.homeProductSquareCardRadius,
@@ -125,10 +127,10 @@ class HomeProductTile extends StatelessWidget {
     ),
     ProductCardStyle.mediumRect
         when HomeProductCardLayout.isMediumFeaturedSection(sectionId ?? '') =>
-        const Size(
-      AppDimens.homeProductPopularWidth,
-      AppDimens.homeProductPopularHeight,
-    ),
+      const Size(
+        AppDimens.homeProductPopularWidth,
+        AppDimens.homeProductPopularHeight,
+      ),
     ProductCardStyle.mediumRect => const Size(
       AppDimens.homeProductMediumWidth,
       AppDimens.homeProductMediumHeight,

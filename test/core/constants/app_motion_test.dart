@@ -11,7 +11,10 @@ void main() {
     expect(AppMotion.onboardingIdlePeriod, const Duration(milliseconds: 3500));
     expect(AppMotion.onboardingIdleAmplitude, 6.0);
     expect(AppMotion.onboardingDriftFactor, 0.12);
-    expect(AppMotion.onboardingBottomEntrance, const Duration(milliseconds: 500));
+    expect(
+      AppMotion.onboardingBottomEntrance,
+      const Duration(milliseconds: 500),
+    );
     expect(AppMotion.onboardingBottomStagger, const Duration(milliseconds: 60));
     expect(AppMotion.onboardingBottomDelay, const Duration(milliseconds: 200));
     expect(AppMotion.onboardingSlideUp, 16.0);

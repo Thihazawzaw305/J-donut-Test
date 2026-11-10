@@ -28,7 +28,7 @@ const _member = CatalogMember(
   pointsBalance: 680000,
   pointsToNextTier: 500,
   rewardsPillCount: 3,
-  tierLadderFillBp: 5800,
+  tierLadderFillBp: 7500,
 );
 
 Widget _scoped(
@@ -61,12 +61,16 @@ void main() {
     expect(find.textContaining("J' Donuts"), findsOneWidget);
   });
 
-  testWidgets('entrance plays when shell tab switches to rewards', (tester) async {
+  testWidgets('entrance plays when shell tab switches to rewards', (
+    tester,
+  ) async {
     await tester.pumpApp(
       ProviderScope(
         overrides: [
           catalogMemberProvider.overrideWith((ref) => Stream.value(_member)),
-          catalogChallengesProvider.overrideWith((ref) => Stream.value(const [])),
+          catalogChallengesProvider.overrideWith(
+            (ref) => Stream.value(const []),
+          ),
           homeShellTabProvider.overrideWith(
             () => _InitialShellTabNotifier(HomeShellTab.home),
           ),
@@ -89,9 +93,7 @@ void main() {
   });
 
   testWidgets('reduce motion shows final points immediately', (tester) async {
-    await tester.pumpApp(
-      _scoped(const RewardsPage(), disableAnimations: true),
-    );
+    await tester.pumpApp(_scoped(const RewardsPage(), disableAnimations: true));
     await tester.pump();
 
     expect(find.textContaining('680,000'), findsOneWidget);

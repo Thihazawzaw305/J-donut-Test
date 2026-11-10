@@ -16,7 +16,12 @@ void main() {
 
     test('rejects 31 April as invalidDate', () {
       expect(
-        validateDateOfBirth(year: 2000, month: 4, day: 31, now: now).errorOrNull,
+        validateDateOfBirth(
+          year: 2000,
+          month: 4,
+          day: 31,
+          now: now,
+        ).errorOrNull,
         DobValidationFailure.invalidDate,
       );
     });
@@ -37,21 +42,36 @@ void main() {
 
     test('rejects 29 February 2025 as invalidDate', () {
       expect(
-        validateDateOfBirth(year: 2025, month: 2, day: 29, now: now).errorOrNull,
+        validateDateOfBirth(
+          year: 2025,
+          month: 2,
+          day: 29,
+          now: now,
+        ).errorOrNull,
         DobValidationFailure.invalidDate,
       );
     });
 
     test('rejects a date after today as inFuture', () {
       expect(
-        validateDateOfBirth(year: 2026, month: 11, day: 10, now: now).errorOrNull,
+        validateDateOfBirth(
+          year: 2026,
+          month: 11,
+          day: 10,
+          now: now,
+        ).errorOrNull,
         DobValidationFailure.inFuture,
       );
     });
 
     test('rejects the day before thirteenth birthday as tooYoung', () {
       expect(
-        validateDateOfBirth(year: 2013, month: 11, day: 10, now: now).errorOrNull,
+        validateDateOfBirth(
+          year: 2013,
+          month: 11,
+          day: 10,
+          now: now,
+        ).errorOrNull,
         DobValidationFailure.tooYoung,
       );
     });

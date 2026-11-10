@@ -100,7 +100,9 @@ class HomeProductSectionSkeleton extends StatelessWidget {
           SizedBox(
             height: listHeight,
             child: ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceMd),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppDimens.spaceMd,
+              ),
               scrollDirection: Axis.horizontal,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: spec.itemCount,
@@ -148,11 +150,7 @@ class _HomeProductTileSkeleton extends StatelessWidget {
             radius: radius,
           ),
           const SizedBox(height: AppDimens.spaceSm),
-          HomeSkeletonBone(
-            width: size.width * 0.72,
-            height: 14,
-            radius: 6,
-          ),
+          HomeSkeletonBone(width: size.width * 0.72, height: 14, radius: 6),
         ],
       ),
     );
@@ -165,10 +163,10 @@ class _HomeProductTileSkeleton extends StatelessWidget {
     ),
     ProductCardStyle.mediumRect
         when HomeProductCardLayout.isMediumFeaturedSection(spec.sectionId) =>
-        const Size(
-      AppDimens.homeProductPopularWidth,
-      AppDimens.homeProductPopularHeight,
-    ),
+      const Size(
+        AppDimens.homeProductPopularWidth,
+        AppDimens.homeProductPopularHeight,
+      ),
     ProductCardStyle.mediumRect => const Size(
       AppDimens.homeProductMediumWidth,
       AppDimens.homeProductMediumHeight,

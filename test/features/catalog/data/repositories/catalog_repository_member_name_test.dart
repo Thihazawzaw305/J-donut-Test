@@ -8,27 +8,29 @@ void main() {
     final db = AppDatabase(NativeDatabase.memory());
     addTearDown(db.close);
 
-    await db.into(db.memberRows).insert(
-      MemberRowsCompanion.insert(
-        id: 'default',
-        displayName: 'Seed Name',
-        subtitleKey: 'memberSubtitleEwallet',
-        avatarAsset: 'assets/images/seed/member_avatar.png',
-        tierProgressKey: 'memberTierProgressGold',
-        tierProgressKyats: 50001,
-        notificationCount: 0,
-        tierCode: 'bronze',
-        pointsBalance: 0,
-        pointsToNextTier: 1290,
-      ),
-    );
+    await db
+        .into(db.memberRows)
+        .insert(
+          MemberRowsCompanion.insert(
+            id: 'default',
+            displayName: 'Seed Name',
+            subtitleKey: 'memberSubtitleEwallet',
+            avatarAsset: 'assets/images/seed/member_avatar.png',
+            tierProgressKey: 'memberTierProgressGold',
+            tierProgressKyats: 50001,
+            notificationCount: 0,
+            tierCode: 'bronze',
+            pointsBalance: 0,
+            pointsToNextTier: 1290,
+          ),
+        );
 
     final repo = CatalogRepositoryImpl(db);
     await repo.updateMemberDisplayName('Ada');
 
-    final row = await (db.select(db.memberRows)
-          ..where((t) => t.id.equals('default')))
-        .getSingle();
+    final row = await (db.select(
+      db.memberRows,
+    )..where((t) => t.id.equals('default'))).getSingle();
     expect(row.displayName, 'Ada');
   });
 }

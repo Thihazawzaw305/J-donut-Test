@@ -248,8 +248,7 @@ class _FailThenSucceedRepository implements AuthRepository {
     PhoneNumber phone,
     OtpCode code, {
     required AuthFlow flow,
-  }) async =>
-      const Ok(null);
+  }) async => const Ok(null);
 
   @override
   Future<Result<void, AuthFailure>> resendOtp(PhoneNumber phone) async =>
@@ -260,8 +259,7 @@ class _FailThenSucceedRepository implements AuthRepository {
     PhoneNumber phone, {
     required String firstName,
     String? lastName,
-  }) async =>
-      const Ok(null);
+  }) async => const Ok(null);
 
   @override
   Future<Result<void, AuthFailure>> completeRegistration(
@@ -269,6 +267,5 @@ class _FailThenSucceedRepository implements AuthRepository {
     required String firstName,
     String? lastName,
     required DateOfBirth dateOfBirth,
-  }) async =>
-      const Ok(null);
+  }) async => const Ok(null);
 }

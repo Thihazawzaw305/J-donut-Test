@@ -6,6 +6,7 @@ abstract final class AppMotion {
   static const productDetailContainer = Duration(milliseconds: 450);
   static const homeNavSelection = medium;
   static const long = Duration(milliseconds: 600);
+  static const stepCheckDraw = Duration(milliseconds: 400);
   static const toastDisplay = Duration(seconds: 3);
   static const homeRefreshSpinLeadIn = Duration(seconds: 1);
   static const homeRefreshSpinPeriod = Duration(seconds: 1);
@@ -16,14 +17,13 @@ abstract final class AppMotion {
 
   static const rewardsEntrance = Duration(milliseconds: 500);
   static const rewardsEntranceOffset = 24.0;
-  static const rewardsTierStagger = Duration(milliseconds: 80);
+  static const rewardsTitleInterval = Interval(0, 0.4, curve: standardCurve);
+  static const rewardsSideInterval = Interval(0.15, 0.55, curve: standardCurve);
   static const rewardsRingSweep = Duration(milliseconds: 1400);
-  static const rewardsPointsCountUp = rewardsRingSweep;
-  static const rewardsPillPopDelay = Duration(milliseconds: 200);
   static const rewardsPillPop = Duration(milliseconds: 320);
   static const rewardsTabThumb = Duration(milliseconds: 280);
   static const rewardsCardEntrance = Duration(milliseconds: 420);
-  static const rewardsCardStagger = Duration(milliseconds: 80);
+
   /// Stagger step on the shared [0, 1] rewards entrance for list cards.
   static const rewardsCardStaggerStep = 0.1;
   static const rewardsCardEntranceSpan = 0.28;
@@ -32,7 +32,9 @@ abstract final class AppMotion {
 
   static const welcomeDonutStagger = Duration(milliseconds: 70);
   static const welcomeDonutEntrance = Duration(milliseconds: 450);
-  static const welcomeTitleDelay = Duration(milliseconds: 280);
+  /// Starts after the last of 4 tiles settles: stagger * 3 + entrance.
+  static const welcomeTitleDelay = Duration(milliseconds: 660);
+  static const welcomeTileSlide = 48.0;
   static const welcomeTitleEntrance = Duration(milliseconds: 500);
 
   static const onboardingHeroEntrance = Duration(milliseconds: 600);
@@ -44,6 +46,11 @@ abstract final class AppMotion {
   static const onboardingBottomEntrance = Duration(milliseconds: 500);
   static const onboardingBottomStagger = Duration(milliseconds: 60);
   static const onboardingBottomDelay = Duration(milliseconds: 200);
+
+  /// Hero donuts: hold stacked, then move up together with the bottom block.
+  static const onboardingHeroHold = onboardingBottomDelay;
+  static const onboardingHeroMove = Duration(milliseconds: 1300);
+  static const onboardingGradientEntrance = Duration(milliseconds: 700);
   static const onboardingIdlePeriod = Duration(milliseconds: 3500);
 
   static const onboardingIdleAmplitude = 6.0;
@@ -64,8 +71,6 @@ abstract final class AppMotion {
         parent: ClampingScrollPhysics(),
       );
     }
-    return const AlwaysScrollableScrollPhysics(
-      parent: BouncingScrollPhysics(),
-    );
+    return const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics());
   }
 }

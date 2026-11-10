@@ -18,7 +18,7 @@ class CatalogImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final url = networkUrl;
-  if (url != null && url.isNotEmpty) {
+    if (url != null && url.isNotEmpty) {
       return CachedNetworkImage(
         imageUrl: url,
         fit: fit,

@@ -29,25 +29,24 @@ class HomeNotificationButton extends StatelessWidget {
               topLeft: Radius.circular(AppDimens.homeNotificationRadius),
               bottomLeft: Radius.circular(AppDimens.homeNotificationRadius),
             ),
-            border: Border(
-              top: _stroke,
-              bottom: _stroke,
-              left: _stroke,
-            ),
+            border: Border(top: _stroke, bottom: _stroke, left: _stroke),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppDimens.spaceSm,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceSm),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.notifications_none, color: AppColors.onPrimary),
+                const Icon(
+                  Icons.notifications_none,
+                  color: AppColors.onPrimary,
+                ),
                 const SizedBox(width: AppDimens.spaceXs),
                 Text(
                   '$count',
-                  style: AppTextStyles.bodyBold.copyWith(color: AppColors.onPrimary),
+                  style: AppTextStyles.bodyBold.copyWith(
+                    color: AppColors.onPrimary,
+                  ),
                 ),
               ],
             ),

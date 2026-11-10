@@ -49,7 +49,10 @@ class _RewardsTierConnectorPainter extends CustomPainter {
       fillRect,
       const Radius.circular(AppDimens.rewardsTierConnectorWidth),
     );
-    canvas.drawRRect(fillRrect, Paint()..color = AppColors.rewardsConnectorFill);
+    canvas.drawRRect(
+      fillRrect,
+      Paint()..color = AppColors.rewardsConnectorFill,
+    );
   }
 
   @override

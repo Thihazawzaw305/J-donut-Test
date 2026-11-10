@@ -34,7 +34,9 @@ class HomeShopsSectionSkeleton extends StatelessWidget {
           SizedBox(
             height: AppDimens.homeShopCardImageHeight + 80,
             child: ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceMd),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppDimens.spaceMd,
+              ),
               scrollDirection: Axis.horizontal,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: itemCount,

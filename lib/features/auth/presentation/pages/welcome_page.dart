@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimens.dart';
 import '../../../../core/constants/app_motion.dart';
 import '../../../../core/l10n/l10n_extension.dart';
@@ -9,8 +10,6 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/primary_button.dart';
 import '../widgets/welcome_donut_tiles.dart';
 import '../widgets/welcome_hero_gradient_overlay.dart';
-import '../widgets/welcome_hero_image.dart';
-
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
 
@@ -60,7 +59,8 @@ class _WelcomePageState extends State<WelcomePage>
       body: Stack(
         fit: StackFit.expand,
         children: [
-          const WelcomeHeroImage(),
+          const ColoredBox(color: AppColors.backgroundBottom),
+          const WelcomeDonutTiles(),
           const WelcomeHeroGradientOverlay(),
           SafeArea(
             top: false,
@@ -72,23 +72,22 @@ class _WelcomePageState extends State<WelcomePage>
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Spacer(),
-                  const WelcomeDonutTiles(),
-                  const SizedBox(height: AppDimens.spaceLg),
                   FadeTransition(
                     opacity: CurvedAnimation(
                       parent: _titleController,
                       curve: AppMotion.standardCurve,
                     ),
                     child: SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(0, 0.12),
-                        end: Offset.zero,
-                      ).animate(
-                        CurvedAnimation(
-                          parent: _titleController,
-                          curve: AppMotion.standardCurve,
-                        ),
-                      ),
+                      position:
+                          Tween<Offset>(
+                            begin: const Offset(0, 0.12),
+                            end: Offset.zero,
+                          ).animate(
+                            CurvedAnimation(
+                              parent: _titleController,
+                              curve: AppMotion.standardCurve,
+                            ),
+                          ),
                       child: Text(
                         context.l10n.welcomeHeadline,
                         style: AppTextStyles.headline,

@@ -47,14 +47,13 @@ class AuthDraftNotifier extends Notifier<AuthDraft> {
 
   void updateLastName(String value) => state = state.copyWith(lastName: value);
 
-  void updateDateOfBirth(DateOfBirth? value) =>
-      state = AuthDraft(
-        phoneInput: state.phoneInput,
-        otpInput: state.otpInput,
-        firstName: state.firstName,
-        lastName: state.lastName,
-        dateOfBirth: value,
-      );
+  void updateDateOfBirth(DateOfBirth? value) => state = AuthDraft(
+    phoneInput: state.phoneInput,
+    otpInput: state.otpInput,
+    firstName: state.firstName,
+    lastName: state.lastName,
+    dateOfBirth: value,
+  );
 }
 
 final authDraftProvider = NotifierProvider<AuthDraftNotifier, AuthDraft>(

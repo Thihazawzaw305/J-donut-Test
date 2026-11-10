@@ -135,7 +135,9 @@ void main() {
     );
   });
 
-  testWidgets('order again section matches popular card layout', (tester) async {
+  testWidgets('order again section matches popular card layout', (
+    tester,
+  ) async {
     await tester.pumpApp(
       const HomeProductTile(
         product: _sampleProduct,

@@ -25,8 +25,7 @@ void main() {
     final card = find.descendant(
       of: find.byType(HomeShopCard),
       matching: find.byWidgetPredicate(
-        (w) =>
-            w is SizedBox && w.width == AppDimens.homeShopCardWidth,
+        (w) => w is SizedBox && w.width == AppDimens.homeShopCardWidth,
       ),
     );
     expect(tester.getSize(card).width, AppDimens.homeShopCardWidth);
@@ -48,9 +47,7 @@ void main() {
       find.descendant(
         of: find.byType(HomeShopCard),
         matching: find.byWidgetPredicate(
-          (w) =>
-              w is SizedBox &&
-              w.height == AppDimens.homeShopCardImageHeight,
+          (w) => w is SizedBox && w.height == AppDimens.homeShopCardImageHeight,
         ),
       ),
     );
@@ -68,14 +65,16 @@ void main() {
     );
 
     final inset = tester.widget<Padding>(
-      find.descendant(
-        of: find.byType(Material),
-        matching: find.byWidgetPredicate(
-          (w) =>
-              w is Padding &&
-              w.padding == const EdgeInsets.all(AppDimens.spaceMd),
-        ),
-      ).first,
+      find
+          .descendant(
+            of: find.byType(Material),
+            matching: find.byWidgetPredicate(
+              (w) =>
+                  w is Padding &&
+                  w.padding == const EdgeInsets.all(AppDimens.spaceMd),
+            ),
+          )
+          .first,
     );
     expect(inset.padding, const EdgeInsets.all(AppDimens.spaceMd));
 

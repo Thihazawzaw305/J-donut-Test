@@ -129,9 +129,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: AppRoutes.home,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: HomePage(),
-                ),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: HomePage()),
               ),
             ],
           ),
@@ -139,9 +138,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: AppRoutes.rewards,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: RewardsPage(),
-                ),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: RewardsPage()),
               ),
             ],
           ),
@@ -149,9 +147,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: AppRoutes.settings,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: SettingsPage(),
-                ),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: SettingsPage()),
               ),
             ],
           ),

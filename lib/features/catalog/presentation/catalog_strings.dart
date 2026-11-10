@@ -11,12 +11,12 @@ String catalogMemberTierProgress(AppLocalizations l10n, CatalogMember member) {
     'memberTierProgressGold' => l10n.memberTierProgressGold(points),
     'memberTierProgressSilver' => l10n.memberTierProgressSilver(kyats),
     _ => () {
-        assert(() {
-          debugPrint('Unknown tierProgressKey: ${member.tierProgressKey}');
-          return true;
-        }());
-        return '';
-      }(),
+      assert(() {
+        debugPrint('Unknown tierProgressKey: ${member.tierProgressKey}');
+        return true;
+      }());
+      return '';
+    }(),
   };
 }
 

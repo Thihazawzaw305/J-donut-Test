@@ -30,16 +30,16 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
-        onUpgrade: (migrator, from, to) async {
-          if (from < 2) {
-            await migrator.addColumn(memberRows, memberRows.rewardsPillCount);
-            await migrator.addColumn(memberRows, memberRows.tierLadderFillBp);
-          }
-          if (from < 3) {
-            await migrator.createTable(challengeRows);
-          }
-        },
-      );
+    onUpgrade: (migrator, from, to) async {
+      if (from < 2) {
+        await migrator.addColumn(memberRows, memberRows.rewardsPillCount);
+        await migrator.addColumn(memberRows, memberRows.tierLadderFillBp);
+      }
+      if (from < 3) {
+        await migrator.createTable(challengeRows);
+      }
+    },
+  );
 
   Future<bool> hasProducts() async {
     final count = await customSelect(

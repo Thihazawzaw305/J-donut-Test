@@ -10,6 +10,7 @@ import '../../features/catalog/domain/entities/catalog_product.dart';
 import '../../features/catalog/domain/entities/catalog_section.dart';
 import '../../features/catalog/domain/entities/catalog_shop.dart';
 import '../../features/catalog/domain/repositories/catalog_repository.dart';
+
 final databaseProvider = FutureProvider<AppDatabase>((ref) async {
   final db = await openAppDatabase();
   final bundle = await loadCatalogSeedBundle();

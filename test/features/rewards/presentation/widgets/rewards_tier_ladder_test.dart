@@ -16,7 +16,7 @@ const _member = CatalogMember(
   pointsBalance: 680000,
   pointsToNextTier: 500,
   rewardsPillCount: 3,
-  tierLadderFillBp: 5800,
+  tierLadderFillBp: 7500,
 );
 
 void main() {

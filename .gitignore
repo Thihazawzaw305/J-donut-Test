@@ -50,5 +50,10 @@ Madivizion_Flutter_Code_Test.pdf
 
 # Subagent-driven-development scratch
 .superpowers/
+.superpower/
+
+# Docs and Node
+docs/
+node_modules/
 
 Madivizion_Flutter_Code_Test.md

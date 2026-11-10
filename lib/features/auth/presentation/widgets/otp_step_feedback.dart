@@ -20,7 +20,10 @@ final class OtpStepFeedback {
   final WidgetRef ref;
   final AuthFlow flow;
 
-  Future<void> onSubmitStatus(BuildContext context, OtpSubmitStatus status) async {
+  Future<void> onSubmitStatus(
+    BuildContext context,
+    OtpSubmitStatus status,
+  ) async {
     if (!context.mounted) return;
     switch (status) {
       case OtpSubmitSuccess():
@@ -34,7 +37,9 @@ final class OtpStepFeedback {
   }
 
   Future<void> _onSuccess(BuildContext context) async {
-    final phone = validatePhone(ref.read(authDraftProvider).phoneInput).valueOrNull;
+    final phone = validatePhone(
+      ref.read(authDraftProvider).phoneInput,
+    ).valueOrNull;
     if (phone != null) {
       await ref.read(sessionProvider.notifier).saveActivePhone(phone.e164);
     }
@@ -59,7 +64,8 @@ final class OtpStepFeedback {
     final actionLabel = switch (failure) {
       AuthFailure.notRegistered => context.l10n.registerAction,
       AuthFailure.alreadyRegistered => context.l10n.logIn,
-      AuthFailure.wrongOtp || AuthFailure.otpLocked => context.l10n.continueLabel,
+      AuthFailure.wrongOtp ||
+      AuthFailure.otpLocked => context.l10n.continueLabel,
     };
     AppToast.show(
       context,

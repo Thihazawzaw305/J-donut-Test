@@ -40,20 +40,23 @@ class CatalogRepositoryImpl implements CatalogRepository {
   Future<List<CatalogSection>> _mapSections(List<SectionRow> sections) async {
     final out = <CatalogSection>[];
     for (final section in sections) {
-      final links = await (_db.select(_db.sectionProductRows)
-            ..where((t) => t.sectionId.equals(section.id))
-            ..orderBy([(t) => OrderingTerm.asc(t.sortIndex)]))
-          .get();
+      final links =
+          await (_db.select(_db.sectionProductRows)
+                ..where((t) => t.sectionId.equals(section.id))
+                ..orderBy([(t) => OrderingTerm.asc(t.sortIndex)]))
+              .get();
       final ids = links.map((e) => e.productId).toList();
       final products = ids.isEmpty
           ? <CatalogProduct>[]
-          : await (_db.select(_db.productRows)
-                ..where((t) => t.id.isIn(ids)))
-              .get()
-              .then((rows) {
-                final byId = {for (final r in rows) r.id: mapProductRow(r)};
-                return [for (final id in ids) if (byId[id] != null) byId[id]!];
-              });
+          : await (_db.select(
+              _db.productRows,
+            )..where((t) => t.id.isIn(ids))).get().then((rows) {
+              final byId = {for (final r in rows) r.id: mapProductRow(r)};
+              return [
+                for (final id in ids)
+                  if (byId[id] != null) byId[id]!,
+              ];
+            });
       out.add(
         CatalogSection(
           id: section.id,
@@ -91,9 +94,9 @@ class CatalogRepositoryImpl implements CatalogRepository {
 
   @override
   Future<CatalogProduct?> productById(String id) async {
-    final row = await (_db.select(_db.productRows)
-          ..where((t) => t.id.equals(id)))
-        .getSingleOrNull();
+    final row = await (_db.select(
+      _db.productRows,
+    )..where((t) => t.id.equals(id))).getSingleOrNull();
     return row == null ? null : mapProductRow(row);
   }
 }

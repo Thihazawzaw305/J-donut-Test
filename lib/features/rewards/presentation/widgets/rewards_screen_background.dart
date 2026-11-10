@@ -9,9 +9,6 @@ class RewardsScreenBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: AppColors.homeScreenBackground,
-      child: child,
-    );
+    return ColoredBox(color: AppColors.homeScreenBackground, child: child);
   }
 }

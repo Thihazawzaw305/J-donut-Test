@@ -56,7 +56,8 @@ class _HomeCatalogBody extends ConsumerWidget {
     final shopsAsync = ref.watch(catalogShopsProvider);
     final refreshing = ref.watch(homeCatalogRefreshingProvider);
 
-    final loading = (memberAsync.isLoading && !memberAsync.hasValue) ||
+    final loading =
+        (memberAsync.isLoading && !memberAsync.hasValue) ||
         (bannersAsync.isLoading && !bannersAsync.hasValue) ||
         (sectionsAsync.isLoading && !sectionsAsync.hasValue) ||
         (shopsAsync.isLoading && !shopsAsync.hasValue);
@@ -69,8 +70,9 @@ class _HomeCatalogBody extends ConsumerWidget {
     final sections = sectionsAsync.value ?? [];
     final shops = shopsAsync.value ?? [];
     final sectionsLoadFailed = sectionsAsync.hasError;
-    final sectionErrorMessage =
-        sectionsLoadFailed ? context.l10n.homeSectionError : null;
+    final sectionErrorMessage = sectionsLoadFailed
+        ? context.l10n.homeSectionError
+        : null;
     final retrySections = sectionsLoadFailed
         ? () => ref.invalidate(catalogSectionsProvider)
         : null;
@@ -138,9 +140,7 @@ List<Widget> _sectionSkeletonSlivers(List<CatalogSection> sections) {
             HomeSectionSkeletonSpec(
               sectionId: section.id,
               cardStyle: section.cardStyle,
-              itemCount: section.products.isEmpty
-                  ? 3
-                  : section.products.length,
+              itemCount: section.products.isEmpty ? 3 : section.products.length,
             ),
         ];
   return [
@@ -163,7 +163,11 @@ class _HomeError extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(message, style: AppTextStyles.body, textAlign: TextAlign.center),
+            Text(
+              message,
+              style: AppTextStyles.body,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: AppDimens.spaceMd),
             FilledButton(
               onPressed: onRetry,

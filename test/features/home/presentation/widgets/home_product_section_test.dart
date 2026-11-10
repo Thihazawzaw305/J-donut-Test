@@ -26,14 +26,13 @@ CatalogSection _section({
   String id = 'popular',
   String titleKey = 'homeSectionPopular',
   ProductCardStyle cardStyle = ProductCardStyle.mediumRect,
-}) =>
-    CatalogSection(
-      id: id,
-      titleKey: titleKey,
-      cardStyle: cardStyle,
-      productIds: const ['prod-1'],
-      products: const [_sampleProduct],
-    );
+}) => CatalogSection(
+  id: id,
+  titleKey: titleKey,
+  cardStyle: cardStyle,
+  productIds: const ['prod-1'],
+  products: const [_sampleProduct],
+);
 
 void main() {
   testWidgets('uses compact section title and white see-all control', (
@@ -58,8 +57,7 @@ void main() {
       find.ancestor(
         of: icon,
         matching: find.byWidgetPredicate(
-          (w) =>
-              w is SizedBox && w.width == AppDimens.homeSeeAllButtonSize,
+          (w) => w is SizedBox && w.width == AppDimens.homeSeeAllButtonSize,
         ),
       ),
     );
@@ -88,8 +86,7 @@ void main() {
       of: find.byType(HomeProductSection),
       matching: find.byType(ListView),
     );
-    final gap =
-        tester.getTopLeft(listView).dy - tester.getBottomLeft(row).dy;
+    final gap = tester.getTopLeft(listView).dy - tester.getBottomLeft(row).dy;
     expect(gap, AppDimens.homeSeasonalListTopGap);
   });
 
@@ -107,8 +104,7 @@ void main() {
       of: find.byType(HomeProductSection),
       matching: find.byType(ListView),
     );
-    final gap =
-        tester.getTopLeft(listView).dy - tester.getBottomLeft(row).dy;
+    final gap = tester.getTopLeft(listView).dy - tester.getBottomLeft(row).dy;
     expect(gap, AppDimens.spaceMd);
   });
 

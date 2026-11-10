@@ -67,9 +67,7 @@ class DobStepNotifier extends Notifier<DobStepState> {
     final result = await ref.read(completeRegistrationProvider)(
       phone,
       firstName: firstName,
-      lastName: draft.lastName.trim().isEmpty
-          ? null
-          : draft.lastName.trim(),
+      lastName: draft.lastName.trim().isEmpty ? null : draft.lastName.trim(),
       dateOfBirth: dob,
     );
     if (!ref.mounted) return;
@@ -85,5 +83,5 @@ class DobStepNotifier extends Notifier<DobStepState> {
 
 final dobStepProvider =
     NotifierProvider.autoDispose<DobStepNotifier, DobStepState>(
-  DobStepNotifier.new,
-);
+      DobStepNotifier.new,
+    );

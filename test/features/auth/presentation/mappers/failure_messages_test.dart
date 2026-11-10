@@ -37,10 +37,7 @@ void main() {
       OtpValidationFailure.incomplete.message(l10n),
       l10n.otpErrorIncomplete,
     );
-    expect(
-      OtpValidationFailure.nonDigit.message(l10n),
-      l10n.otpErrorNonDigit,
-    );
+    expect(OtpValidationFailure.nonDigit.message(l10n), l10n.otpErrorNonDigit);
   });
 
   test('maps name validation failures to localized text', () {
@@ -67,9 +64,6 @@ void main() {
       DobValidationFailure.incomplete.message(l10n),
       l10n.dobErrorIncomplete,
     );
-    expect(
-      DobValidationFailure.tooYoung.message(l10n),
-      l10n.dobErrorTooYoung,
-    );
+    expect(DobValidationFailure.tooYoung.message(l10n), l10n.dobErrorTooYoung);
   });
 }

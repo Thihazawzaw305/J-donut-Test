@@ -5,8 +5,7 @@ class OtpCode {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is OtpCode && other.digits == digits;
+      identical(this, other) || other is OtpCode && other.digits == digits;
 
   @override
   int get hashCode => digits.hashCode;

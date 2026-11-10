@@ -20,8 +20,10 @@ class RewardsChallengeEntrance extends StatelessWidget {
   }
 
   static double _intervalEnd(int index) {
-    return (_intervalStart(index) + AppMotion.rewardsCardEntranceSpan)
-        .clamp(0.0, 1.0);
+    return (_intervalStart(index) + AppMotion.rewardsCardEntranceSpan).clamp(
+      0.0,
+      1.0,
+    );
   }
 
   @override

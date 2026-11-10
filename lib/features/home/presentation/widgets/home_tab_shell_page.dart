@@ -12,11 +12,11 @@ class HomeTabShellPage extends ConsumerStatefulWidget {
   final StatefulNavigationShell navigationShell;
 
   static HomeShellTab tabForBranchIndex(int index) => switch (index) {
-        0 => HomeShellTab.home,
-        1 => HomeShellTab.rewards,
-        2 => HomeShellTab.settings,
-        _ => HomeShellTab.home,
-      };
+    0 => HomeShellTab.home,
+    1 => HomeShellTab.rewards,
+    2 => HomeShellTab.settings,
+    _ => HomeShellTab.home,
+  };
 
   @override
   ConsumerState<HomeTabShellPage> createState() => _HomeTabShellPageState();
@@ -58,8 +58,6 @@ class _HomeTabShellPageState extends ConsumerState<HomeTabShellPage> {
 
   @override
   Widget build(BuildContext context) {
-    return HomeShell(
-      body: widget.navigationShell,
-    );
+    return HomeShell(body: widget.navigationShell);
   }
 }

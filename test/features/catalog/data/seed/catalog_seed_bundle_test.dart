@@ -8,7 +8,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test('catalog_v1 seed parses member and coconut product', () async {
-  final json = await rootBundle.loadString('assets/seed/catalog_v1.json');
+    final json = await rootBundle.loadString('assets/seed/catalog_v1.json');
     final bundle = CatalogSeedBundle.fromJson(
       jsonDecode(json) as Map<String, dynamic>,
     );
@@ -19,7 +19,7 @@ void main() {
     expect(bundle.member.pointsBalance, 680000);
     expect(bundle.member.pointsToNextTier, 500);
     expect(bundle.member.rewardsPillCount, 3);
-    expect(bundle.member.tierLadderFillBp, 5800);
+    expect(bundle.member.tierLadderFillBp, 8500);
     expect(
       bundle.products.any((p) => p.id == 'p_coconut' && p.priceMmk == 3200),
       isTrue,

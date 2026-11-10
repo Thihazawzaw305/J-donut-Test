@@ -55,10 +55,7 @@ class HomeShopCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: AppDimens.spaceSm),
-              Text(
-                context.l10n.homeOrderOnline,
-                style: AppTextStyles.link,
-              ),
+              Text(context.l10n.homeOrderOnline, style: AppTextStyles.link),
             ],
           ),
         ),

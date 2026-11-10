@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimens.dart';
 import '../../../../core/l10n/l10n_extension.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../domain/entities/phone_number.dart';
+import 'animated_input_shell.dart';
 
 class PhoneInputField extends StatelessWidget {
   const PhoneInputField({
@@ -15,6 +15,7 @@ class PhoneInputField extends StatelessWidget {
     required this.onChanged,
     required this.onSubmitted,
     this.readOnly = false,
+    this.hasError = false,
   });
 
   static const _maxInputLength = 15;
@@ -25,16 +26,12 @@ class PhoneInputField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final ValueChanged<String> onSubmitted;
   final bool readOnly;
+  final bool hasError;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(minHeight: AppDimens.inputHeight),
-      padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceLg),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppDimens.inputRadius),
-      ),
+    return AnimatedInputShell(
+      hasError: hasError,
       child: Row(
         children: [
           const Text(PhoneNumber.countryCode, style: AppTextStyles.inputHint),

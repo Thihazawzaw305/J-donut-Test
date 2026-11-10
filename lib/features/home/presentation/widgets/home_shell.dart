@@ -8,11 +8,7 @@ import '../providers/home_shell_tab_provider.dart';
 import 'home_bottom_nav.dart';
 
 class HomeShell extends ConsumerWidget {
-  const HomeShell({
-    super.key,
-    required this.body,
-    this.activeTabOverride,
-  });
+  const HomeShell({super.key, required this.body, this.activeTabOverride});
 
   final Widget body;
 
@@ -39,10 +35,7 @@ class HomeShell extends ConsumerWidget {
           alignment: Alignment.bottomCenter,
           children: [
             const HomeBottomNavAccentStrip(),
-            HomeBottomNav(
-              key: _navKey,
-              activeOverride: activeTabOverride,
-            ),
+            HomeBottomNav(key: _navKey, activeOverride: activeTabOverride),
           ],
         ),
       ),

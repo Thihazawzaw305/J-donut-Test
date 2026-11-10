@@ -9,7 +9,7 @@ class WelcomeHeroGradientOverlay extends StatelessWidget {
   static const Key overlayKey = Key('welcome_hero_gradient');
 
   /// Fraction of viewport height covered (lower half).
-  static const viewportHeightFraction = 0.7;
+  static const viewportHeightFraction = 0.5;
 
   static const List<double> gradientStops = [
     0.0,

@@ -61,7 +61,7 @@ class _HomeSectionEntranceState extends State<HomeSectionEntrance>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        final t = Curves.easeOutCubic.transform(_controller.value);
+        final t = AppMotion.standardCurve.transform(_controller.value);
         return Opacity(
           opacity: t,
           child: Transform.translate(

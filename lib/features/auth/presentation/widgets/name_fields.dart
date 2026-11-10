@@ -6,6 +6,7 @@ import '../../../../core/l10n/l10n_extension.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../domain/failures/name_validation_failure.dart';
 import '../mappers/failure_messages.dart';
+import 'animated_input_shell.dart';
 
 class NameFields extends StatelessWidget {
   const NameFields({
@@ -95,14 +96,10 @@ class NameTextField extends StatelessWidget {
   }
 
   Widget _field() {
-    return Container(
+    return AnimatedInputShell(
       height: AppDimens.inputHeight,
-      padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceLg),
       alignment: Alignment.centerLeft,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppDimens.inputRadius),
-      ),
+      hasError: errorText != null,
       child: TextField(
         controller: controller,
         readOnly: readOnly,

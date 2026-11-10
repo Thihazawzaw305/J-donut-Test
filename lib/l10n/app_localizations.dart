@@ -100,12 +100,6 @@ abstract class AppLocalizations {
   /// **'J\'Donuts'**
   String get appName;
 
-  /// No description provided for @onboardingHeadline.
-  ///
-  /// In en, this message translates to:
-  /// **'Round food for every mood'**
-  String get onboardingHeadline;
-
   /// No description provided for @getStarted.
   ///
   /// In en, this message translates to:

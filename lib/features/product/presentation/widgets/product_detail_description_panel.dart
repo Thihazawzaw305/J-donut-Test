@@ -44,9 +44,7 @@ class ProductDetailDescriptionPanel extends StatelessWidget {
           color: AppColors.tierCapsuleBorder,
         ),
         const SizedBox(width: AppDimens.spaceMd),
-        Expanded(
-          child: Text(description, style: AppTextStyles.body),
-        ),
+        Expanded(child: Text(description, style: AppTextStyles.body)),
       ],
     );
   }

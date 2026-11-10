@@ -32,8 +32,8 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
     final productAsync = ref.watch(productByIdProvider(widget.productId));
 
     return Scaffold(
-        backgroundColor: AppColors.homeScreenBackground,
-        body: productAsync.when(
+      backgroundColor: AppColors.homeScreenBackground,
+      body: productAsync.when(
         loading: () => const ColoredBox(
           color: AppColors.homeScreenBackground,
           child: SizedBox.expand(),
@@ -45,8 +45,10 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
           }
 
           final name = catalogString(context.l10n, product.nameKey);
-          final description =
-              catalogString(context.l10n, product.descriptionKey);
+          final description = catalogString(
+            context.l10n,
+            product.descriptionKey,
+          );
           final unitPrice = formatMmkPrice(product.priceMmk);
           final lineTotal = formatMmkPrice(product.priceMmk * _quantity);
 
@@ -112,15 +114,16 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
                   switchInCurve: AppMotion.standardCurve,
                   switchOutCurve: AppMotion.standardCurve,
                   transitionBuilder: (child, animation) {
-                    final slide = Tween<Offset>(
-                      begin: const Offset(0, 1),
-                      end: Offset.zero,
-                    ).animate(
-                      CurvedAnimation(
-                        parent: animation,
-                        curve: AppMotion.standardCurve,
-                      ),
-                    );
+                    final slide =
+                        Tween<Offset>(
+                          begin: const Offset(0, 1),
+                          end: Offset.zero,
+                        ).animate(
+                          CurvedAnimation(
+                            parent: animation,
+                            curve: AppMotion.standardCurve,
+                          ),
+                        );
                     return FadeTransition(
                       opacity: animation,
                       child: SlideTransition(position: slide, child: child),

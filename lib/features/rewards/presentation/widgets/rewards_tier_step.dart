@@ -35,10 +35,26 @@ class RewardsTierStep extends StatelessWidget {
     const b = 0.0722;
     final keep = 1 - amount;
     return [
-      keep + amount * r, amount * g, amount * b, 0, 0,
-      amount * r, keep + amount * g, amount * b, 0, 0,
-      amount * r, amount * g, keep + amount * b, 0, 0,
-      0, 0, 0, 1, 0,
+      keep + amount * r,
+      amount * g,
+      amount * b,
+      0,
+      0,
+      amount * r,
+      keep + amount * g,
+      amount * b,
+      0,
+      0,
+      amount * r,
+      amount * g,
+      keep + amount * b,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
     ];
   }
 
@@ -46,11 +62,11 @@ class RewardsTierStep extends StatelessWidget {
     if (reached) return null;
     return switch (tier) {
       RewardsTier.gold => ColorFilter.matrix(
-          _desaturateMatrix(AppDimens.rewardsTierLockedDesaturateGold),
-        ),
+        _desaturateMatrix(AppDimens.rewardsTierLockedDesaturateGold),
+      ),
       RewardsTier.platinum => ColorFilter.matrix(
-          _desaturateMatrix(AppDimens.rewardsTierLockedDesaturatePlatinum),
-        ),
+        _desaturateMatrix(AppDimens.rewardsTierLockedDesaturatePlatinum),
+      ),
       RewardsTier.silver => null,
     };
   }

@@ -43,9 +43,7 @@ class HomeProductSection extends StatelessWidget {
       return _sectionShell(
         context,
         title: title,
-        child: _SectionStatePanel(
-          message: context.l10n.homeSectionEmpty,
-        ),
+        child: _SectionStatePanel(message: context.l10n.homeSectionEmpty),
       );
     }
 
@@ -65,10 +63,8 @@ class HomeProductSection extends StatelessWidget {
                   child: Text(title, style: AppTextStyles.homeSectionTitle),
                 ),
                 _SeeAllButton(
-                  onTap: () => AppToast.show(
-                    context,
-                    message: context.l10n.comingSoon,
-                  ),
+                  onTap: () =>
+                      AppToast.show(context, message: context.l10n.comingSoon),
                 ),
               ],
             ),
@@ -77,7 +73,9 @@ class HomeProductSection extends StatelessWidget {
           SizedBox(
             height: _listHeight(section),
             child: ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceMd),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppDimens.spaceMd,
+              ),
               scrollDirection: Axis.horizontal,
               itemCount: section.products.length,
               separatorBuilder: (_, _) =>
@@ -132,10 +130,7 @@ class HomeProductSection extends StatelessWidget {
     final imageHeight = switch (section) {
       CatalogSection(cardStyle: ProductCardStyle.largeRect) =>
         AppDimens.homeProductLargeHeight,
-      CatalogSection(
-        id: final id,
-        cardStyle: ProductCardStyle.mediumRect,
-      )
+      CatalogSection(id: final id, cardStyle: ProductCardStyle.mediumRect)
           when HomeProductCardLayout.isMediumFeaturedSection(id) =>
         AppDimens.homeProductPopularHeight,
       CatalogSection(cardStyle: ProductCardStyle.mediumRect) =>

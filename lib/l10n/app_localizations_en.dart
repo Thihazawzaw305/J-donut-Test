@@ -12,9 +12,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appName => 'J\'Donuts';
 
   @override
-  String get onboardingHeadline => 'Round food for every mood';
-
-  @override
   String get getStarted => 'Let\'s get started';
 
   @override

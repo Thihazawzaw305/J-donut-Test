@@ -3,14 +3,8 @@ import 'package:j_donuts_app/features/rewards/domain/rewards_challenge.dart';
 
 void main() {
   test('complete when current meets total', () {
-    expect(
-      challengeIsComplete(current: 4, total: 4),
-      isTrue,
-    );
-    expect(
-      challengeIsComplete(current: 1, total: 4),
-      isFalse,
-    );
+    expect(challengeIsComplete(current: 4, total: 4), isTrue);
+    expect(challengeIsComplete(current: 1, total: 4), isFalse);
   });
 
   test('progress fraction matches quarters and cups', () {

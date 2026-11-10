@@ -43,6 +43,7 @@ class PhoneStepBody extends StatelessWidget {
           controller: controller,
           focusNode: focusNode,
           readOnly: state.isSubmitting,
+          hasError: validationMessage != null,
           onChanged: onChanged,
           onSubmitted: onSubmitted,
         ),

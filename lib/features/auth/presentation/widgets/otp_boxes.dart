@@ -23,6 +23,7 @@ class OtpStepBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         OtpBoxes(
           digits: state.digits,

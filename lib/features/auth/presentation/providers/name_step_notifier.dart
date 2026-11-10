@@ -43,7 +43,9 @@ class NameStepNotifier extends Notifier<NameStepState> {
 
   Future<void> submit() async {
     if (!state.canSubmit || state.isSubmitting) return;
-    final phone = validatePhone(ref.read(authDraftProvider).phoneInput).valueOrNull;
+    final phone = validatePhone(
+      ref.read(authDraftProvider).phoneInput,
+    ).valueOrNull;
     if (phone == null) return;
 
     final firstName = state.firstValidation.valueOrNull;
@@ -68,5 +70,5 @@ class NameStepNotifier extends Notifier<NameStepState> {
 
 final nameStepProvider =
     NotifierProvider.autoDispose<NameStepNotifier, NameStepState>(
-  NameStepNotifier.new,
-);
+      NameStepNotifier.new,
+    );

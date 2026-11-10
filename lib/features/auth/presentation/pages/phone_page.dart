@@ -64,9 +64,8 @@ class _PhonePageState extends ConsumerState<PhonePage> {
     return AuthStepScaffold(
       title: context.l10n.phoneTitle,
       currentStep: widget.flow == AuthFlow.register ? 1 : null,
-      onBack: () => context.canPop()
-          ? context.pop()
-          : context.go(AppRoutes.onboarding),
+      onBack: () =>
+          context.canPop() ? context.pop() : context.go(AppRoutes.onboarding),
       body: PhoneStepBody(
         flow: widget.flow,
         state: state,
@@ -93,7 +92,9 @@ class _PhonePageState extends ConsumerState<PhonePage> {
   void _onFocusChanged() {
     if (!mounted) return;
     final isCurrentRoute = ModalRoute.of(context)?.isCurrent ?? false;
-    if (!_focusNode.hasFocus && isCurrentRoute && ref.read(_provider).visibleError != null) {
+    if (!_focusNode.hasFocus &&
+        isCurrentRoute &&
+        ref.read(_provider).visibleError != null) {
       setState(() => _showValidationMessage = true);
     }
   }

@@ -1,6 +1,6 @@
 # j_donuts_app
 
-Madivizion Flutter code test — J'Donuts customer app slice (Tasks 1–2 implemented; Task 3 Rewards placeholder).
+Madivizion Flutter code test — J'Donuts customer app slice (Tasks 1–3).
 
 ## Versions
 
@@ -34,14 +34,14 @@ lib/
     catalog/     Drift DB, seed JSON, repository
     home/        Home shell, sections, offline banner
     product/     Product detail, quantity, MMK formatting
-    rewards/     placeholder (Task 3)
+    rewards/     Tier ladder, points ring, challenges, tab motion (Task 3)
 ```
 
 Dependencies point inward: presentation → domain ← data.
 
 ## Navigation
 
-`go_router` with session redirect (logged in → Home; logged out → Onboarding). Product deep link: `/product/:id`. Registration uses shared-axis transitions; Home uses `StatefulNavigationShell` for tabs.
+`go_router` with session redirect (logged in → Home; logged out → Onboarding). Product deep link: `/product/:id`. Registration uses shared-axis transitions; Home uses `StatefulNavigationShell` for tabs (Home, Rewards, Settings).
 
 ## Offline strategy
 
@@ -54,12 +54,13 @@ Dependencies point inward: presentation → domain ← data.
 
 | Area | Implementation |
 |------|----------------|
-| Onboarding | Hero image slide; bottom CTAs staggered; reduce motion short-circuits durations |
+| Onboarding | Solid surface; bottom CTAs staggered; reduce motion short-circuits durations |
 | Registration | Shared-axis / fade-through routes; progress ring tween; OTP shake |
 | Buttons | `PrimaryButton` press scale + loading morph |
 | Welcome | Staggered donut tiles; title/button fade-up |
 | Home | Shimmer skeletons; staggered section entrance; banner auto-advance (4s); pull-to-refresh donut |
 | Product | `OpenContainer` from tile; quantity `AnimatedSwitcher` |
+| Rewards | Ring sweep + points count-up; tier stagger; tab thumb slide; challenge stagger; donut quarter clip; coffee arc |
 | Bottom nav | Animated pill width/label for active tab |
 
 Motion durations and curves live in `lib/core/constants/app_motion.dart`.
@@ -70,22 +71,16 @@ Use **`123456`** on the verify-number step. Three wrong attempts lock until Rese
 
 ## Tests
 
-- Unit: domain validators, auth repository, catalog seed, MMK formatter
-- Widget: auth steps, home sections, product detail
+- Unit: domain validators, auth repository, catalog seed, MMK formatter, rewards progress helpers
+- Widget: auth steps, home sections, product detail, rewards motion widgets
 - Integration: register → welcome → home → coconut product (`integration_test/register_to_product_test.dart`)
 
 ## Known gaps
 
-- **Task 3 Rewards** — placeholder screen only (no ring, tiers, challenges).
 - **Delivery artifacts** — APK / iOS simulator `.app` and screen recording not included in repo (build locally).
 - **Burmese locale** — English ARB only (bonus locale not done).
 - Per-section **independent** error streams not implemented; one sections provider failure marks all sections with retry.
-
-## Device check
-
-| Date | Device | Text scale 1.3 | Notes | Pass |
-|------|--------|----------------|-------|------|
-| _TBD_ | | 1.3 | Ring / toast / spinner | |
+- **`flutter analyze`** — may report `prefer_const_*` info lints in tests/rewards; no errors.
 
 ## Madivizion Task 1 notes
 
@@ -95,6 +90,10 @@ Use **`123456`** on the verify-number step. Three wrong attempts lock until Rese
 | Session | Secure storage; relaunch → Home; Settings → Log out |
 | Social / legal | Coming soon toast |
 | Registered users | Persisted E.164 set in secure storage |
+
+## Rewards seed (Task 3)
+
+Member row in `catalog_v1.json`: `pointsBalance` 680000, `tierCode` silver, `rewardsPillCount` 3, `tierLadderFillBp` 8500. Ring arc uses `rewardsDonutRingTarget(member)` (tier fill × display sweep cap).
 
 ## Time spent
 

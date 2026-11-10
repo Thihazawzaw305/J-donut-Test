@@ -23,7 +23,9 @@ class RewardsChallengeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tab = giftSelected ? CatalogChallengeTab.gift : CatalogChallengeTab.eat;
+    final tab = giftSelected
+        ? CatalogChallengeTab.gift
+        : CatalogChallengeTab.eat;
     final items = [
       for (final c in challenges)
         if (c.tab == tab) c,
@@ -44,20 +46,20 @@ class RewardsChallengeList extends StatelessWidget {
                   AppDimens.spaceMd,
                   homeScrollBottomClearance(context),
                 ),
-              itemCount: items.length,
-              separatorBuilder: (_, _) =>
-                  const SizedBox(height: AppDimens.rewardsChallengeListGap),
-              itemBuilder: (context, index) {
-                final challenge = items[index];
-                return RewardsChallengeEntrance(
-                  entrance: entrance,
-                  index: index,
-                  child: RewardsChallengeCard(
-                    key: ValueKey(challenge.id),
-                    challenge: challenge,
-                  ),
-                );
-              },
+                itemCount: items.length,
+                separatorBuilder: (_, _) =>
+                    const SizedBox(height: AppDimens.rewardsChallengeListGap),
+                itemBuilder: (context, index) {
+                  final challenge = items[index];
+                  return RewardsChallengeEntrance(
+                    entrance: entrance,
+                    index: index,
+                    child: RewardsChallengeCard(
+                      key: ValueKey(challenge.id),
+                      challenge: challenge,
+                    ),
+                  );
+                },
               ),
       ),
     );

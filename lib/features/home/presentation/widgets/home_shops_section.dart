@@ -20,7 +20,8 @@ class HomeShopsSection extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final backgroundHeight = constraints.maxWidth *
+        final backgroundHeight =
+            constraints.maxWidth *
             AppDimens.homeShopsBackgroundHeight /
             AppDimens.homeShopsBackgroundWidth;
         return ConstrainedBox(
@@ -98,7 +99,11 @@ class HomeShopsSection extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          for (var index = 0; index < shops.length; index++) ...[
+                          for (
+                            var index = 0;
+                            index < shops.length;
+                            index++
+                          ) ...[
                             if (index > 0)
                               const SizedBox(width: AppDimens.spaceMd),
                             HomeShopCard(shop: shops[index]),

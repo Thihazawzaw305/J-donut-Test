@@ -48,10 +48,10 @@ class _OtpPageState extends ConsumerState<OtpPage> {
   Widget build(BuildContext context) {
     ref.listen(_provider.select((s) => s.status), (_, status) async {
       if (status is OtpSubmitSuccess) _ticker?.cancel();
-      await OtpStepFeedback(ref: ref, flow: widget.flow).onSubmitStatus(
-        context,
-        status,
-      );
+      await OtpStepFeedback(
+        ref: ref,
+        flow: widget.flow,
+      ).onSubmitStatus(context, status);
     });
     final state = ref.watch(_provider);
     final e164 =

@@ -10,7 +10,7 @@ class RewardsHeroRow extends StatelessWidget {
   const RewardsHeroRow({
     super.key,
     required this.pillCount,
-    required this.pillScale,
+    required this.badgeScale,
     required this.titleFade,
     required this.titleSlide,
     required this.pillFade,
@@ -19,7 +19,7 @@ class RewardsHeroRow extends StatelessWidget {
   });
 
   final int pillCount;
-  final double pillScale;
+  final double badgeScale;
   final double titleFade;
   final double titleSlide;
   final double pillFade;
@@ -67,7 +67,7 @@ class RewardsHeroRow extends StatelessWidget {
                 child: RewardsPillButton(
                   label: context.l10n.rewardsPillLabel,
                   count: pillCount,
-                  scale: pillScale,
+                  badgeScale: badgeScale,
                   onPressed: onPillPressed,
                 ),
               ),

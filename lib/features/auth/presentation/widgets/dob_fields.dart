@@ -11,6 +11,7 @@ import '../mappers/failure_messages.dart';
 import '../providers/auth_providers.dart';
 import '../providers/dob_step_notifier.dart';
 import '../providers/dob_step_state.dart';
+import 'animated_input_shell.dart';
 import 'birthday_sheet.dart';
 
 class DobFields extends ConsumerWidget {
@@ -29,18 +30,21 @@ class DobFields extends ConsumerWidget {
           hint: l10n.dayHint,
           value: state.day?.toString(),
           onTap: state.isSubmitting ? null : open,
+          hasError: error != null,
         ),
         const SizedBox(height: AppDimens.spaceMd),
         _DobReadOnlyField(
           hint: l10n.monthHint,
           value: _monthLabel(context, state.month),
           onTap: state.isSubmitting ? null : open,
+          hasError: error != null,
         ),
         const SizedBox(height: AppDimens.spaceMd),
         _DobReadOnlyField(
           hint: l10n.yearHint,
           value: state.year?.toString(),
           onTap: state.isSubmitting ? null : open,
+          hasError: error != null,
         ),
         if (error != null) ...[
           const SizedBox(height: AppDimens.spaceXs),
@@ -108,8 +112,10 @@ class _DobReadOnlyField extends StatelessWidget {
     required this.hint,
     required this.value,
     required this.onTap,
+    required this.hasError,
   });
 
+  final bool hasError;
   final String hint;
   final String? value;
   final VoidCallback? onTap;
@@ -118,14 +124,10 @@ class _DobReadOnlyField extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AnimatedInputShell(
         height: AppDimens.inputHeight,
-        padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceLg),
         alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppDimens.inputRadius),
-        ),
+        hasError: hasError,
         child: IgnorePointer(
           child: TextFormField(
             key: ValueKey('$hint-${value ?? ''}'),

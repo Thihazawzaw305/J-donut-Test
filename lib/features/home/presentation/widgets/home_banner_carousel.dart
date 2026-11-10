@@ -92,10 +92,7 @@ class _HomeBannerCarouselState extends State<HomeBannerCarousel> {
                 topLeft: Radius.circular(AppDimens.homeBannerRadius),
                 topRight: Radius.circular(AppDimens.homeBannerRadius),
               ),
-              child: CatalogImage(
-                asset: banner.imageAsset,
-                fit: BoxFit.cover,
-              ),
+              child: CatalogImage(asset: banner.imageAsset, fit: BoxFit.cover),
             ),
           );
         },
