@@ -44,8 +44,9 @@ Requires macOS + Xcode locally, or the GitHub Actions workflow (no local Mac nee
 Local Mac equivalent:
 
 ```bash
-flutter build ios --simulator --release --no-codesign
+flutter build ios --simulator --debug --no-codesign
 # then zip build/ios/iphonesimulator/Runner.app → Runner.app.zip
+# (--release is not supported for simulators)
 ```
 
 Workflow: `.github/workflows/ios-simulator-app.yml` (manual `workflow_dispatch` only — saves macOS CI minutes).

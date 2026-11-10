@@ -21,7 +21,8 @@ jobs:
         run: flutter pub get
 
       - name: Build iOS Simulator .app
-        run: flutter build ios --simulator --release --no-codesign
+        # Release is not supported for simulators; debug .app is what Madivizion asks for.
+        run: flutter build ios --simulator --debug --no-codesign
 
       - name: Zip Runner.app
         run: |
