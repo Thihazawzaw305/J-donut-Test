@@ -35,6 +35,35 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  testWidgets('keeps leading trunk zero in the field while typing', (
+    tester,
+  ) async {
+    await pumpJDonutsApp(tester, location: AppRoutes.registerPhone);
+    await typeNumber(tester, validNumber);
+
+    expect(find.text(validNumber), findsOneWidget);
+  });
+
+  testWidgets('Continue strips leading zero from the field before OTP', (
+    tester,
+  ) async {
+    final repository = ControllableAuthRepository();
+    await pumpJDonutsApp(
+      tester,
+      location: AppRoutes.registerPhone,
+      overrides: [authRepositoryProvider.overrideWithValue(repository)],
+    );
+    await typeNumber(tester, validNumber);
+    await tester.tap(find.byType(PrimaryButton));
+    await tester.pump();
+
+    expect(find.text(validNumber), findsNothing);
+    expect(find.text(displayedNumber), findsOneWidget);
+
+    repository.complete(const Ok(null));
+    await tester.pumpAndSettle();
+  });
+
   testWidgets('Continue stays disabled until the number is valid', (
     tester,
   ) async {
@@ -48,7 +77,7 @@ void main() {
     expect(continueButton(tester).onPressed, isNotNull);
   });
 
-  testWidgets('done on the keyboard shows one validation toast', (
+  testWidgets('done on the keyboard shows one inline validation message', (
     tester,
   ) async {
     await pumpJDonutsApp(tester, location: AppRoutes.registerPhone);
@@ -58,9 +87,10 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text(invalidMessage), findsOneWidget);
+    expect(find.byType(SnackBar), findsNothing);
   });
 
-  testWidgets('shows a toast when an invalid number loses focus', (
+  testWidgets('shows inline validation when an invalid number loses focus', (
     tester,
   ) async {
     await pumpJDonutsApp(tester, location: AppRoutes.registerPhone);
@@ -70,15 +100,19 @@ void main() {
     await tapOutsideField(tester);
 
     expect(find.text(invalidMessage), findsOneWidget);
+    expect(find.byType(SnackBar), findsNothing);
   });
 
-  testWidgets('shows no toast when a valid number loses focus', (tester) async {
+  testWidgets('shows no inline message when a valid number loses focus', (
+    tester,
+  ) async {
     await pumpJDonutsApp(tester, location: AppRoutes.registerPhone);
     await tester.tap(find.byType(TextField));
     await typeNumber(tester, validNumber);
 
     await tapOutsideField(tester);
 
+    expect(find.text(invalidMessage), findsNothing);
     expect(find.byType(SnackBar), findsNothing);
   });
 
@@ -122,7 +156,11 @@ void main() {
     await tester.tap(find.byType(PrimaryButton));
     await tester.pumpAndSettle();
 
-    expect(find.text("This number isn't registered yet."), findsOneWidget);
+    expect(
+      find.textContaining("This number isn't registered yet"),
+      findsOneWidget,
+    );
+    expect(find.byType(SnackBar), findsNothing);
 
     await tester.tap(find.text('Register'));
     await tester.pumpAndSettle();
@@ -148,11 +186,12 @@ void main() {
     await typeNumber(tester, validNumber);
 
     await tester.tap(find.byIcon(Icons.arrow_back));
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 2500));
     await tester.tap(find.text("LET'S GET STARTED"));
     await tester.pumpAndSettle();
 
-    expect(find.text(displayedNumber), findsOneWidget);
+    expect(find.text(validNumber), findsOneWidget);
   });
 
   testWidgets('a stale failure toast is gone after a later successful submit', (

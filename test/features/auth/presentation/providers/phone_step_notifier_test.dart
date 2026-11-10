@@ -65,6 +65,17 @@ void main() {
     expect(repository.requestCount, 0);
   });
 
+  test('submit strips leading trunk zero from stored input', () async {
+    notifier().onInputChanged(validInput);
+    final pending = notifier().submit();
+
+    expect(state().input, '9254135592');
+    expect(container.read(authDraftProvider).phoneInput, '9254135592');
+
+    repository.complete(const Ok(null));
+    await pending;
+  });
+
   test('submit shows submitting then success with the phone number', () async {
     notifier().onInputChanged(validInput);
     final pending = notifier().submit();
@@ -88,7 +99,7 @@ void main() {
     final pending = notifier().submit();
     notifier().onInputChanged('09123456789');
 
-    expect(state().input, validInput);
+    expect(state().input, '9254135592');
     repository.complete(const Ok(null));
     await pending;
   });

@@ -110,7 +110,7 @@ void main() {
     expect(continueButton(tester).onPressed, isNotNull);
   });
 
-  testWidgets('submit shows Creating overlay then opens Welcome', (
+  testWidgets('submit shows button loading then opens Welcome', (
     tester,
   ) async {
     final repository = ControllableAuthRepository();
@@ -120,7 +120,8 @@ void main() {
     await tester.tap(find.widgetWithText(PrimaryButton, 'CONTINUE'));
     await tester.pump();
 
-    expect(find.text('Creating...'), findsOneWidget);
+    expect(find.text('Creating...'), findsNothing);
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
     expect(find.text('30'), findsOneWidget);
     expect(find.text('May'), findsOneWidget);
     expect(find.text('2000'), findsOneWidget);
@@ -129,13 +130,13 @@ void main() {
       everyElement(predicate<TextField>((field) => field.enabled ?? true)),
     );
     expect(find.widgetWithText(PrimaryButton, 'CONTINUE'), findsOneWidget);
-    expect(continueButton(tester).isLoading, isFalse);
+    expect(continueButton(tester).isLoading, isTrue);
     expect(repository.completeRegistrationCount, 1);
 
     repository.finishCompleteRegistration(const Ok(null));
     await tester.pumpAndSettle();
 
-    expect(find.text('Welcome'), findsOneWidget);
+    expect(find.textContaining('Welcome to the'), findsOneWidget);
   });
 }
 

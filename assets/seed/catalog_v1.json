@@ -1,0 +1,242 @@
+{
+  "member": {
+    "displayName": "Thiha Zaw Zaw",
+    "subtitleKey": "memberSubtitleEwallet",
+    "avatarAsset": "assets/images/seed/member_avatar.png",
+    "tierProgressKey": "memberTierProgressSilver",
+    "tierProgressKyats": 50001,
+    "notificationCount": 0,
+    "tierCode": "bronze",
+    "pointsBalance": 0,
+    "pointsToNextTier": 1290
+  },
+  "banners": [
+    {
+      "id": "b_promo_donut",
+      "imageAsset": "assets/images/seed/banner_promo_one.jpg",
+      "sortOrder": 0
+    },
+    {
+      "id": "b_promo_deal",
+      "imageAsset": "assets/images/seed/banner_promo_two.jpg",
+      "sortOrder": 1
+    },
+    {
+      "id": "b_promo_seasonal",
+      "imageAsset": "assets/images/seed/banner_promo_three.jpg",
+      "sortOrder": 2
+    }
+  ],
+  "products": [
+    {
+      "id": "p_coconut",
+      "code": "JD022123",
+      "nameKey": "productCoconutDonut",
+      "priceMmk": 3200,
+      "isNew": true,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/p_coconut.png",
+      "imageUrl": null,
+      "descriptionKey": "productCoconutDescription"
+    },
+    {
+      "id": "p_monster_black",
+      "code": "JD010001",
+      "nameKey": "productMonsterBlackFlake",
+      "priceMmk": 2800,
+      "isNew": false,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/seasonal_special_one.jpg",
+      "imageUrl": null,
+      "descriptionKey": "productMonsterDescription"
+    },
+    {
+      "id": "p_chocolate_brownie",
+      "code": "JD010002",
+      "nameKey": "productChocolateBrownie",
+      "priceMmk": 2400,
+      "isNew": false,
+      "discountPercent": 10,
+      "imageAsset": "assets/images/seed/seasonal_special_two.jpg",
+      "imageUrl": null,
+      "descriptionKey": "productBrownieDescription"
+    },
+    {
+      "id": "p_fancy_clover",
+      "code": "JD010003",
+      "nameKey": "productFancyClover",
+      "priceMmk": 2200,
+      "isNew": false,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/seasonal_special_three.jpg",
+      "imageUrl": null,
+      "descriptionKey": "productFancyCloverDescription"
+    },
+    {
+      "id": "p_candy_ring",
+      "code": "JD020001",
+      "nameKey": "productCandyRing",
+      "priceMmk": 1800,
+      "isNew": false,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/p_candy_ring.png",
+      "imageUrl": null,
+      "descriptionKey": "productGenericDonutDescription"
+    },
+    {
+      "id": "p_happy_bloom",
+      "code": "JD020002",
+      "nameKey": "productHappyBloom",
+      "priceMmk": 1900,
+      "isNew": false,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/p_happy_bloom.png",
+      "imageUrl": null,
+      "descriptionKey": "productGenericDonutDescription"
+    },
+    {
+      "id": "p_butter_bread",
+      "code": "JD030001",
+      "nameKey": "productButterCreamBread",
+      "priceMmk": 1500,
+      "isNew": false,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/p_butter_bread.png",
+      "imageUrl": null,
+      "descriptionKey": "productBreadDescription"
+    },
+    {
+      "id": "p_cheese_bread",
+      "code": "JD030002",
+      "nameKey": "productCheeseBread",
+      "priceMmk": 1600,
+      "isNew": false,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/p_cheese_bread.png",
+      "imageUrl": null,
+      "descriptionKey": "productBreadDescription"
+    },
+    {
+      "id": "p_bread_sticks",
+      "code": "JD040001",
+      "nameKey": "productBreadSticks",
+      "priceMmk": 1200,
+      "isNew": false,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/p_bread_sticks.png",
+      "imageUrl": null,
+      "descriptionKey": "productCookieDescription"
+    },
+    {
+      "id": "p_butter_biscuit",
+      "code": "JD040002",
+      "nameKey": "productButterBiscuit",
+      "priceMmk": 3500,
+      "isNew": false,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/p_butter_biscuit.png",
+      "imageUrl": null,
+      "descriptionKey": "productCookieDescription"
+    },
+    {
+      "id": "p_buttercake_10",
+      "code": "JD050001",
+      "nameKey": "productButtercake10",
+      "priceMmk": 4200,
+      "isNew": false,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/p_buttercake_10.png",
+      "imageUrl": null,
+      "descriptionKey": "productCakeDescription"
+    },
+    {
+      "id": "p_buttercake_6",
+      "code": "JD050002",
+      "nameKey": "productButtercake6",
+      "priceMmk": 2800,
+      "isNew": false,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/p_buttercake_6.png",
+      "imageUrl": null,
+      "descriptionKey": "productCakeDescription"
+    },
+    {
+      "id": "p_jbites_chocolate",
+      "code": "JD022124",
+      "nameKey": "productJbitesChocolate",
+      "priceMmk": 1200,
+      "isNew": true,
+      "discountPercent": null,
+      "imageAsset": "assets/images/seed/p_jbites_chocolate.png",
+      "imageUrl": null,
+      "descriptionKey": "productJbitesDescription"
+    }
+  ],
+  "sections": [
+    {
+      "id": "seasonal",
+      "titleKey": "homeSectionSeasonal",
+      "cardStyle": "largeRect",
+      "productIds": ["p_monster_black", "p_chocolate_brownie", "p_fancy_clover"]
+    },
+    {
+      "id": "popular",
+      "titleKey": "homeSectionPopular",
+      "cardStyle": "mediumRect",
+      "productIds": ["p_chocolate_brownie", "p_fancy_clover", "p_candy_ring", "p_happy_bloom"]
+    },
+    {
+      "id": "orderAgain",
+      "titleKey": "homeSectionOrderAgain",
+      "cardStyle": "mediumRect",
+      "productIds": ["p_coconut", "p_monster_black", "p_jbites_chocolate"]
+    },
+    {
+      "id": "donuts",
+      "titleKey": "homeSectionDonuts",
+      "cardStyle": "square",
+      "productIds": ["p_candy_ring", "p_happy_bloom", "p_fancy_clover", "p_coconut"]
+    },
+    {
+      "id": "bread",
+      "titleKey": "homeSectionBread",
+      "cardStyle": "square",
+      "productIds": ["p_butter_bread", "p_cheese_bread"]
+    },
+    {
+      "id": "cookies",
+      "titleKey": "homeSectionCookies",
+      "cardStyle": "square",
+      "productIds": ["p_bread_sticks", "p_butter_biscuit"]
+    },
+    {
+      "id": "cake",
+      "titleKey": "homeSectionCake",
+      "cardStyle": "square",
+      "productIds": ["p_buttercake_10", "p_buttercake_6"]
+    }
+  ],
+  "shops": [
+    {
+      "id": "s_myaynigone",
+      "nameKey": "shopMyaynigone",
+      "addressKey": "shopMyaynigoneAddress",
+      "imageAsset": "assets/images/seed/shop_myaynigone.jpg",
+      "sortOrder": 0
+    },
+    {
+      "id": "s_bo_aung_kyaw",
+      "nameKey": "shopBoAungKyaw",
+      "addressKey": "shopBoAungKyawAddress",
+      "imageAsset": "assets/images/seed/shop_bo_aung_kyaw.jpg",
+      "sortOrder": 1
+    },
+    {
+      "id": "s_hledan",
+      "nameKey": "shopHledan",
+      "addressKey": "shopHledanAddress",
+      "imageAsset": "assets/images/seed/shop_hledan.jpg",
+      "sortOrder": 2
+    }
+  ]
+}

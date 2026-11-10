@@ -1,7 +1,6 @@
-/// Formats what the user sees in the national-number field (after the +95 prefix).
+/// Strips one leading trunk `0` from the digit sequence (e.g. on Continue).
 ///
-/// Removes one leading trunk `0` from the digit sequence while keeping spaces,
-/// dashes, and an optional leading `+`.
+/// Keeps spaces, dashes, and an optional leading `+`.
 String normalizePhoneInputForDisplay(String raw) {
   if (raw.isEmpty) return raw;
 

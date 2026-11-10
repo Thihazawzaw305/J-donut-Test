@@ -112,7 +112,10 @@ void main() {
     );
 
     await tester.enterText(find.byType(TextField), '123456');
-    await tester.pump();
+    for (var i = 0; i < 30; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+      if (find.text('Home').evaluate().isNotEmpty) break;
+    }
 
     expect(find.text('Home'), findsOneWidget);
   });

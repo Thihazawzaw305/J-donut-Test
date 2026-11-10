@@ -5,32 +5,17 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/l10n/l10n_extension.dart';
 import '../../../../core/widgets/app_toast.dart';
 import '../../domain/entities/auth_flow.dart';
-import '../auth_routes.dart';
 import '../../domain/failures/auth_failure.dart';
+import '../auth_routes.dart';
 import '../mappers/failure_messages.dart';
-import '../providers/phone_step_notifier.dart';
 import '../providers/phone_step_state.dart';
 
-/// Toasts and navigation driven by phone-step submit status and validation.
+/// Navigation and auth-failure toasts for the phone step (validation is inline).
 final class PhoneStepFeedback {
   PhoneStepFeedback({required this.ref, required this.flow});
 
   final WidgetRef ref;
   final AuthFlow flow;
-
-  NotifierProvider<PhoneStepNotifier, PhoneStepState> get _provider =>
-      phoneStepProvider(flow);
-
-  void warnIfInvalid(BuildContext context) {
-    if (!context.mounted) return;
-    final error = ref.read(_provider).visibleError;
-    if (error == null) return;
-    AppToast.show(
-      context,
-      message: error.message(context.l10n),
-      type: AppToastType.error,
-    );
-  }
 
   void onSubmitStatus(BuildContext context, PhoneSubmitStatus status) {
     if (!context.mounted) return;
@@ -46,6 +31,9 @@ final class PhoneStepFeedback {
   }
 
   void _showAuthFailure(BuildContext context, AuthFailure failure) {
+    if (flow == AuthFlow.login && failure == AuthFailure.notRegistered) {
+      return;
+    }
     final router = GoRouter.of(context);
     final (actionLabel, target) = switch (failure) {
       AuthFailure.notRegistered => (

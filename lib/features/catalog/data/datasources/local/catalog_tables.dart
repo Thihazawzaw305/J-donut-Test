@@ -1,0 +1,71 @@
+import 'package:drift/drift.dart';
+
+class MemberRows extends Table {
+  TextColumn get id => text()();
+  TextColumn get displayName => text()();
+  TextColumn get subtitleKey => text()();
+  TextColumn get avatarAsset => text()();
+  TextColumn get tierProgressKey => text()();
+  IntColumn get tierProgressKyats => integer()();
+  IntColumn get notificationCount => integer()();
+  TextColumn get tierCode => text()();
+  IntColumn get pointsBalance => integer()();
+  IntColumn get pointsToNextTier => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
+class ProductRows extends Table {
+  TextColumn get id => text()();
+  TextColumn get code => text()();
+  TextColumn get nameKey => text()();
+  IntColumn get priceMmk => integer()();
+  BoolColumn get isNew => boolean()();
+  IntColumn get discountPercent => integer().nullable()();
+  TextColumn get imageAsset => text()();
+  TextColumn get imageUrl => text().nullable()();
+  TextColumn get descriptionKey => text()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
+class BannerRows extends Table {
+  TextColumn get id => text()();
+  TextColumn get imageAsset => text()();
+  IntColumn get sortOrder => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
+class SectionRows extends Table {
+  TextColumn get id => text()();
+  TextColumn get titleKey => text()();
+  TextColumn get cardStyle => text()();
+  IntColumn get sortOrder => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
+class SectionProductRows extends Table {
+  TextColumn get sectionId => text()();
+  TextColumn get productId => text()();
+  IntColumn get sortIndex => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {sectionId, productId};
+}
+
+class ShopRows extends Table {
+  TextColumn get id => text()();
+  TextColumn get nameKey => text()();
+  TextColumn get addressKey => text()();
+  TextColumn get imageAsset => text()();
+  IntColumn get sortOrder => integer()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}

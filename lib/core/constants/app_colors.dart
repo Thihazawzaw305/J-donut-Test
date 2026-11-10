@@ -30,4 +30,15 @@ abstract final class AppColors {
     backgroundBottom,
   ];
   static const onboardingGradient = [surface, backgroundBottom];
+
+  static const homeHeader = heroPeach;
+  static const homeScreenBackground = Color(0xFFF5F6F8);
+  static const notificationOrange = Color(0xFFF5A623);
+  static const homeNavBar = primary;
+  static const homeNavActive = accent;
+  static const homeShopsSky = Color(0xFFB8ECF8);
+  static const homeShopsGrass = Color(0xFF8FD14F);
+  static const productHelpGreen = Color(0xFF8BC34A);
+  static const quantityTrack = Color(0xFFE8E8EA);
+  static const tierCapsuleBorder = Color(0xFFE2E2E6);
 }

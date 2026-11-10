@@ -79,16 +79,20 @@ class _ButtonBody extends StatelessWidget {
   Widget build(BuildContext context) {
     // No LayoutBuilder: the button must support intrinsic-height layout
     // (AuthStepScaffold wraps its content in IntrinsicHeight).
+    final pill = _AnimatedPill(
+      width: isLoading ? AppDimens.buttonHeight : double.infinity,
+      duration: duration,
+      isDisabled: isDisabled,
+      child: _content(),
+    );
+    if (duration == Duration.zero) {
+      return Center(child: pill);
+    }
     return Center(
       child: AnimatedSize(
         duration: duration,
         curve: AppMotion.standardCurve,
-        child: _AnimatedPill(
-          width: isLoading ? AppDimens.buttonHeight : double.infinity,
-          duration: duration,
-          isDisabled: isDisabled,
-          child: _content(),
-        ),
+        child: pill,
       ),
     );
   }

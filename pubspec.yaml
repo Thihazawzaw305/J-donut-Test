@@ -39,9 +39,20 @@ dependencies:
   intl: ^0.20.2
   flutter_localizations:
     sdk: flutter
+  flutter_secure_storage: ^9.2.4
+  animations: ^3.0.0
+  drift: ^2.29.0
+  drift_flutter: ^0.2.8
+  sqlite3_flutter_libs: ^0.5.40
+  path_provider: ^2.1.5
+  path: ^1.9.1
+  cached_network_image: ^3.4.1
+  connectivity_plus: ^7.0.0
 
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -50,6 +61,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  drift_dev: ^2.29.0
+  build_runner: ^2.10.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -57,6 +70,13 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+  assets:
+    - assets/images/onboarding_hero.jpg
+    - assets/images/home_refresh_donut.png
+    - assets/images/home_shops_background.jpg
+    - assets/images/welcome_hero.jpg
+    - assets/seed/catalog_v1.json
+    - assets/images/seed/
   fonts:
     - family: Urbanist
       fonts:

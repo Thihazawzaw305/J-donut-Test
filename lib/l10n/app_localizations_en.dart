@@ -12,6 +12,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appName => 'J\'Donuts';
 
   @override
+  String get onboardingHeadline => 'Round food for every mood';
+
+  @override
   String get getStarted => 'Let\'s get started';
 
   @override
@@ -120,7 +123,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get firstNameHint => 'First Name';
 
   @override
-  String get lastNameHint => 'Last Name';
+  String get lastNameHint => 'Last Name (Optional)';
 
   @override
   String get nameTitle => 'What\'s your name?';
@@ -188,5 +191,223 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeTitle => 'Welcome';
 
   @override
+  String get welcomeHeadline => 'Welcome to the\nworld of J\'donuts';
+
+  @override
+  String get letsExplore => 'Let\'s explore';
+
+  @override
   String get homeTitle => 'Home';
+
+  @override
+  String get homeNavHome => 'Home';
+
+  @override
+  String get homeNavReward => 'Reward';
+
+  @override
+  String get homeNavOrder => 'Order';
+
+  @override
+  String get homeNavWallet => 'Wallet';
+
+  @override
+  String get homeNavSettings => 'Settings';
+
+  @override
+  String get homeOfflineBanner => 'You\'re offline. Showing saved catalog.';
+
+  @override
+  String get memberSubtitleEwallet => 'E-wallet Customer';
+
+  @override
+  String memberTierProgressSilver(String kyats) {
+    return '$kyats kyats left to become Silver';
+  }
+
+  @override
+  String get homeSectionSeasonal => 'Seasonal specials';
+
+  @override
+  String get homeSectionPopular => 'Popular';
+
+  @override
+  String get homeSectionOrderAgain => 'Order again';
+
+  @override
+  String get homeSectionDonuts => 'Donuts';
+
+  @override
+  String get homeSectionBread => 'Bread';
+
+  @override
+  String get homeSectionCookies => 'Cookies';
+
+  @override
+  String get homeSectionCake => 'Cake';
+
+  @override
+  String homeShopsNearby(int count) {
+    return 'There are $count J\'Donut shops near you.';
+  }
+
+  @override
+  String get homeExploreNow => 'EXPLORE NOW';
+
+  @override
+  String get homeOrderOnline => 'Order online';
+
+  @override
+  String get seeAllAction => 'See all products';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get logOut => 'Log out';
+
+  @override
+  String get rewardsTitle => 'Rewards';
+
+  @override
+  String get walletTitle => 'Wallet';
+
+  @override
+  String get storesTitle => 'Stores';
+
+  @override
+  String get productCoconutDonut => 'Coconut Donut';
+
+  @override
+  String get productMonsterBlackFlake => 'Monster Black Flake';
+
+  @override
+  String get productChocolateBrownie => 'Chocolate Browine';
+
+  @override
+  String get productFancyClover => 'Fancy Clover';
+
+  @override
+  String get productCandyRing => 'Candy Ring';
+
+  @override
+  String get productHappyBloom => 'Happy Bloom';
+
+  @override
+  String get productButterCreamBread => 'Butter Cream Bread';
+
+  @override
+  String get productCheeseBread => 'Cheese Bread';
+
+  @override
+  String get productBreadSticks => 'Bread Sticks';
+
+  @override
+  String get productButterBiscuit => 'Butter Biscuit 12\'s';
+
+  @override
+  String get productButtercake10 => 'Buttercake 10\'s';
+
+  @override
+  String get productButtercake6 => 'Buttercake 6\'s';
+
+  @override
+  String get productJbitesChocolate => 'J\'Bites Chocolate';
+
+  @override
+  String get productCoconutDescription =>
+      'Enjoy our scrumptious coconut donut, lightly glazed and perfect with coffee.';
+
+  @override
+  String get productMonsterDescription =>
+      'Monster Black Flake donut topped with chocolate flake and candy eyes.';
+
+  @override
+  String get productBrownieDescription =>
+      'Rich chocolate brownie baked fresh daily.';
+
+  @override
+  String get productFancyCloverDescription =>
+      'Fancy clover donut with pastel glaze.';
+
+  @override
+  String get productGenericDonutDescription =>
+      'A fun J\'Donuts treat made fresh for you.';
+
+  @override
+  String get productBreadDescription => 'Soft bakery bread from J\'Donuts.';
+
+  @override
+  String get productCookieDescription =>
+      'Crispy cookies and sticks, perfect for sharing.';
+
+  @override
+  String get productCakeDescription =>
+      'Buttercake slices packed for the family.';
+
+  @override
+  String get productJbitesDescription =>
+      'Bite-size donut balls dusted with sugar.';
+
+  @override
+  String get shopMyaynigone => 'Myaynigone J\'Donut';
+
+  @override
+  String get shopMyaynigoneAddress =>
+      '2972 Pyay Road, Sanchaung Township, Yangon';
+
+  @override
+  String get shopBoAungKyaw => 'Bo Aung Kyaw';
+
+  @override
+  String get shopBoAungKyawAddress =>
+      'No.(144/146), 29th Street, Pabedan Township, Yangon';
+
+  @override
+  String get shopHledan => 'Hledan';
+
+  @override
+  String get shopHledanAddress =>
+      'No.(286/B), Hledan Road, Kamayut Township, Yangon';
+
+  @override
+  String get productCodeLabel => 'Product code';
+
+  @override
+  String get productWhatsThis => 'What\'s this?';
+
+  @override
+  String get addToCart => 'ADD TO CART';
+
+  @override
+  String get productNotFound => 'Product not found.';
+
+  @override
+  String get productFavorite => 'Favorite';
+
+  @override
+  String get quantityDecrease => 'Decrease quantity';
+
+  @override
+  String get quantityIncrease => 'Increase quantity';
+
+  @override
+  String get addedToCart => 'Added to cart';
+
+  @override
+  String get homeRetry => 'Try again';
+
+  @override
+  String get homeEmptyCatalog => 'No catalog data yet.';
+
+  @override
+  String get productDetailTitle => 'Product';
+
+  @override
+  String discountBadge(int percent) {
+    return '-$percent%';
+  }
+
+  @override
+  String get productNewBadge => 'New';
 }

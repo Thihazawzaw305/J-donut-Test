@@ -8,7 +8,7 @@ Task 1 steps (OTP, Name, Date of birth) plug into.
 
 - Onboarding screen with layout matching design; donut/logo images are placeholders (real assets added later).
 - Phone number screen (step 1 of 4) with real validation, animated progress ring, loading Continue button.
-- All errors shown as **toasts** (user decision; overrides spec's inline messages).
+- Phone **validation** errors are **inline** under the field (Madivizion §3). Auth/API failures use **toasts** with optional actions unless Madivizion requires inline (e.g. login `notRegistered` + Register link).
 - No Cloudflare widget.
 - Foundation: theme tokens, motion constants, `Result`/`Failure`, gen-l10n, `go_router`, Riverpod DI, `AuthRepository` + fake impl.
 
@@ -67,7 +67,7 @@ lib/
       pages/onboarding_page.dart, phone_page.dart, placeholder_page.dart
       widgets/step_progress_ring.dart, phone_input_field.dart, legal_footer.dart,
               social_login_row.dart, onboarding_hero.dart, auth_back_button.dart
-      providers/auth_providers.dart, registration_draft_notifier.dart,
+      providers/auth_providers.dart, auth_draft_notifier.dart (AuthDraft),
                 phone_step_notifier.dart, phone_step_state.dart
       mappers/failure_messages.dart   failure -> localized string
 ```
@@ -97,7 +97,7 @@ lib/
 
 ## Presentation
 
-`RegistrationDraftNotifier` (Notifier, kept alive): holds raw phone text so Back keeps input.
+`AuthDraftNotifier` / `authDraftProvider` (Notifier, kept alive): holds raw phone text so Back keeps input.
 
 `PhoneStepNotifier` (Notifier, family by `AuthFlow`), state `PhoneStepState`:
 - `rawInput`, `validation` (`Result`), `status` sealed: `PhoneIdle`, `PhoneSubmitting`, `PhoneSubmitSuccess(PhoneNumber)`, `PhoneSubmitFailure(AuthFailure)`.
@@ -107,8 +107,8 @@ lib/
 `PhonePage`:
 - Back button, progress ring (register flow only, 25%), title, `+95` field, Continue, legal footer.
 - Continue disabled while invalid; shows spinner while submitting.
-- Field blur / keyboard done with invalid non-empty input -> toast with localized message.
-- Success -> push OTP placeholder route. Failure -> toast; `notRegistered` toast offers "Register" action that switches to register flow.
+- Field blur / keyboard done with invalid non-empty input -> **inline** localized message.
+- Success -> push OTP route. Login `notRegistered` -> **inline** message + Register link; other auth failures -> toast with action.
 
 `OnboardingPage`: hero placeholder (circles), logo placeholder, Let's get started -> `/register/phone`, Log in -> `/login/phone`, Google + Facebook buttons and Terms/Privacy -> "coming soon" toast.
 

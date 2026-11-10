@@ -6,7 +6,6 @@ import '../../../../core/constants/app_dimens.dart';
 import '../../../../core/l10n/l10n_extension.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../domain/entities/phone_number.dart';
-import '../../domain/validators/phone_input_normalizer.dart';
 
 class PhoneInputField extends StatelessWidget {
   const PhoneInputField({
@@ -64,19 +63,8 @@ class PhoneInputField extends StatelessWidget {
         hintStyle: AppTextStyles.inputHint,
       ),
       onTapOutside: (_) => focusNode.unfocus(),
-      onChanged: _onChanged,
+      onChanged: onChanged,
       onSubmitted: onSubmitted,
     );
-  }
-
-  void _onChanged(String value) {
-    final display = normalizePhoneInputForDisplay(value);
-    if (display != value) {
-      controller.value = TextEditingValue(
-        text: display,
-        selection: TextSelection.collapsed(offset: display.length),
-      );
-    }
-    onChanged(display);
   }
 }

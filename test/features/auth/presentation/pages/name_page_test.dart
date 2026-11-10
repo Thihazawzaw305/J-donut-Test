@@ -35,7 +35,7 @@ void main() {
 
     expect(find.text("What's your name?"), findsOneWidget);
     expect(find.text('First Name'), findsOneWidget);
-    expect(find.text('Last Name'), findsOneWidget);
+    expect(find.text('Last Name (Optional)'), findsOneWidget);
     expect(find.byType(TextField), findsNWidgets(2));
     expect(find.byType(PrimaryButton), findsOneWidget);
     expect(find.textContaining('Terms of Use'), findsOneWidget);

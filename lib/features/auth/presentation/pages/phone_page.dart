@@ -6,11 +6,10 @@ import '../../../../core/l10n/l10n_extension.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/widgets/primary_button.dart';
 import '../../domain/entities/auth_flow.dart';
-import '../../domain/validators/phone_input_normalizer.dart';
 import '../providers/phone_step_notifier.dart';
 import '../providers/phone_step_state.dart';
 import '../widgets/auth_step_scaffold.dart';
-import '../widgets/phone_input_field.dart';
+import '../widgets/phone_step_body.dart';
 import '../widgets/phone_step_feedback.dart';
 
 class PhonePage extends ConsumerStatefulWidget {
@@ -25,19 +24,15 @@ class PhonePage extends ConsumerStatefulWidget {
 class _PhonePageState extends ConsumerState<PhonePage> {
   late final TextEditingController _controller;
   final _focusNode = FocusNode();
+  var _showValidationMessage = false;
 
   NotifierProvider<PhoneStepNotifier, PhoneStepState> get _provider =>
       phoneStepProvider(widget.flow);
 
-  PhoneStepFeedback get _feedback =>
-      PhoneStepFeedback(ref: ref, flow: widget.flow);
-
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(
-      text: normalizePhoneInputForDisplay(ref.read(_provider).input),
-    );
+    _controller = TextEditingController(text: ref.read(_provider).input);
     _focusNode.addListener(_onFocusChanged);
   }
 
@@ -51,22 +46,41 @@ class _PhonePageState extends ConsumerState<PhonePage> {
 
   @override
   Widget build(BuildContext context) {
+    final feedback = PhoneStepFeedback(ref: ref, flow: widget.flow);
     ref.listen(
       _provider.select((s) => s.status),
-      (_, status) => _feedback.onSubmitStatus(context, status),
+      (_, status) => feedback.onSubmitStatus(context, status),
     );
+    ref.listen(_provider.select((s) => s.input), (prev, next) {
+      if (_controller.text != next) {
+        _controller.value = TextEditingValue(
+          text: next,
+          selection: TextSelection.collapsed(offset: next.length),
+        );
+      }
+    });
     final state = ref.watch(_provider);
     final notifier = ref.read(_provider.notifier);
     return AuthStepScaffold(
       title: context.l10n.phoneTitle,
       currentStep: widget.flow == AuthFlow.register ? 1 : null,
-      onBack: _goBack,
-      body: PhoneInputField(
+      onBack: () => context.canPop()
+          ? context.pop()
+          : context.go(AppRoutes.onboarding),
+      body: PhoneStepBody(
+        flow: widget.flow,
+        state: state,
         controller: _controller,
         focusNode: _focusNode,
-        readOnly: state.isSubmitting,
-        onChanged: notifier.onInputChanged,
+        showValidationMessage: _showValidationMessage,
+        onChanged: (value) {
+          if (_showValidationMessage) {
+            setState(() => _showValidationMessage = false);
+          }
+          notifier.onInputChanged(value);
+        },
         onSubmitted: (_) => _onKeyboardDone(state),
+        onRegisterTap: () => context.pushReplacement(AppRoutes.registerPhone),
       ),
       action: PrimaryButton(
         label: context.l10n.continueLabel,
@@ -79,15 +93,18 @@ class _PhonePageState extends ConsumerState<PhonePage> {
   void _onFocusChanged() {
     if (!mounted) return;
     final isCurrentRoute = ModalRoute.of(context)?.isCurrent ?? false;
-    if (!_focusNode.hasFocus && isCurrentRoute) {
-      _feedback.warnIfInvalid(context);
+    if (!_focusNode.hasFocus && isCurrentRoute && ref.read(_provider).visibleError != null) {
+      setState(() => _showValidationMessage = true);
     }
   }
 
-  void _onKeyboardDone(PhoneStepState state) => state.canSubmit
-      ? ref.read(_provider.notifier).submit()
-      : _feedback.warnIfInvalid(context);
-
-  void _goBack() =>
-      context.canPop() ? context.pop() : context.go(AppRoutes.onboarding);
+  void _onKeyboardDone(PhoneStepState state) {
+    if (state.canSubmit) {
+      ref.read(_provider.notifier).submit();
+      return;
+    }
+    if (state.visibleError != null) {
+      setState(() => _showValidationMessage = true);
+    }
+  }
 }

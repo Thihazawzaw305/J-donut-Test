@@ -19,7 +19,7 @@ void main() {
       expect(normalizePhoneInputForDisplay('9254135592'), '9254135592');
     });
 
-    test('typing only zero clears the visible field', () {
+    test('lone leading zero strips to empty on normalize', () {
       expect(normalizePhoneInputForDisplay('0'), '');
     });
   });

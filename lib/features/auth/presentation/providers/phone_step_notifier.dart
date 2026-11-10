@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/errors/result.dart';
 import '../../domain/entities/auth_flow.dart';
+import '../../domain/validators/phone_input_normalizer.dart';
 import '../../domain/validators/phone_validator.dart';
 import 'auth_draft_notifier.dart';
 import 'auth_providers.dart';
@@ -29,8 +30,19 @@ class PhoneStepNotifier extends Notifier<PhoneStepState> {
   }
 
   Future<void> submit() async {
+    if (state.isSubmitting) return;
+
+    final normalized = normalizePhoneInputForDisplay(state.input);
+    if (normalized != state.input) {
+      ref.read(authDraftProvider.notifier).updatePhoneInput(normalized);
+      state = state.copyWith(
+        input: normalized,
+        validation: validatePhone(normalized),
+      );
+    }
+
     final phone = state.validation.valueOrNull;
-    if (phone == null || state.isSubmitting) return;
+    if (phone == null) return;
 
     state = state.copyWith(status: const PhoneSubmitting());
     final result = await ref.read(requestOtpProvider)(phone, flow: flow);

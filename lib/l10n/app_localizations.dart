@@ -100,6 +100,12 @@ abstract class AppLocalizations {
   /// **'J\'Donuts'**
   String get appName;
 
+  /// No description provided for @onboardingHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Round food for every mood'**
+  String get onboardingHeadline;
+
   /// No description provided for @getStarted.
   ///
   /// In en, this message translates to:
@@ -301,7 +307,7 @@ abstract class AppLocalizations {
   /// No description provided for @lastNameHint.
   ///
   /// In en, this message translates to:
-  /// **'Last Name'**
+  /// **'Last Name (Optional)'**
   String get lastNameHint;
 
   /// No description provided for @nameTitle.
@@ -430,11 +436,413 @@ abstract class AppLocalizations {
   /// **'Welcome'**
   String get welcomeTitle;
 
+  /// No description provided for @welcomeHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to the\nworld of J\'donuts'**
+  String get welcomeHeadline;
+
+  /// No description provided for @letsExplore.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s explore'**
+  String get letsExplore;
+
   /// No description provided for @homeTitle.
   ///
   /// In en, this message translates to:
   /// **'Home'**
   String get homeTitle;
+
+  /// No description provided for @homeNavHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get homeNavHome;
+
+  /// No description provided for @homeNavReward.
+  ///
+  /// In en, this message translates to:
+  /// **'Reward'**
+  String get homeNavReward;
+
+  /// No description provided for @homeNavOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get homeNavOrder;
+
+  /// No description provided for @homeNavWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get homeNavWallet;
+
+  /// No description provided for @homeNavSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get homeNavSettings;
+
+  /// No description provided for @homeOfflineBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re offline. Showing saved catalog.'**
+  String get homeOfflineBanner;
+
+  /// No description provided for @memberSubtitleEwallet.
+  ///
+  /// In en, this message translates to:
+  /// **'E-wallet Customer'**
+  String get memberSubtitleEwallet;
+
+  /// No description provided for @memberTierProgressSilver.
+  ///
+  /// In en, this message translates to:
+  /// **'{kyats} kyats left to become Silver'**
+  String memberTierProgressSilver(String kyats);
+
+  /// No description provided for @homeSectionSeasonal.
+  ///
+  /// In en, this message translates to:
+  /// **'Seasonal specials'**
+  String get homeSectionSeasonal;
+
+  /// No description provided for @homeSectionPopular.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular'**
+  String get homeSectionPopular;
+
+  /// No description provided for @homeSectionOrderAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Order again'**
+  String get homeSectionOrderAgain;
+
+  /// No description provided for @homeSectionDonuts.
+  ///
+  /// In en, this message translates to:
+  /// **'Donuts'**
+  String get homeSectionDonuts;
+
+  /// No description provided for @homeSectionBread.
+  ///
+  /// In en, this message translates to:
+  /// **'Bread'**
+  String get homeSectionBread;
+
+  /// No description provided for @homeSectionCookies.
+  ///
+  /// In en, this message translates to:
+  /// **'Cookies'**
+  String get homeSectionCookies;
+
+  /// No description provided for @homeSectionCake.
+  ///
+  /// In en, this message translates to:
+  /// **'Cake'**
+  String get homeSectionCake;
+
+  /// No description provided for @homeShopsNearby.
+  ///
+  /// In en, this message translates to:
+  /// **'There are {count} J\'Donut shops near you.'**
+  String homeShopsNearby(int count);
+
+  /// No description provided for @homeExploreNow.
+  ///
+  /// In en, this message translates to:
+  /// **'EXPLORE NOW'**
+  String get homeExploreNow;
+
+  /// No description provided for @homeOrderOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Order online'**
+  String get homeOrderOnline;
+
+  /// No description provided for @seeAllAction.
+  ///
+  /// In en, this message translates to:
+  /// **'See all products'**
+  String get seeAllAction;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// No description provided for @logOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logOut;
+
+  /// No description provided for @rewardsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards'**
+  String get rewardsTitle;
+
+  /// No description provided for @walletTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get walletTitle;
+
+  /// No description provided for @storesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stores'**
+  String get storesTitle;
+
+  /// No description provided for @productCoconutDonut.
+  ///
+  /// In en, this message translates to:
+  /// **'Coconut Donut'**
+  String get productCoconutDonut;
+
+  /// No description provided for @productMonsterBlackFlake.
+  ///
+  /// In en, this message translates to:
+  /// **'Monster Black Flake'**
+  String get productMonsterBlackFlake;
+
+  /// No description provided for @productChocolateBrownie.
+  ///
+  /// In en, this message translates to:
+  /// **'Chocolate Browine'**
+  String get productChocolateBrownie;
+
+  /// No description provided for @productFancyClover.
+  ///
+  /// In en, this message translates to:
+  /// **'Fancy Clover'**
+  String get productFancyClover;
+
+  /// No description provided for @productCandyRing.
+  ///
+  /// In en, this message translates to:
+  /// **'Candy Ring'**
+  String get productCandyRing;
+
+  /// No description provided for @productHappyBloom.
+  ///
+  /// In en, this message translates to:
+  /// **'Happy Bloom'**
+  String get productHappyBloom;
+
+  /// No description provided for @productButterCreamBread.
+  ///
+  /// In en, this message translates to:
+  /// **'Butter Cream Bread'**
+  String get productButterCreamBread;
+
+  /// No description provided for @productCheeseBread.
+  ///
+  /// In en, this message translates to:
+  /// **'Cheese Bread'**
+  String get productCheeseBread;
+
+  /// No description provided for @productBreadSticks.
+  ///
+  /// In en, this message translates to:
+  /// **'Bread Sticks'**
+  String get productBreadSticks;
+
+  /// No description provided for @productButterBiscuit.
+  ///
+  /// In en, this message translates to:
+  /// **'Butter Biscuit 12\'s'**
+  String get productButterBiscuit;
+
+  /// No description provided for @productButtercake10.
+  ///
+  /// In en, this message translates to:
+  /// **'Buttercake 10\'s'**
+  String get productButtercake10;
+
+  /// No description provided for @productButtercake6.
+  ///
+  /// In en, this message translates to:
+  /// **'Buttercake 6\'s'**
+  String get productButtercake6;
+
+  /// No description provided for @productJbitesChocolate.
+  ///
+  /// In en, this message translates to:
+  /// **'J\'Bites Chocolate'**
+  String get productJbitesChocolate;
+
+  /// No description provided for @productCoconutDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enjoy our scrumptious coconut donut, lightly glazed and perfect with coffee.'**
+  String get productCoconutDescription;
+
+  /// No description provided for @productMonsterDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Monster Black Flake donut topped with chocolate flake and candy eyes.'**
+  String get productMonsterDescription;
+
+  /// No description provided for @productBrownieDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Rich chocolate brownie baked fresh daily.'**
+  String get productBrownieDescription;
+
+  /// No description provided for @productFancyCloverDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Fancy clover donut with pastel glaze.'**
+  String get productFancyCloverDescription;
+
+  /// No description provided for @productGenericDonutDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'A fun J\'Donuts treat made fresh for you.'**
+  String get productGenericDonutDescription;
+
+  /// No description provided for @productBreadDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Soft bakery bread from J\'Donuts.'**
+  String get productBreadDescription;
+
+  /// No description provided for @productCookieDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Crispy cookies and sticks, perfect for sharing.'**
+  String get productCookieDescription;
+
+  /// No description provided for @productCakeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Buttercake slices packed for the family.'**
+  String get productCakeDescription;
+
+  /// No description provided for @productJbitesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Bite-size donut balls dusted with sugar.'**
+  String get productJbitesDescription;
+
+  /// No description provided for @shopMyaynigone.
+  ///
+  /// In en, this message translates to:
+  /// **'Myaynigone J\'Donut'**
+  String get shopMyaynigone;
+
+  /// No description provided for @shopMyaynigoneAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'2972 Pyay Road, Sanchaung Township, Yangon'**
+  String get shopMyaynigoneAddress;
+
+  /// No description provided for @shopBoAungKyaw.
+  ///
+  /// In en, this message translates to:
+  /// **'Bo Aung Kyaw'**
+  String get shopBoAungKyaw;
+
+  /// No description provided for @shopBoAungKyawAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'No.(144/146), 29th Street, Pabedan Township, Yangon'**
+  String get shopBoAungKyawAddress;
+
+  /// No description provided for @shopHledan.
+  ///
+  /// In en, this message translates to:
+  /// **'Hledan'**
+  String get shopHledan;
+
+  /// No description provided for @shopHledanAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'No.(286/B), Hledan Road, Kamayut Township, Yangon'**
+  String get shopHledanAddress;
+
+  /// No description provided for @productCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Product code'**
+  String get productCodeLabel;
+
+  /// No description provided for @productWhatsThis.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s this?'**
+  String get productWhatsThis;
+
+  /// No description provided for @addToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'ADD TO CART'**
+  String get addToCart;
+
+  /// No description provided for @productNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Product not found.'**
+  String get productNotFound;
+
+  /// No description provided for @productFavorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite'**
+  String get productFavorite;
+
+  /// No description provided for @quantityDecrease.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease quantity'**
+  String get quantityDecrease;
+
+  /// No description provided for @quantityIncrease.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase quantity'**
+  String get quantityIncrease;
+
+  /// No description provided for @addedToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to cart'**
+  String get addedToCart;
+
+  /// No description provided for @homeRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get homeRetry;
+
+  /// No description provided for @homeEmptyCatalog.
+  ///
+  /// In en, this message translates to:
+  /// **'No catalog data yet.'**
+  String get homeEmptyCatalog;
+
+  /// No description provided for @productDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get productDetailTitle;
+
+  /// No description provided for @discountBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'-{percent}%'**
+  String discountBadge(int percent);
+
+  /// No description provided for @productNewBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get productNewBadge;
 }
 
 class _AppLocalizationsDelegate

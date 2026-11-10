@@ -14,6 +14,7 @@ import 'package:j_donuts_app/features/auth/presentation/providers/auth_providers
 import 'package:j_donuts_app/features/auth/presentation/widgets/name_fields.dart';
 import 'package:j_donuts_app/features/auth/presentation/widgets/otp_boxes.dart';
 
+import '../../../../helpers/catalog_test_overrides.dart';
 import '../../../../helpers/pump_jdonuts_app.dart';
 
 const _phoneInput = '09254135592';
@@ -86,14 +87,26 @@ void main() {
 
       await selectBirthday(tester, _birthday);
       await pressLabeledButton(tester, 'CONTINUE');
-      expect(find.text('Welcome'), findsOneWidget);
+      await tester.pump();
+      await tester.pump();
+      await tester.pump(AppMotion.medium);
+      expect(find.textContaining('Welcome to the'), findsOneWidget);
       expect(routerOf(tester).state.uri.path, AppRoutes.welcome);
 
       expect(routerOf(tester).canPop(), isFalse);
       await tester.binding.handlePopRoute();
       await tester.pump();
-      expect(find.text('Welcome'), findsOneWidget);
+      expect(find.textContaining('Welcome to the'), findsOneWidget);
       expect(find.text("What's your date of birth?"), findsNothing);
+
+      await tester.tap(find.text("LET'S EXPLORE"));
+      await tester.pump();
+      await tester.pump(AppMotion.medium);
+      await tester.pump(AppMotion.medium);
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(find.text('Thiha Zaw Zaw'), findsOneWidget);
+
+      await tearDownCatalog(tester);
     },
   );
 
@@ -117,6 +130,7 @@ void main() {
 
       await tester.enterText(find.byType(TextField), '123456');
       await pumpZeroLatency(tester);
+      await tester.pump(const Duration(milliseconds: 100));
 
       expect(find.text('Home'), findsOneWidget);
       expect(routerOf(tester).state.uri.path, AppRoutes.home);

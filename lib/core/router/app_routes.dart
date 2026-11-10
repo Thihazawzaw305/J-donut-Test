@@ -8,4 +8,7 @@ abstract final class AppRoutes {
   static const registerDob = '/register/dob';
   static const welcome = '/welcome';
   static const home = '/home';
+  static const rewards = '/rewards';
+  static const settings = '/settings';
+  static String productPath(String id) => '/product/$id';
 }
