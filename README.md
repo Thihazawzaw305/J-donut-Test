@@ -32,6 +32,24 @@ flutter build apk --release
 
 Release builds need `INTERNET` in the main `AndroidManifest` for connectivity reachability and remote images.
 
+### iOS Simulator `.app` (zip)
+
+Requires macOS + Xcode locally, or the GitHub Actions workflow (no local Mac needed):
+
+1. Push this repo to GitHub.
+2. Open **Actions** → **ios-simulator-app** → **Run workflow**.
+3. When the run finishes, download the **Runner.app.zip** artifact.
+4. Submit that zip (unzipped contents are the Simulator `.app`).
+
+Local Mac equivalent:
+
+```bash
+flutter build ios --simulator --release --no-codesign
+# then zip build/ios/iphonesimulator/Runner.app → Runner.app.zip
+```
+
+Workflow: `.github/workflows/ios-simulator-app.yml` (manual `workflow_dispatch` only — saves macOS CI minutes).
+
 ## State management
 
 **Riverpod 3** — providers are the composition root (`core/di`, feature `presentation/providers`). No services constructed inside widgets. `AsyncValue` / sealed notifier states drive loading and error UI.
@@ -91,12 +109,12 @@ Use **`123456`** on the verify-number step. Three wrong attempts lock until Rese
 
 ## Known gaps
 
-- **Delivery artifacts** — APK / iOS simulator `.app` and screen recording not included in repo (build locally).
+- **Delivery artifacts** — APK build locally; iOS Simulator `.app` via Actions workflow or a Mac; screen recording not in repo.
 - **Burmese locale** — `lib/l10n/app_my.arb` covers UI copy; product names and descriptions, shop names and addresses, and tier titles fall back to English.
 - Product sections load from one Drift stream; if it fails, Home still renders header, banners and shops, with one `HomeSectionStatePanel` retry in place of the product sections (no per-section streams, no hardcoded fallback catalog).
 - Integration tests find widgets by English text, so run them on a device set to English.
 
-CI (`.github/workflows/ci.yml`) runs `flutter analyze` and `flutter test`.
+CI (`.github/workflows/ci.yml`) runs `flutter analyze` and `flutter test`. Manual workflow `ios-simulator-app` builds and uploads `Runner.app.zip`.
 
 ## Madivizion Task 1 notes
 

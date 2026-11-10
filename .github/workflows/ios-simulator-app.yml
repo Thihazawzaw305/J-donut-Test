@@ -1,0 +1,43 @@
+# Builds a zipped iOS Simulator .app for Madivizion delivery.
+# Run: GitHub → Actions → "ios-simulator-app" → Run workflow → download artifact.
+name: ios-simulator-app
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-simulator-app:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.44.8
+          cache: true
+
+      - name: Pub get
+        run: flutter pub get
+
+      - name: Build iOS Simulator .app
+        run: flutter build ios --simulator --release --no-codesign
+
+      - name: Zip Runner.app
+        run: |
+          APP_PATH="$(find build/ios -name 'Runner.app' -type d | head -n 1)"
+          if [ -z "$APP_PATH" ] || [ ! -d "$APP_PATH" ]; then
+            echo "Runner.app not found under build/ios"
+            find build/ios -maxdepth 4 -type d || true
+            exit 1
+          fi
+          echo "Zipping $APP_PATH"
+          ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" Runner.app.zip
+          ls -lh Runner.app.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Runner.app.zip
+          path: Runner.app.zip
+          if-no-files-found: error
+          retention-days: 14
